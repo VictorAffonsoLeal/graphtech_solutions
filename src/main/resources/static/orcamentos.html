@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Lançar Orçamento</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Classe de erro para inputs */
+        .input-error {
+            border-color: #ef4444 !important; /* Borda vermelha */
+        }
+        .input-error:focus {
+            --tw-ring-color: #ef4444 !important; /* Anel de foco vermelho */
+            border-color: #ef4444 !important;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 antialiased flex min-h-screen">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-[#211E48] text-white p-6 flex flex-col justify-between">
+        <div>
+            <!-- Logo -->
+            <div class="flex items-center mb-10">
+                <div class="w-10 h-10 bg-[#00CEF7] flex items-center justify-center rounded-lg text-xl font-bold text-white mr-3">G</div>
+                <span class="text-xl font-semibold">GraphTech CRM</span>
+            </div>
+            <!-- Navegação -->
+            <nav>
+                <ul>
+                    <li class="mb-2"><a href="clientes.html" class="block px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white">Cadastro Clientes</a></li>
+                    <li class="mb-2"><a href="usuarios.html" class="block px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white">Cadastro Usuários</a></li>
+                    <li class="mb-2"><a href="produtos.html" class="block px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white">Cadastro Produtos</a></li>
+                    <li class="mb-2"><a href="orcamentos.html" class="block px-4 py-2 rounded-md text-[#00CEF7] font-medium bg-[#37336D]">Lançar Orçamento</a></li>
+                    <li class="mb-2"><a href="pedidos.html" class="block px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white">Lançar Pedido</a></li>
+                </ul>
+            </nav>
+        </div>
+        <!-- Sair -->
+        <div>
+            <a href="#" class="block px-4 py-2 rounded-md hover:bg-red-700 text-gray-300 hover:text-white text-center">Sair</a>
+        </div>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <div class="flex-1 p-10">
+        <h1 class="text-3xl font-bold text-gray-800 mb-8">Lançar Orçamento</h1>
+
+        <!-- Formulário -->
+        <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-200 mb-8">
+            <h2 id="form-title" class="text-xl font-semibold text-gray-700 mb-6">Informações do Orçamento</h2>
+            
+            <form id="budget-form" class="space-y-5" novalidate>
+                <input type="hidden" id="idOrcamento">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                        <label for="idCliente" class="block text-sm font-medium text-gray-600 mb-1">ID Cliente</label>
+                        <input type="number" id="idCliente" name="idCliente"
+                               class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00CEF7] focus:border-[#00CEF7] sm:text-sm">
+                        <p id="idCliente-error" class="text-red-500 text-xs mt-1 h-4"></p>
+                    </div>
+                    <div>
+                        <label for="idUsuario" class="block text-sm font-medium text-gray-600 mb-1">ID Usuário</label>
+                        <input type="number" id="idUsuario" name="idUsuario"
+                               class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00CEF7] focus:border-[#00CEF7] sm:text-sm">
+                        <p id="idUsuario-error" class="text-red-500 text-xs mt-1 h-4"></p>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="descricao" class="block text-sm font-medium text-gray-600 mb-1">Descrição</label>
+                    <textarea id="descricao" name="descricao" rows="3"
+                           class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00CEF7] focus:border-[#00CEF7] sm:text-sm"></textarea>
+                    <p id="descricao-error" class="text-red-500 text-xs mt-1 h-4"></p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                        <label for="dataOrcamento" class="block text-sm font-medium text-gray-600 mb-1">Data do Orçamento</label>
+                        <input type="date" id="dataOrcamento" name="dataOrcamento"
+                               class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00CEF7] focus:border-[#00CEF7] sm:text-sm">
+                        <p id="dataOrcamento-error" class="text-red-500 text-xs mt-1 h-4"></p>
+                    </div>
+                    <div class="flex items-end pb-2">
+                         <div class="flex items-center">
+                            <input type="checkbox" id="status" name="status"
+                                   class="h-4 w-4 text-[#00CEF7] border-gray-300 rounded focus:ring-[#00CEF7]">
+                            <label for="status" class="ml-2 block text-sm font-medium text-gray-700">Orçamento Aprovado?</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-start space-x-4 pt-2">
+                    <button type="submit"
+                            class="px-5 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-[#00CEF7] hover:bg-[#00b2d3] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00CEF7]">
+                        Salvar
+                    </button>
+                    <button type="button" id="cancel-button"
+                            class="hidden px-5 py-2 border border-gray-300 rounded-md shadow-sm text-base font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Lista -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+            <div class="p-6"><h3 class="text-xl font-semibold text-gray-700">Orçamentos Lançados</h3></div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">ID</th>
+                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Descrição</th>
+                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Cliente</th>
+                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Data</th>
+                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</th>
+                            <th class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="budget-table-body" class="bg-white divide-y divide-gray-200">
+                        <!-- Linhas da tabela -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="loading-indicator" class="p-6 text-center text-gray-500 hidden">Carregando orçamentos...</div>
+            <div id="empty-state" class="p-6 text-center text-gray-500 hidden">Nenhum orçamento lançado.</div>
+        </div>
+    </div>
+    
+    <!-- Modal de Exclusão -->
+    <div id="delete-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md mx-4 transform scale-95 transition-transform duration-300">
+            <div class="text-center">
+                <svg class="w-16 h-16 text-red-500 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                </svg>
+                <h3 class="text-xl font-bold text-gray-900 mt-4">Excluir Orçamento</h3>
+                <p class="text-sm text-gray-500 mt-2 mb-6">Você tem certeza? Esta ação não pode ser desfeita.</p>
+                <input type="hidden" id="delete-budget-id">
+                <div class="flex justify-center space-x-4">
+                    <button id="cancel-delete-btn" class="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">Cancelar</button>
+                    <button id="confirm-delete-btn" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700">Excluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast de Notificação -->
+    <div id="toast" class="fixed bottom-10 right-10 flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow-lg hidden opacity-0 transition-opacity duration-300" role="alert">
+        <div id="toast-icon" class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg">
+            <!-- Ícone será adicionado via JS -->
+        </div>
+        <div id="toast-message" class="ml-3 text-sm font-normal"></div>
+        <button type="button" id="toast-close" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8" aria-label="Close">
+            <span class="sr-only">Fechar</span>
+            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const API_URL = '/orcamentos';
+            const form = document.getElementById('budget-form');
+            const tableBody = document.getElementById('budget-table-body');
+            const loadingIndicator = document.getElementById('loading-indicator');
+            const emptyState = document.getElementById('empty-state');
+            const hiddenId = document.getElementById('idOrcamento');
+            const formTitle = document.getElementById('form-title');
+            const cancelButton = document.getElementById('cancel-button');
+            
+            // --- Elementos Modal/Toast ---
+            const deleteModal = document.getElementById('delete-modal');
+            const cancelDeleteBtn = document.getElementById('cancel-delete-btn');
+            const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
+            const deleteBudgetIdInput = document.getElementById('delete-budget-id');
+            const toast = document.getElementById('toast');
+            const toastIcon = document.getElementById('toast-icon');
+            const toastMessage = document.getElementById('toast-message');
+            const toastClose = document.getElementById('toast-close');
+            
+            let budgets = [];
+            let isEditing = false;
+            
+            // --- Função de Toast ---
+            const showToast = (message, type = 'success') => {
+                toastMessage.textContent = message;
+                toastIcon.className = "inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg";
+                if (type === 'success') {
+                    toastIcon.classList.add('text-green-500', 'bg-green-100');
+                    toastIcon.innerHTML = `<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>`;
+                } else {
+                    toastIcon.classList.add('text-red-500', 'bg-red-100');
+                    toastIcon.innerHTML = `<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>`;
+                }
+                toast.classList.remove('hidden');
+                setTimeout(() => toast.classList.add('opacity-100'), 10);
+                setTimeout(() => {
+                    toast.classList.add('opacity-0');
+                    setTimeout(() => toast.classList.add('hidden'), 300);
+                }, 4000); 
+            };
+            toastClose.addEventListener('click', () => {
+                toast.classList.add('opacity-0');
+                setTimeout(() => toast.classList.add('hidden'), 300);
+            });
+            
+            // --- FUNÇÕES DE VALIDAÇÃO ---
+            const setError = (id, message) => {
+                const input = document.getElementById(id);
+                const errorEl = document.getElementById(`${id}-error`);
+                if (input) input.classList.add('input-error');
+                if (errorEl) errorEl.textContent = message;
+            };
+
+            const clearError = (id) => {
+                const input = document.getElementById(id);
+                const errorEl = document.getElementById(`${id}-error`);
+                if (input) input.classList.remove('input-error');
+                if (errorEl) errorEl.textContent = '';
+            };
+
+            const clearAllErrors = () => {
+                ['idCliente', 'idUsuario', 'descricao', 'dataOrcamento'].forEach(clearError);
+            };
+            
+            const validateForm = () => {
+                clearAllErrors();
+                let isValid = true;
+                
+                const formData = new FormData(form);
+                const idCliente = formData.get('idCliente');
+                const idUsuario = formData.get('idUsuario');
+                const descricao = formData.get('descricao').trim();
+                const dataOrcamento = formData.get('dataOrcamento');
+
+                if (!idCliente || parseInt(idCliente) <= 0) {
+                    setError('idCliente', 'O ID do Cliente é obrigatório.');
+                    isValid = false;
+                }
+                
+                if (!idUsuario || parseInt(idUsuario) <= 0) {
+                    setError('idUsuario', 'O ID do Usuário é obrigatório.');
+                    isValid = false;
+                }
+
+                if (!descricao) {
+                    setError('descricao', 'A descrição é obrigatória.');
+                    isValid = false;
+                }
+
+                if (!dataOrcamento) {
+                    setError('dataOrcamento', 'A data do orçamento é obrigatória.');
+                    isValid = false;
+                } else if (!isEditing) { // Validação de data como em clientes.html
+                    const parts = dataOrcamento.split('-');
+                    const dataOrcamentoDate = new Date(parts[0], parts[1] - 1, parts[2]);
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0); 
+                    if (dataOrcamentoDate < today) {
+                        setError('dataOrcamento', 'A data não pode ser anterior a hoje.');
+                        isValid = false;
+                    }
+                }
+                
+                return isValid;
+            };
+
+            // --- Funções CRUD ---
+            const renderTable = () => {
+                tableBody.innerHTML = '';
+                if (budgets.length === 0) {
+                    emptyState.classList.remove('hidden');
+                } else {
+                    emptyState.classList.add('hidden');
+                    budgets.forEach(budget => {
+                        const tr = document.createElement('tr');
+                        tr.className = 'hover:bg-gray-50';
+                        const dataOrcamentoFormatada = new Date(budget.dataOrcamento + 'T00:00:00').toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+                        
+                        tr.innerHTML = `
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${budget.idOrcamento}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${budget.descricao}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${budget.cliente ? budget.cliente.nome : 'N/A'}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${dataOrcamentoFormatada}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${budget.status ? '<span class="px-2 py-0.5 bg-green-100 text-green-800 rounded-full font-medium text-xs">Aprovado</span>' : '<span class="px-2 py-0.5 bg-yellow-100 text-yellow-800 rounded-full font-medium text-xs">Pendente</span>'}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
+                                <button data-id="${budget.idOrcamento}" class="edit-btn text-gray-500 hover:text-[#00CEF7]" title="Editar">
+                                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M17.414 2.586a2 2 0 0 0-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 0 0 0-2.828Z" /><path fill-rule="evenodd" d="M2 6a2 2 0 0 1 2-2h4a1 1 0 0 1 0 2H4v10h10v-4a1 1 0 1 1 2 0v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6Z" clip-rule="evenodd" /></svg>
+                                </button>
+                                <button data-id="${budget.idOrcamento}" class="delete-btn text-gray-500 hover:text-red-600" title="Excluir">
+                                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.75 1A2.75 2.75 0 0 0 6 3.75V4.5h8V3.75A2.75 2.75 0 0 0 11.25 1H8.75ZM-1.357 6.357a.75.75 0 0 1 1.06 0l2.061 2.061a.75.75 0 0 1-1.06 1.06L-1.357 7.418a.75.75 0 0 1 0-1.061Zm10.414 0a.75.75 0 0 1 1.06 0l2.06 2.061a.75.75 0 1 1-1.06 1.06l-2.06-2.06a.75.75 0 0 1 0-1.061ZM5 6.5a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0v-7.5A.75.75 0 0 1 5 6.5Zm5 0a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0v-7.5A.75.75 0 0 1 10 6.5ZM15 6.5a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0v-7.5A.75.75 0 0 1 15 6.5Z" clip-rule="evenodd" /></svg>
+                                </button>
+                            </td>
+                        `;
+                        tableBody.appendChild(tr);
+                    });
+                }
+            };
+
+            const fetchBudgets = async () => {
+                loadingIndicator.classList.remove('hidden');
+                emptyState.classList.add('hidden');
+                tableBody.innerHTML = ''; 
+                try {
+                    const response = await fetch(API_URL);
+                    if (!response.ok) throw new Error('Falha ao buscar orçamentos.');
+                    budgets = await response.json();
+                    renderTable();
+                } catch (error) {
+                    console.error('Erro:', error);
+                    showToast(error.message, 'error');
+                } finally {
+                    loadingIndicator.classList.add('hidden');
+                }
+            };
+
+            const resetForm = () => {
+                form.reset();
+                hiddenId.value = '';
+                isEditing = false;
+                formTitle.textContent = 'Informações do Orçamento';
+                cancelButton.classList.add('hidden');
+                clearAllErrors();
+            };
+
+            const handleEdit = (id) => {
+                const budget = budgets.find(b => b.idOrcamento === id);
+                if (!budget) return;
+                isEditing = true;
+                formTitle.textContent = 'Editar Orçamento'; 
+                cancelButton.classList.remove('hidden');
+                clearAllErrors();
+                
+                hiddenId.value = budget.idOrcamento;
+                document.getElementById('idCliente').value = budget.cliente ? budget.cliente.idCliente : '';
+                document.getElementById('idUsuario').value = budget.usuario ? budget.usuario.idUsuario : '';
+                document.getElementById('descricao').value = budget.descricao;
+                document.getElementById('dataOrcamento').value = budget.dataOrcamento;
+                document.getElementById('status').checked = budget.status;
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            
+            // --- Funções de Exclusão ---
+            const handleDelete = (id) => {
+                deleteBudgetIdInput.value = id;
+                deleteModal.classList.remove('hidden');
+                setTimeout(() => {
+                    deleteModal.classList.add('opacity-100');
+                    deleteModal.querySelector('div > div').style.transform = 'scale(1)';
+                }, 10);
+            };
+
+            const closeDeleteModal = () => {
+                deleteModal.classList.remove('opacity-100');
+                deleteModal.querySelector('div > div').style.transform = 'scale(0.95)';
+                setTimeout(() => deleteModal.classList.add('hidden'), 300);
+            };
+
+            const confirmDelete = async () => {
+                const id = parseInt(deleteBudgetIdInput.value);
+                try {
+                    const response = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+                    if (!response.ok) {
+                         const errorBody = await response.json();
+                         throw new Error(errorBody.message || 'Falha ao excluir.');
+                    }
+                    fetchBudgets(); // Recarrega da API
+                    showToast('Orçamento excluído com sucesso.', 'success');
+                } catch (error) {
+                    console.error('Erro ao excluir:', error);
+                    showToast(error.message, 'error');
+                } finally {
+                    closeDeleteModal();
+                }
+            };
+            
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                
+                if (!validateForm()) {
+                    showToast('Por favor, corrija os erros no formulário.', 'error');
+                    return;
+                }
+                
+                const formData = new FormData(form);
+                const id = hiddenId.value ? parseInt(hiddenId.value) : null;
+                
+                const apiData = {
+                    descricao: formData.get('descricao'),
+                    dataOrcamento: formData.get('dataOrcamento'),
+                    status: formData.get('status') === 'on',
+                    cliente: { idCliente: parseInt(formData.get('idCliente')) },
+                    usuario: { idUsuario: parseInt(formData.get('idUsuario')) }
+                };
+
+                const method = isEditing ? 'PUT' : 'POST';
+                const url = isEditing ? `${API_URL}/${id}` : API_URL;
+
+                try {
+                    const response = await fetch(url, {
+                        method: method,
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(apiData)
+                    });
+                    if (!response.ok) {
+                         const errorBody = await response.json();
+                         throw new Error(errorBody.message || 'Falha ao salvar. Verifique IDs.');
+                    }
+                    
+                    // const savedBudget = await response.json();
+                    if(isEditing) {
+                        // const index = budgets.findIndex(b => b.idOrcamento === id);
+                        // if (index !== -1) budgets[index] = savedBudget;
+                        showToast('Orçamento atualizado com sucesso.', 'success');
+                    } else {
+                        // budgets.push(savedBudget);
+                        showToast('Orçamento salvo com sucesso.', 'success');
+                    }
+                    
+                    resetForm();
+                    // renderTable();
+                    fetchBudgets(); // Recarrega da API
+                } catch (error) {
+                    console.error('Erro:', error);
+                    showToast(error.message, 'error');
+                }
+            };
+
+            // --- Event Listeners ---
+            fetchBudgets();
+            form.addEventListener('submit', handleSubmit);
+            cancelButton.addEventListener('click', resetForm);
+            tableBody.addEventListener('click', (e) => {
+                const button = e.target.closest('button');
+                if (!button) return;
+                const id = parseInt(button.dataset.id);
+                if (button.classList.contains('edit-btn')) handleEdit(id);
+                if (button.classList.contains('delete-btn')) handleDelete(id);
+            });
+            
+            cancelDeleteBtn.addEventListener('click', closeDeleteModal);
+            confirmDeleteBtn.addEventListener('click', confirmDelete);
+            deleteModal.addEventListener('click', (e) => {
+                if (e.target === deleteModal) closeDeleteModal();
+            });
+        });
+    </script>
+</body>
+</html>
