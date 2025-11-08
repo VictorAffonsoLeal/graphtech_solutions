@@ -42,4 +42,15 @@ public class UsuarioService {
 
     }
 
+    public boolean validarLogin(String login, String senha) {
+        Optional<UsuarioEntity> usuarioOpt = usuarioRepository.findByLogin(login);
+
+        if (usuarioOpt.isEmpty()) {
+            return false;
+        }
+
+        UsuarioEntity usuario = usuarioOpt.get();
+        return usuario.getSenha().equals(senha);
+    }
+
 }
