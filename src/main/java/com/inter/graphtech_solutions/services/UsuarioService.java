@@ -43,13 +43,13 @@ public class UsuarioService {
     }
 
     public boolean validarLogin(String login, String senha) {
-        Optional<UsuarioEntity> usuarioOpt = usuarioRepository.findByLogin(login);
+        Optional<UsuarioEntity> usuarioLogin = usuarioRepository.findByLogin(login);
 
-        if (usuarioOpt.isEmpty()) {
+        if (usuarioLogin.isEmpty()) {
             return false;
         }
 
-        UsuarioEntity usuario = usuarioOpt.get();
+        UsuarioEntity usuario = usuarioLogin.get();
         return usuario.getSenha().equals(senha);
     }
 
