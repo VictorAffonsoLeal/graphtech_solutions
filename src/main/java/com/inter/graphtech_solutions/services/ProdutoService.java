@@ -6,8 +6,6 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.inter.graphtech_solutions.entities.ProdutoEntity;
-import com.inter.graphtech_solutions.repositories.OrcamentoRepository;
-import com.inter.graphtech_solutions.repositories.PedidoRepository;
 import com.inter.graphtech_solutions.repositories.ProdutoRepository;
 
 import lombok.RequiredArgsConstructor;
