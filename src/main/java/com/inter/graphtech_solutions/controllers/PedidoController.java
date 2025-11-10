@@ -39,6 +39,17 @@ public class PedidoController {
         }
     }
 
+        @PostMapping("/from-orcamento/{orcamentoId}")
+    public ResponseEntity<?> criarDeOrcamento(@PathVariable int orcamentoId) {
+        try {
+            PedidoEntity novoPedido = pedidoService.criarPedidoDeOrcamento(orcamentoId);
+            return new ResponseEntity<>(novoPedido, HttpStatus.CREATED);
+        } catch (RuntimeException e) {
+            // Captura exceções personalizadas (Ex: Orçamento não encontrado ou já processado)
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT); // 409 Conflict
+        }
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<PedidoEntity> alterar(@PathVariable int id, @RequestBody PedidoEntity pedido) {
         PedidoEntity atualizado = pedidoService.alterarPedido(id, pedido);

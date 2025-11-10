@@ -1,6 +1,10 @@
 package com.inter.graphtech_solutions.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Entity;
@@ -8,8 +12,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,10 +26,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "produtos")
-@JsonIdentityInfo(
-  generator = ObjectIdGenerators.PropertyGenerator.class, 
-  property = "idProduto")
-
 public class ProdutoEntity {
 
         // Atributos
@@ -37,14 +36,14 @@ public class ProdutoEntity {
     private String descricao;
     private float valor;
     private int qtd;
-    // Produto pertence a um Pedido (N:1)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pedido_id")
-    private PedidoEntity pedido;
+    
+    @JsonIgnore // Ignora ao serializar para evitar loops
+    @ManyToMany(mappedBy = "produtos", fetch = FetchType.LAZY)
+    private Set<PedidoEntity> pedidos = new HashSet<>();
 
     // Produto pertence a um Orcamento (N:1)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "orcamento_id")
-    private OrcamentoEntity orcamento;
+    @JsonIgnore // Ignora ao serializar para evitar loops
+    @ManyToMany(mappedBy = "produtos", fetch = FetchType.LAZY)
+    private Set<OrcamentoEntity> orcamentos = new HashSet<>();
 
 }

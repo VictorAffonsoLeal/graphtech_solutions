@@ -37,7 +37,7 @@ public class UsuarioService {
             usuarioAtualizado.setDataNascimento(usuario.getDataNascimento());
             return usuarioRepository.save(usuarioAtualizado);
         } else {
-            return null; // Ou lançar uma exceção apropriada
+            return null;
         }
 
     }

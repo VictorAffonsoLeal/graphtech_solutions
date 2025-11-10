@@ -10,7 +10,11 @@ import com.inter.graphtech_solutions.entities.OrcamentoEntity;
 
 @Repository
 public interface OrcamentoRepository extends JpaRepository <OrcamentoEntity, Integer>{
-    @Query("SELECT o FROM OrcamentoEntity o JOIN FETCH o.cliente JOIN FETCH o.usuario")
+    @Query("SELECT o FROM OrcamentoEntity o " +
+           "JOIN FETCH o.cliente " +
+           "JOIN FETCH o.usuario " +
+           "LEFT JOIN FETCH o.produtos " +
+           "LEFT JOIN FETCH o.pedido")
     List<OrcamentoEntity> findAllWithDetails();
 
 }

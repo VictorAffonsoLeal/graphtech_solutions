@@ -10,7 +10,7 @@ import com.inter.graphtech_solutions.entities.ProdutoEntity;
 
 @Repository
 public interface ProdutoRepository extends JpaRepository <ProdutoEntity, Integer>{
-    @Query("SELECT p FROM ProdutoEntity p LEFT JOIN FETCH p.pedido LEFT JOIN FETCH p.orcamento")
+    @Query("SELECT p FROM ProdutoEntity p LEFT JOIN FETCH p.pedidos LEFT JOIN FETCH p.orcamentos")
     List<ProdutoEntity> findAllWithDetails();
 
 }

@@ -16,8 +16,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProdutoService {
     private final ProdutoRepository produtoRepository;
-    private final PedidoRepository pedidoRepository;
-    private final OrcamentoRepository orcamentoRepository;
 
     public ProdutoEntity salvarProduto(ProdutoEntity produto) {
         return produtoRepository.save(produto);
@@ -38,18 +36,7 @@ public class ProdutoService {
             produtoAtualizado.setDescricao(produto.getDescricao());
             produtoAtualizado.setValor(produto.getValor());
             produtoAtualizado.setQtd(produto.getQtd());
-            if (produto.getPedido() != null && produto.getPedido().getIdPedido() > 0) {
-                produtoAtualizado.setPedido(pedidoRepository.findById(produto.getPedido().getIdPedido()).orElse(null));
-            } else {
-                produtoAtualizado.setPedido(null);
-            }
-            
-            // Se um orçamento foi passado, busca a entidade completa
-            if (produto.getOrcamento() != null && produto.getOrcamento().getIdOrcamento() > 0) {
-                produtoAtualizado.setOrcamento(orcamentoRepository.findById(produto.getOrcamento().getIdOrcamento()).orElse(null));
-            } else {
-                produtoAtualizado.setOrcamento(null);
-            }
+
             return produtoRepository.save(produtoAtualizado);
         } else {
             return null;

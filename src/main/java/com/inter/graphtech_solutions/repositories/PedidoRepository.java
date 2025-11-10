@@ -10,7 +10,7 @@ import com.inter.graphtech_solutions.entities.PedidoEntity;
 
 @Repository
 public interface PedidoRepository extends JpaRepository <PedidoEntity, Integer>{
-    @Query("SELECT p FROM PedidoEntity p JOIN FETCH p.cliente JOIN FETCH p.usuario")
+    @Query("SELECT p FROM PedidoEntity p JOIN FETCH p.cliente JOIN FETCH p.usuario LEFT JOIN FETCH p.produtos")
     List<PedidoEntity> findAllWithDetails();
 
 }

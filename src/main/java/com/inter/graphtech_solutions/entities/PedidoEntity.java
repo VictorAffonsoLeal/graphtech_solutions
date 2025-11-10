@@ -1,8 +1,8 @@
 package com.inter.graphtech_solutions.entities;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -13,8 +13,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -29,7 +30,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "pedidos")
-
 public class PedidoEntity {
 
     // Atributos
@@ -53,13 +53,18 @@ public class PedidoEntity {
     private UsuarioEntity usuario;
 
     // Relacionamento 1:N (Um Pedido para Muitos Produtos)
-    @JsonIgnore
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<ProdutoEntity> produtos = new ArrayList<>();
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(
+        name = "pedido_produto", // Nome da tabela de junção
+        joinColumns = @JoinColumn(name = "pedido_id"), // Chave desta entidade
+        inverseJoinColumns = @JoinColumn(name = "produto_id") // Chave da outra entidade
+    )
+    private Set<ProdutoEntity> produtos = new HashSet<>();
 
     // Relação 1:1 com Orçamento
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idOrcamento", unique = true)
+    @JsonIgnore
     private OrcamentoEntity orcamento;
 
 }
