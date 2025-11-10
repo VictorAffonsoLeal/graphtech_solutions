@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-T_8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Cadastro de Clientes</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -15,148 +15,177 @@
             --tw-ring-color: #ef4444 !important; /* Anel de foco vermelho */
             border-color: #ef4444 !important;
         }
+        /* Oculta scrollbars no Firefox */
+        .no-scrollbar { scrollbar-width: none; }
+        /* Oculta scrollbars no Chrome, Safari e Opera */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 antialiased flex min-h-screen">
+<body class="bg-gray-50 text-gray-900 antialiased">
 
-    <!-- Sidebar -->
-    <aside class="w-64 bg-[#211E48] text-white p-6 flex flex-col justify-between">
-        <div>
-            <!-- Logo -->
-            <div class="flex items-center mb-10">
-                <img src="images/logo.png" alt="Logo GraphTech" class="w-12 h-12 rounded-lg mr-4">
-                <span class="text-xl font-semibold">GraphTech</span>
+    <div class="flex min-h-screen">
+        <aside id="sidebar" class="w-64 bg-[#211E48] text-white p-6 flex flex-col justify-between transition-all duration-300 ease-in-out no-scrollbar overflow-y-auto">
+            <div>
+                <div class="flex items-center justify-center mb-10">
+                    <img src="images/logo.png" alt="Logo GraphTech" class="w-12 h-12 rounded-lg mr-4 flex-shrink-0">
+                    <span id="logo-text" class="text-xl font-semibold transition-opacity duration-200">GraphTech</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li class="mb-2">
+                            <a href="clientes.html" class="nav-link flex items-center px-4 py-2 rounded-md text-[#00CEF7] font-medium bg-[#37336D] justify-start">
+                                <svg class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m-4.682-2.72a3 3 0 00-4.682 2.72 9.094 9.094 0 003.741.479M0 10.5h24m-24 0a8.999 8.999 0 008.94 8.94 8.999 8.999 0 008.94-8.94M3 10.5a8.999 8.999 0 018.94-8.94A8.999 8.999 0 0121 10.5M12 15.75a3 3 0 01-3-3m3 3a3 3 0 003-3m-3 3v-3.75m-3 3h3.75m-3-3h-3.75C6.34 12 4.5 10.16 4.5 8.25V6.75a3 3 0 013-3h1.5a3 3 0 013 3v1.5c0 1.91-1.84 3.75-4.25 3.75M12 15.75v-3.75m0 0a3 3 0 00-3-3m3 3a3 3 0 003-3m-3 3h3.75m-3-3h-3.75a3 3 0 01-3-3V6.75a3 3 0 013-3h1.5a3 3 0 013 3v1.5c0 1.91 1.84 3.75 4.25 3.75m-4.25 0V15.75m0 0a3 3 0 013 3m-3-3a3 3 0 00-3 3m3-3h-3.75m3.75 0h3.75c2.41 0 4.25-1.84 4.25-3.75V6.75a3 3 0 00-3-3h-1.5a3 3 0 00-3 3v1.5c0 1.91-1.84 3.75-4.25 3.75m4.25 3.75v-3.75" /></svg>
+                                <span class="nav-text ml-4 transition-opacity duration-200">Cadastro Clientes</span>
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="usuarios.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
+                                <svg class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
+                                <span class="nav-text ml-4 transition-opacity duration-200">Cadastro Usuários</span>
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="produtos.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
+                                <svg class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10.5 11.25h3M12 15h.008" /></svg>
+                                <span class="nav-text ml-4 transition-opacity duration-200">Cadastro Produtos</span>
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="orcamentos.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
+                                <svg class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+                                <span class="nav-text ml-4 transition-opacity duration-200">Lançar Orçamento</span>
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="pedidos.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
+                                <svg class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <span class="nav-text ml-4 transition-opacity duration-200">Lançar Pedido</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
-            <!-- Navegação -->
-            <nav>
-                <ul>
-                    <li class="mb-2"><a href="clientes.html" class="block px-4 py-2 rounded-md text-[#00CEF7] font-medium bg-[#37336D]">Cadastro Clientes</a></li>
-                    <li class="mb-2"><a href="usuarios.html" class="block px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white">Cadastro Usuários</a></li>
-                    <li class="mb-2"><a href="produtos.html" class="block px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white">Cadastro Produtos</a></li>
-                    <li class="mb-2"><a href="orcamentos.html" class="block px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white">Lançar Orçamento</a></li>
-                    <li class="mb-2"><a href="pedidos.html" class="block px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white">Lançar Pedido</a></li>
-                </ul>
-            </nav>
-        </div>
-        <!-- Sair -->
-        <div>
-            <a href="index.html" class="block px-4 py-2 rounded-md hover:bg-red-700 text-gray-300 hover:text-white text-center">Sair</a>
-        </div>
-    </aside>
+            <div>
+                <button id="sidebar-toggle" class="nav-link flex items-center w-full px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-400 hover:text-white justify-start mb-2">
+                    <svg id="sidebar-toggle-icon" class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                    </svg>
+                    <span class="nav-text ml-4 transition-opacity duration-200">Recolher</span>
+                </button>
 
-    <!-- Conteúdo Principal -->
-    <div class="flex-1 p-10">
-        <h1 class="text-3xl font-bold text-gray-800 mb-8">Cadastro de Clientes</h1>
+                <a href="index.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-red-700 text-gray-300 hover:text-white justify-start">
+                    <svg class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" /></svg>
+                    <span class="nav-text ml-4 transition-opacity duration-200">Sair</span>
+                </a>
+            </div>
+        </aside>
 
-        <!-- Formulário -->
-        <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-200 mb-8">
-            <h2 id="form-title" class="text-xl font-semibold text-gray-700 mb-6">Informações do Cliente</h2>
-            
-            <form id="client-form" class="space-y-5" novalidate> <!-- novalidate impede a validação padrão do browser -->
-                <input type="hidden" id="idCliente">
+        <div id="main-content" class="flex-1 p-10 overflow-y-auto transition-all duration-300 ease-in-out">
+            <h1 class="text-3xl font-bold text-gray-800 mb-8">Cadastro de Clientes</h1>
+
+            <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-200 mb-8">
+                <h2 id="form-title" class="text-xl font-semibold text-gray-700 mb-6">Informações do Cliente</h2>
+                <form id="client-form" class="space-y-5" novalidate>
+                     <input type="hidden" id="idCliente">
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div>
-                        <label for="idClienteDisplay" class="block text-sm font-medium text-gray-600 mb-1">ID Cliente</label>
-                        <input type="text" id="idClienteDisplay" name="idClienteDisplay" disabled
-                               class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-50 text-gray-500 cursor-not-allowed sm:text-sm">
-                    </div>
-                    <div>
-                        <label for="dataCadastro" class="block text-sm font-medium text-gray-600 mb-1">Data de Cadastro</label>
-                        <input type="date" id="dataCadastro" name="dataCadastro"
-                               class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00CEF7] focus:border-[#00CEF7] sm:text-sm">
-                        <p id="dataCadastro-error" class="text-red-500 text-xs mt-1 h-4"></p>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div>
-                        <label for="nome" class="block text-sm font-medium text-gray-600 mb-1">Nome Completo</label>
-                        <input type="text" id="nome" name="nome"
-                               class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00CEF7] focus:border-[#00CEF7] sm:text-sm">
-                        <p id="nome-error" class="text-red-500 text-xs mt-1 h-4"></p>
-                    </div>
-                     <div>
-                        <label for="idUsuario" class="block text-sm font-medium text-gray-600 mb-1">Usuário Responsável</label>
-                        <select id="idUsuario" name="idUsuario"
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label for="idClienteDisplay" class="block text-sm font-medium text-gray-600 mb-1">ID Cliente</label>
+                            <input type="text" id="idClienteDisplay" name="idClienteDisplay" disabled
+                                class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-50 text-gray-500 cursor-not-allowed sm:text-sm">
+                        </div>
+                        <div>
+                            <label for="dataCadastro" class="block text-sm font-medium text-gray-600 mb-1">Data de Cadastro</label>
+                            <input type="date" id="dataCadastro" name="dataCadastro"
                                 class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00CEF7] focus:border-[#00CEF7] sm:text-sm">
-                            <option value="">Carregando usuários...</option>
-                        </select>
-                        <p id="idUsuario-error" class="text-red-500 text-xs mt-1 h-4"></p>
+                            <p id="dataCadastro-error" class="text-red-500 text-xs mt-1 h-4"></p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label for="nome" class="block text-sm font-medium text-gray-600 mb-1">Nome Completo</label>
+                            <input type="text" id="nome" name="nome"
+                                class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00CEF7] focus:border-[#00CEF7] sm:text-sm">
+                            <p id="nome-error" class="text-red-500 text-xs mt-1 h-4"></p>
+                        </div>
+                        <div>
+                            <label for="idUsuario" class="block text-sm font-medium text-gray-600 mb-1">Usuário Responsável</label>
+                            <select id="idUsuario" name="idUsuario"
+                                    class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00CEF7] focus:border-[#00CEF7] sm:text-sm">
+                                <option value="">Carregando usuários...</option>
+                            </select>
+                            <p id="idUsuario-error" class="text-red-500 text-xs mt-1 h-4"></p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-600 mb-1">Email</label>
+                            <input type="email" id="email" name="email"
+                                class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00CEF7] focus:border-[#00CEF7] sm:text-sm">
+                            <p id="email-error" class="text-red-500 text-xs mt-1 h-4"></p>
+                        </div>
+                        <div>
+                            <label for="telefone" class="block text-sm font-medium text-gray-600 mb-1">Telefone</label>
+                            <input type="tel" id="telefone" name="telefone"
+                                class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00CEF7] focus:border-[#00CEF7] sm:text-sm">
+                            <p id="telefone-error" class="text-red-500 text-xs mt-1 h-4"></p>
+                        </div>
+                    </div>
+
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-600 mb-1">Email</label>
-                        <input type="email" id="email" name="email"
-                               class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00CEF7] focus:border-[#00CEF7] sm:text-sm">
-                        <p id="email-error" class="text-red-500 text-xs mt-1 h-4"></p>
+                        <label for="dataNascimento" class="block text-sm font-medium text-gray-600 mb-1">Data de Nascimento</label>
+                        <input type="date" id="dataNascimento" name="dataNascimento"
+                            class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00CEF7] focus:border-[#00CEF7] sm:text-sm">
+                        <p id="dataNascimento-error" class="text-red-500 text-xs mt-1 h-4"></p>
                     </div>
+
                     <div>
-                        <label for="telefone" class="block text-sm font-medium text-gray-600 mb-1">Telefone</label>
-                        <input type="tel" id="telefone" name="telefone"
-                               class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00CEF7] focus:border-[#00CEF7] sm:text-sm">
-                        <p id="telefone-error" class="text-red-500 text-xs mt-1 h-4"></p>
+                        <label for="endereco" class="block text-sm font-medium text-gray-600 mb-1">Endereço</label>
+                        <input type="text" id="endereco" name="endereco"
+                            class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00CEF7] focus:border-[#00CEF7] sm:text-sm">
+                        <p id="endereco-error" class="text-red-500 text-xs mt-1 h-4"></p>
                     </div>
-                </div>
 
-                <div>
-                    <label for="dataNascimento" class="block text-sm font-medium text-gray-600 mb-1">Data de Nascimento</label>
-                    <input type="date" id="dataNascimento" name="dataNascimento"
-                           class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00CEF7] focus:border-[#00CEF7] sm:text-sm">
-                    <p id="dataNascimento-error" class="text-red-500 text-xs mt-1 h-4"></p>
-                </div>
-
-                <div>
-                    <label for="endereco" class="block text-sm font-medium text-gray-600 mb-1">Endereço</label>
-                    <input type="text" id="endereco" name="endereco"
-                           class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00CEF7] focus:border-[#00CEF7] sm:text-sm">
-                    <p id="endereco-error" class="text-red-500 text-xs mt-1 h-4"></p>
-                </div>
-
-                <div class="flex justify-start space-x-4 pt-2">
-                    <button type="submit"
-                            class="px-5 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-[#00CEF7] hover:bg-[#00b2d3] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00CEF7]">
-                        Salvar
-                    </button>
-                    <button type="button" id="cancel-button"
-                            class="hidden px-5 py-2 border border-gray-300 rounded-md shadow-sm text-base font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
-                        Cancelar
-                    </button>
-                </div>
-            </form>
-        </div>
-
-        <!-- Lista -->
-        <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-            <div class="p-6">
-                <h3 class="text-xl font-semibold text-gray-700">Clientes Cadastrados</h3>
+                    <div class="flex justify-start space-x-4 pt-2">
+                        <button type="submit"
+                                class="px-5 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-[#00CEF7] hover:bg-[#00b2d3] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00CEF7]">
+                            Salvar
+                        </button>
+                        <button type="button" id="cancel-button"
+                                class="hidden px-5 py-2 border border-gray-300 rounded-md shadow-sm text-base font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
             </div>
-            <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">ID</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Nome</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Usuário Resp.</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Email</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Telefone</th>
-                            <th scope="col" class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody id="client-table-body" class="bg-white divide-y divide-gray-200">
-                        <!-- Linhas da tabela serão inseridas aqui pelo JS -->
-                    </tbody>
-                </table>
-            </div>
-            <div id="loading-indicator" class="p-6 text-center text-gray-500 hidden">Carregando clientes...</div>
-            <div id="empty-state" class="p-6 text-center text-gray-500 hidden">Nenhum cliente cadastrado ainda.</div>
-        </div>
-    </div>
 
-    <!-- Modal de Exclusão -->
-    <div id="delete-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-gray-700">Clientes Cadastrados</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">ID</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Nome</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Usuário Resp.</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Email</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Telefone</th>
+                                <th scope="col" class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="client-table-body" class="bg-white divide-y divide-gray-200">
+                            </tbody>
+                    </table>
+                </div>
+                <div id="loading-indicator" class="p-6 text-center text-gray-500 hidden">Carregando clientes...</div>
+                <div id="empty-state" class="p-6 text-center text-gray-500 hidden">Nenhum cliente cadastrado ainda.</div>
+            </div>
+        </div>
+    </div> <div id="delete-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
         <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md mx-4 transform scale-95 transition-transform duration-300">
             <div class="text-center">
                 <svg class="w-16 h-16 text-red-500 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -173,11 +202,9 @@
         </div>
     </div>
 
-    <!-- Toast de Notificação -->
     <div id="toast" class="fixed bottom-10 right-10 flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow-lg hidden opacity-0 transition-opacity duration-300" role="alert">
         <div id="toast-icon" class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg">
-            <!-- Ícone será adicionado via JS -->
-        </div>
+            </div>
         <div id="toast-message" class="ml-3 text-sm font-normal"></div>
         <button type="button" id="toast-close" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8" aria-label="Close">
             <span class="sr-only">Fechar</span>
@@ -188,6 +215,55 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Lógica do Sidebar Retrátil ---
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('main-content');
+            const toggleButton = document.getElementById('sidebar-toggle');
+            const toggleIcon = toggleButton.querySelector('svg'); // Pega o ícone dentro do botão
+            const navTextLabels = document.querySelectorAll('.nav-text');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const logoText = document.getElementById('logo-text');
+
+            const setSidebarState = (isCollapsed) => {
+                if (isCollapsed) {
+                    sidebar.classList.remove('w-64');
+                    sidebar.classList.add('w-20');
+                    // **** CORREÇÃO APLICADA AQUI: Linhas de margem removidas ****
+                    logoText.classList.add('hidden');
+                    navTextLabels.forEach(label => label.classList.add('hidden'));
+                    navLinks.forEach(link => {
+                        link.classList.add('justify-center');
+                        link.classList.remove('justify-start');
+                    });
+                    toggleIcon.innerHTML = `<svg id="sidebar-toggle-icon" class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>`; // Chevron Right
+                } else {
+                    sidebar.classList.add('w-64');
+                    sidebar.classList.remove('w-20');
+                    // **** CORREÇÃO APLICADA AQUI: Linhas de margem removidas ****
+                    logoText.classList.remove('hidden');
+                    navTextLabels.forEach(label => label.classList.remove('hidden'));
+                    navLinks.forEach(link => {
+                        link.classList.remove('justify-center');
+                        link.classList.add('justify-start');
+                    });
+                    toggleIcon.innerHTML = `<svg id="sidebar-toggle-icon" class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>`; // Chevron Left
+                }
+            };
+
+            // Carregar estado do localStorage
+            const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+            setSidebarState(isCollapsed);
+
+            // Adicionar evento ao botão
+            toggleButton.addEventListener('click', () => {
+                const currentState = sidebar.classList.contains('w-20');
+                localStorage.setItem('sidebarCollapsed', !currentState);
+                setSidebarState(!currentState);
+            });
+            // --- Fim da Lógica do Sidebar ---
+
+
+            // --- Lógica da Página (Clientes) ---
             const API_URL = '/clientes'; 
             const USUARIOS_API_URL = '/usuarios'; 
 
@@ -239,13 +315,7 @@
                 setTimeout(() => toast.classList.add('hidden'), 300);
             });
             
-            // --- NOVAS FUNÇÕES DE VALIDAÇÃO ---
-
-            /**
-             * Define uma mensagem de erro para um campo
-             * @param {string} id - O ID do input
-             * @param {string} message - A mensagem de erro
-             */
+            // --- FUNÇÕES DE VALIDAÇÃO ---
             const setError = (id, message) => {
                 const input = document.getElementById(id);
                 const errorEl = document.getElementById(`${id}-error`);
@@ -255,10 +325,6 @@
                 if (errorEl) errorEl.textContent = message;
             };
 
-            /**
-             * Limpa a mensagem de erro de um campo
-             * @param {string} id - O ID do input
-             */
             const clearError = (id) => {
                 const input = document.getElementById(id);
                 const errorEl = document.getElementById(`${id}-error`);
@@ -268,35 +334,22 @@
                 if (errorEl) errorEl.textContent = '';
             };
 
-            /**
-             * Limpa todas as mensagens de erro do formulário
-             */
             const clearAllErrors = () => {
                 const fields = ['dataCadastro', 'nome', 'idUsuario', 'email', 'telefone', 'dataNascimento', 'endereco'];
                 fields.forEach(clearError);
             };
 
-            /**
-             * Valida um email usando regex simples
-             */
             const validateEmail = (email) => {
                 return String(email)
                     .toLowerCase()
                     .match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
             };
             
-            /**
-             * Valida um telefone (mínimo de 10 dígitos)
-             */
             const validatePhone = (phone) => {
                 const digits = phone.replace(/\D/g, ''); // Remove não-dígitos
                 return digits.length >= 10; // Ex: (11) 98765-4321
             }
 
-            /**
-             * Valida o formulário inteiro
-             * @returns {boolean} - true se for válido, false se não
-             */
             const validateForm = () => {
                 clearAllErrors();
                 let isValid = true;
@@ -347,19 +400,7 @@
                 if (!dataCadastro) {
                     setError('dataCadastro', 'A data de cadastro é obrigatória.');
                     isValid = false;
-                } else if (!isEditing) { // <-- SÓ VALIDA SE FOR CADASTRO NOVO
-                    const parts = dataCadastro.split('-'); // YYYY-MM-DD
-                    // new Date(ano, mes-1, dia) cria data na timezone local
-                    const dataCadastroDate = new Date(parts[0], parts[1] - 1, parts[2]);
-                    
-                    const today = new Date();
-                    today.setHours(0, 0, 0, 0); // Zera o tempo para comparar apenas a data de hoje
-
-                    if (dataCadastroDate < today) {
-                        setError('dataCadastro', 'A data de cadastro não pode ser anterior a hoje.');
-                        isValid = false;
-                    }
-                }
+                } 
 
                 if (!endereco) {
                     setError('endereco', 'O endereço é obrigatório.');
@@ -514,12 +555,10 @@
             const handleSubmit = async (e) => {
                 e.preventDefault();
                 
-                // --- VALIDAÇÃO ADICIONADA ---
                 if (!validateForm()) {
                     showToast('Por favor, corrija os erros no formulário.', 'error');
-                    return; // Interrompe o envio se for inválido
+                    return; 
                 }
-                // --- FIM DA VALIDAÇÃO ---
                 
                 const formData = new FormData(form);
                 const id = hiddenId.value ? parseInt(hiddenId.value) : null;
@@ -553,9 +592,6 @@
                          throw new Error(errorMsg);
                     }
                     
-                    // Não precisamos mais manipular o 'savedClient' aqui,
-                    // pois o fetchClients() buscará os dados atualizados.
-                    
                     if (isEditing) {
                         showToast('Cliente atualizado com sucesso.', 'success');
                     } else {
@@ -563,8 +599,7 @@
                     }
                     
                     resetForm();
-                    // renderTable(); // Alterado daqui...
-                    fetchClients(); // ...para cá. Agora busca da API.
+                    fetchClients();
                     
                 } catch (error) {
                     console.error(`Erro ao ${isEditing ? 'atualizar' : 'salvar'}:`, error);

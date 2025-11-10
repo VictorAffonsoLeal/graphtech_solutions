@@ -15,40 +15,74 @@
             --tw-ring-color: #ef4444 !important; /* Anel de foco vermelho */
             border-color: #ef4444 !important;
         }
+        /* Oculta scrollbars no Firefox */
+        .no-scrollbar { scrollbar-width: none; }
+        /* Oculta scrollbars no Chrome, Safari e Opera */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 antialiased flex min-h-screen">
+<body class="bg-gray-50 text-gray-900 antialiased">
 
-    <!-- Sidebar -->
-    <aside class="w-64 bg-[#211E48] text-white p-6 flex flex-col justify-between">
+<div class="flex min-h-screen">
+    <aside id="sidebar" class="w-64 bg-[#211E48] text-white p-6 flex flex-col justify-between transition-all duration-300 ease-in-out no-scrollbar overflow-y-auto">
         <div>
-            <!-- Logo -->
-            <div class="flex items-center mb-10">
-                <img src="images/logo.png" alt="Logo GraphTech" class="w-12 h-12 rounded-lg mr-4">
-                <span class="text-xl font-semibold">GraphTech</span>
+            <div class="flex items-center justify-center mb-10">
+                <img src="images/logo.png" alt="Logo GraphTech" class="w-12 h-12 rounded-lg mr-4 flex-shrink-0">
+                <span id="logo-text" class="text-xl font-semibold transition-opacity duration-200">GraphTech</span>
             </div>
-            <!-- Navegação -->
             <nav>
                 <ul>
-                    <li class="mb-2"><a href="clientes.html" class="block px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white">Cadastro Clientes</a></li>
-                    <li class="mb-2"><a href="usuarios.html" class="block px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white">Cadastro Usuários</a></li>
-                    <li class="mb-2"><a href="produtos.html" class="block px-4 py-2 rounded-md text-[#00CEF7] font-medium bg-[#37336D]">Cadastro Produtos</a></li>
-                    <li class="mb-2"><a href="orcamentos.html" class="block px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white">Lançar Orçamento</a></li>
-                    <li class="mb-2"><a href="pedidos.html" class="block px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white">Lançar Pedido</a></li>
+                    <li class="mb-2">
+                        <a href="clientes.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
+                            <svg class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m-4.682-2.72a3 3 0 00-4.682 2.72 9.094 9.094 0 003.741.479M0 10.5h24m-24 0a8.999 8.999 0 008.94 8.94 8.999 8.999 0 008.94-8.94M3 10.5a8.999 8.999 0 018.94-8.94A8.999 8.999 0 0121 10.5M12 15.75a3 3 0 01-3-3m3 3a3 3 0 003-3m-3 3v-3.75m-3 3h3.75m-3.75 0h-3.75C6.34 12 4.5 10.16 4.5 8.25V6.75a3 3 0 013-3h1.5a3 3 0 013 3v1.5c0 1.91-1.84 3.75-4.25 3.75M12 15.75v-3.75m0 0a3 3 0 00-3-3m3 3a3 3 0 003-3m-3 3h3.75m-3.75 0h-3.75a3 3 0 01-3-3V6.75a3 3 0 013-3h1.5a3 3 0 013 3v1.5c0 1.91 1.84 3.75 4.25 3.75m-4.25 0V15.75m0 0a3 3 0 013 3m-3-3a3 3 0 00-3 3m3-3h-3.75m3.75 0h3.75c2.41 0 4.25-1.84 4.25-3.75V6.75a3 3 0 00-3-3h-1.5a3 3 0 00-3 3v1.5c0 1.91-1.84 3.75-4.25 3.75m4.25 3.75v-3.75" /></svg>
+                            <span class="nav-text ml-4 transition-opacity duration-200">Cadastro Clientes</span>
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="usuarios.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
+                            <svg class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
+                            <span class="nav-text ml-4 transition-opacity duration-200">Cadastro Usuários</span>
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="produtos.html" class="nav-link flex items-center px-4 py-2 rounded-md text-[#00CEF7] font-medium bg-[#37336D] justify-start">
+                            <svg class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10.5 11.25h3M12 15h.008" /></svg>
+                            <span class="nav-text ml-4 transition-opacity duration-200">Cadastro Produtos</span>
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="orcamentos.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
+                            <svg class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+                            <span class="nav-text ml-4 transition-opacity duration-200">Lançar Orçamento</span>
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="pedidos.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
+                            <svg class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                            <span class="nav-text ml-4 transition-opacity duration-200">Lançar Pedido</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
-        <!-- Sair -->
         <div>
-            <a href="index.html" class="block px-4 py-2 rounded-md hover:bg-red-700 text-gray-300 hover:text-white text-center">Sair</a>
+            <button id="sidebar-toggle" class="nav-link flex items-center w-full px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-400 hover:text-white justify-start mb-2">
+                <svg id="sidebar-toggle-icon" class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                </svg>
+                <span class="nav-text ml-4 transition-opacity duration-200">Recolher</span>
+            </button>
+
+            <a href="index.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-red-700 text-gray-300 hover:text-white justify-start">
+                <svg class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" /></svg>
+                <span class="nav-text ml-4 transition-opacity duration-200">Sair</span>
+            </a>
         </div>
     </aside>
 
-    <!-- Conteúdo Principal -->
-    <div class="flex-1 p-10">
+    <div id="main-content" class="flex-1 p-10 overflow-y-auto transition-all duration-300 ease-in-out">
         <h1 class="text-3xl font-bold text-gray-800 mb-8">Cadastro de Produtos</h1>
 
-        <!-- Formulário -->
         <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-200 mb-8">
             <h2 id="form-title" class="text-xl font-semibold text-gray-700 mb-6">Informações do Produto/Serviço</h2>
             
@@ -90,7 +124,6 @@
             </form>
         </div>
 
-        <!-- Lista -->
         <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
             <div class="p-6"><h3 class="text-xl font-semibold text-gray-700">Produtos Cadastrados</h3></div>
             <div class="overflow-x-auto">
@@ -105,8 +138,7 @@
                         </tr>
                     </thead>
                     <tbody id="product-table-body" class="bg-white divide-y divide-gray-200">
-                        <!-- Linhas da tabela -->
-                    </tbody>
+                        </tbody>
                 </table>
             </div>
             <div id="loading-indicator" class="p-6 text-center text-gray-500 hidden">Carregando produtos...</div>
@@ -114,7 +146,6 @@
         </div>
     </div>
     
-    <!-- Modal de Exclusão -->
     <div id="delete-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
         <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md mx-4 transform scale-95 transition-transform duration-300">
             <div class="text-center">
@@ -132,11 +163,9 @@
         </div>
     </div>
 
-    <!-- Toast de Notificação -->
     <div id="toast" class="fixed bottom-10 right-10 flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow-lg hidden opacity-0 transition-opacity duration-300" role="alert">
         <div id="toast-icon" class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg">
-            <!-- Ícone será adicionado via JS -->
-        </div>
+            </div>
         <div id="toast-message" class="ml-3 text-sm font-normal"></div>
         <button type="button" id="toast-close" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8" aria-label="Close">
             <span class="sr-only">Fechar</span>
@@ -146,6 +175,53 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Lógica do Sidebar Retrátil ---
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('main-content');
+            const toggleButton = document.getElementById('sidebar-toggle');
+            const toggleIcon = toggleButton.querySelector('svg');
+            const navTextLabels = document.querySelectorAll('.nav-text');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const logoText = document.getElementById('logo-text');
+
+            const setSidebarState = (isCollapsed) => {
+                if (isCollapsed) {
+                    sidebar.classList.remove('w-64');
+                    sidebar.classList.add('w-20');
+                    // **** CORREÇÃO APLICADA AQUI: Linhas de margem removidas ****
+                    logoText.classList.add('hidden');
+                    navTextLabels.forEach(label => label.classList.add('hidden'));
+                    navLinks.forEach(link => {
+                        link.classList.add('justify-center');
+                        link.classList.remove('justify-start');
+                    });
+                    toggleIcon.innerHTML = `<svg id="sidebar-toggle-icon" class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>`; // Chevron Right
+                } else {
+                    sidebar.classList.add('w-64');
+                    sidebar.classList.remove('w-20');
+                    // **** CORREÇÃO APLICADA AQUI: Linhas de margem removidas ****
+                    logoText.classList.remove('hidden');
+                    navTextLabels.forEach(label => label.classList.remove('hidden'));
+                    navLinks.forEach(link => {
+                        link.classList.remove('justify-center');
+                        link.classList.add('justify-start');
+                    });
+                    toggleIcon.innerHTML = `<svg id="sidebar-toggle-icon" class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>`; // Chevron Left
+                }
+            };
+
+            const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+            setSidebarState(isCollapsed);
+
+            toggleButton.addEventListener('click', () => {
+                const currentState = sidebar.classList.contains('w-20');
+                localStorage.setItem('sidebarCollapsed', !currentState);
+                setSidebarState(!currentState);
+            });
+            // --- Fim da Lógica do Sidebar ---
+
+
+            // --- Lógica da Página (Produtos) ---
             const API_URL = '/produtos';
             const form = document.getElementById('product-form');
             const formTitle = document.getElementById('form-title');
@@ -155,7 +231,6 @@
             const cancelButton = document.getElementById('cancel-button');
             const hiddenId = document.getElementById('idProduto');
             
-            // --- Elementos Modal/Toast ---
             const deleteModal = document.getElementById('delete-modal');
             const cancelDeleteBtn = document.getElementById('cancel-delete-btn');
             const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
@@ -168,7 +243,6 @@
             let products = [];
             let isEditing = false;
             
-            // --- Função de Toast ---
             const showToast = (message, type = 'success') => {
                 toastMessage.textContent = message;
                 toastIcon.className = "inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg";
@@ -191,7 +265,6 @@
                 setTimeout(() => toast.classList.add('hidden'), 300);
             });
             
-            // --- FUNÇÕES DE VALIDAÇÃO ---
             const setError = (id, message) => {
                 const input = document.getElementById(id);
                 const errorEl = document.getElementById(`${id}-error`);
@@ -243,7 +316,6 @@
                 return isValid;
             };
 
-            // --- Funções CRUD ---
             const renderTable = () => {
                 tableBody.innerHTML = '';
                 if (products.length === 0) {
@@ -313,7 +385,6 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             };
             
-             // --- Funções de Exclusão ---
             const handleDelete = (id) => {
                 deleteProductIdInput.value = id;
                 deleteModal.classList.remove('hidden');
@@ -373,18 +444,13 @@
                          throw new Error(errorBody.message || 'Falha ao salvar produto.');
                     }
                     
-                    // const savedProduct = await response.json();
                     if(isEditing) {
-                        // const index = products.findIndex(p => p.idProduto === id);
-                        // if (index !== -1) products[index] = savedProduct;
                          showToast('Produto atualizado com sucesso.', 'success');
                     } else {
-                        // products.push(savedProduct);
                         showToast('Produto salvo com sucesso.', 'success');
                     }
 
                     resetForm();
-                    // renderTable();
                     fetchProducts(); // Recarrega da API
                 } catch (error) {
                     console.error('Erro:', error);
