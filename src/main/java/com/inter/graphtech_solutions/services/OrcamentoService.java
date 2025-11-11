@@ -58,8 +58,6 @@ public class OrcamentoService {
 
     private void vincularProdutosExistentes(OrcamentoEntity orcamento, List<ProdutoEntity> produtos) {
         if (produtos != null && !produtos.isEmpty()) {
-            // Busca os produtos REAIS do banco de dados pelos IDs
-            // CORREÇÃO: Coletar para um Set
             Set<ProdutoEntity> produtosGerenciados = produtos.stream()
                 .map(produto -> produtoRepository.findById(produto.getIdProduto()))
                 .filter(Optional::isPresent)
