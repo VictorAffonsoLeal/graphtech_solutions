@@ -7,13 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { font-family: 'Inter', sans-serif; }
-        .input-error {
-            border-color: #ef4444 !important; 
-        }
-        .input-error:focus {
-            --tw-ring-color: #ef4444 !important; 
-            border-color: #ef4444 !important;
-        }
+        .input-error { border-color: #ef4444 !important; }
+        .input-error:focus { --tw-ring-color: #ef4444 !important; border-color: #ef4444 !important; }
         .no-scrollbar { scrollbar-width: none; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
@@ -21,6 +16,7 @@
 <body class="bg-gray-50 text-gray-900 antialiased">
 
 <div class="flex min-h-screen">
+    <!-- Sidebar -->
     <aside id="sidebar" class="w-64 bg-[#211E48] text-white p-6 flex flex-col justify-between transition-all duration-300 ease-in-out no-scrollbar overflow-y-auto">
         <div>
             <div class="flex items-center justify-center mb-10">
@@ -29,50 +25,22 @@
             </div>
             <nav>
                 <ul>
-                    <li class="mb-2">
-                        <a href="clientes.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
-                            <svg class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m-4.682-2.72a3 3 0 00-4.682 2.72 9.094 9.094 0 003.741.479M0 10.5h24m-24 0a8.999 8.999 0 008.94 8.94 8.999 8.999 0 008.94-8.94M3 10.5a8.999 8.999 0 018.94-8.94A8.999 8.999 0 0121 10.5M12 15.75a3 3 0 01-3-3m3 3a3 3 0 003-3m-3 3v-3.75m-3 3h3.75m-3.75 0h-3.75C6.34 12 4.5 10.16 4.5 8.25V6.75a3 3 0 013-3h1.5a3 3 0 013 3v1.5c0 1.91-1.84 3.75-4.25 3.75M12 15.75v-3.75m0 0a3 3 0 00-3-3m3 3a3 3 0 003-3m-3 3h3.75m-3.75 0h-3.75a3 3 0 01-3-3V6.75a3 3 0 013-3h1.5a3 3 0 013 3v1.5c0 1.91 1.84 3.75 4.25 3.75m-4.25 0V15.75m0 0a3 3 0 013 3m-3-3a3 3 0 00-3 3m3-3h-3.75m3.75 0h3.75c2.41 0 4.25-1.84 4.25-3.75V6.75a3 3 0 00-3-3h-1.5a3 3 0 00-3 3v1.5c0 1.91-1.84 3.75-4.25 3.75m4.25 3.75v-3.75" /></svg>
-                            <span class="nav-text ml-4 transition-opacity duration-200">Cadastro Clientes</span>
-                        </a>
-                    </li>
-                    <li class="mb-2">
-                        <a href="usuarios.html" class="nav-link flex items-center px-4 py-2 rounded-md text-[#00CEF7] font-medium bg-[#37336D] justify-start">
-                            <svg class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
-                            <span class="nav-text ml-4 transition-opacity duration-200">Cadastro Usuários</span>
-                        </a>
-                    </li>
-                    <li class="mb-2">
-                        <a href="produtos.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
-                            <svg class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10.5 11.25h3M12 15h.008" /></svg>
-                            <span class="nav-text ml-4 transition-opacity duration-200">Cadastro Produtos</span>
-                        </a>
-                    </li>
-                    <li class="mb-2">
-                        <a href="orcamentos.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
-                            <svg class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
-                            <span class="nav-text ml-4 transition-opacity duration-200">Lançar Orçamento</span>
-                        </a>
-                    </li>
-                    <li class="mb-2">
-                        <a href="pedidos.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
-                            <svg class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
-                            <span class="nav-text ml-4 transition-opacity duration-200">Lançar Pedido</span>
-                        </a>
-                    </li>
+                    <li class="mb-2"><a href="clientes.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start"><svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg><span class="nav-text ml-4">Cadastro Clientes</span></a></li>
+                    <li class="mb-2"><a href="usuarios.html" class="nav-link flex items-center px-4 py-2 rounded-md text-[#00CEF7] font-medium bg-[#37336D] justify-start"><svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg><span class="nav-text ml-4">Cadastro Usuários</span></a></li>
+                    <li class="mb-2"><a href="produtos.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start"><svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg><span class="nav-text ml-4">Cadastro Produtos</span></a></li>
+                    <li class="mb-2"><a href="orcamentos.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start"><svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg><span class="nav-text ml-4">Lançar Orçamento</span></a></li>
+                    <li class="mb-2"><a href="pedidos.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start"><svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg><span class="nav-text ml-4">Lançar Pedido</span></a></li>
                 </ul>
             </nav>
         </div>
         <div>
-            <button id="sidebar-toggle" class="nav-link flex items-center w-full px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-400 hover:text-white justify-start mb-2">
-                <svg id="sidebar-toggle-icon" class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                </svg>
-                <span class="nav-text ml-4 transition-opacity duration-200">Recolher</span>
+             <button id="sidebar-toggle" class="nav-link flex items-center w-full px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-400 hover:text-white justify-start mb-2">
+                <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7" /></svg>
+                <span class="nav-text ml-4">Recolher</span>
             </button>
-
             <a href="index.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-red-700 text-gray-300 hover:text-white justify-start">
-                <svg class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" /></svg>
-                <span class="nav-text ml-4 transition-opacity duration-200">Sair</span>
+                <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+                <span class="nav-text ml-4">Sair</span>
             </a>
         </div>
     </aside>
@@ -83,76 +51,64 @@
         <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-200 mb-8">
             <h2 id="form-title" class="text-xl font-semibold text-gray-700 mb-6">Informações do Usuário</h2>
             <form id="user-form" class="space-y-5" novalidate>
-                <input type="hidden" id="idUsuario">
+                <!-- CORREÇÃO: Alterado idUsuario para idPessoa -->
+                <input type="hidden" id="idPessoa">
                 <div>
                     <label for="nome" class="block text-sm font-medium text-gray-600 mb-1">Nome Completo</label>
-                    <input type="text" id="nome" name="nome"
-                           class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00CEF7] focus:border-[#00CEF7] sm:text-sm">
+                    <input type="text" id="nome" name="nome" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00CEF7] focus:border-[#00CEF7] sm:text-sm">
                     <p id="nome-error" class="text-red-500 text-xs mt-1 h-4"></p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div>
                         <label for="login" class="block text-sm font-medium text-gray-600 mb-1">Login</label>
-                        <input type="text" id="login" name="login"
-                               class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00CEF7] focus:border-[#00CEF7] sm:text-sm">
+                        <input type="text" id="login" name="login" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00CEF7] focus:border-[#00CEF7] sm:text-sm">
                         <p id="login-error" class="text-red-500 text-xs mt-1 h-4"></p>
                     </div>
                     <div>
                         <label for="senha" class="block text-sm font-medium text-gray-600 mb-1">Senha</label>
-                        <input type="password" id="senha" name="senha"
-                               class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00CEF7] focus:border-[#00CEF7] sm:text-sm"
-                               placeholder="Senha (obrigatória ao criar)">
+                        <input type="password" id="senha" name="senha" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00CEF7] focus:border-[#00CEF7] sm:text-sm" placeholder="Senha (obrigatória ao criar)">
                         <p id="senha-error" class="text-red-500 text-xs mt-1 h-4"></p>
                     </div>
                 </div>
                 <div>
                     <label for="dataNascimento" class="block text-sm font-medium text-gray-600 mb-1">Data de Nascimento</label>
-                    <input type="date" id="dataNascimento" name="dataNascimento"
-                           class="block w-full max-w-sm px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00CEF7] focus:border-[#00CEF7] sm:text-sm">
+                    <input type="date" id="dataNascimento" name="dataNascimento" class="block w-full max-w-sm px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00CEF7] focus:border-[#00CEF7] sm:text-sm">
                     <p id="dataNascimento-error" class="text-red-500 text-xs mt-1 h-4"></p>
                 </div>
                 <div class="flex justify-start space-x-4 pt-2">
-                    <button type="submit"
-                            class="px-5 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-[#00CEF7] hover:bg-[#00b2d3] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00CEF7]">
-                        Salvar
-                    </button>
-                    <button type="button" id="cancel-button"
-                            class="hidden px-5 py-2 border border-gray-300 rounded-md shadow-sm text-base font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
-                        Cancelar
-                    </button>
+                    <button type="submit" class="px-5 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-[#00CEF7] hover:bg-[#00b2d3] focus:outline-none">Salvar</button>
+                    <button type="button" id="cancel-button" class="hidden px-5 py-2 border border-gray-300 rounded-md shadow-sm text-base font-medium text-gray-700 bg-white hover:bg-gray-50">Cancelar</button>
                 </div>
             </form>
         </div>
 
         <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-            <div class="p-6">
-                <h3 class="text-xl font-semibold text-gray-700">Usuários Cadastrados</h3>
-            </div>
+            <div class="p-6"><h3 class="text-xl font-semibold text-gray-700">Usuários Cadastrados</h3></div>
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">ID</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Nome</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Login</th>
-                            <th scope="col" class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">Ações</th>
+                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">ID</th>
+                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Nome</th>
+                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Login</th>
+                            <th class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">Ações</th>
                         </tr>
                     </thead>
-                    <tbody id="user-table-body" class="bg-white divide-y divide-gray-200">
-                        </tbody>
+                    <tbody id="user-table-body" class="bg-white divide-y divide-gray-200"></tbody>
                 </table>
             </div>
             <div id="loading-indicator" class="p-6 text-center text-gray-500 hidden">Carregando usuários...</div>
             <div id="empty-state" class="p-6 text-center text-gray-500 hidden">Nenhum usuário cadastrado ainda.</div>
         </div>
-    </div> <div id="delete-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+    </div> 
+    
+    <!-- Modais e Toast -->
+    <div id="delete-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
         <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md mx-4 transform scale-95 transition-transform duration-300">
             <div class="text-center">
-                <svg class="w-16 h-16 text-red-500 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
-                </svg>
+                <svg class="w-16 h-16 text-red-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
                 <h3 class="text-xl font-bold text-gray-900 mt-4">Excluir Usuário</h3>
-                <p class="text-sm text-gray-500 mt-2 mb-6">Você tem certeza? Esta ação não pode ser desfeita.</p>
+                <p class="text-sm text-gray-500 mt-2 mb-6">Esta ação não pode ser desfeita.</p>
                 <input type="hidden" id="delete-user-id">
                 <div class="flex justify-center space-x-4">
                     <button id="cancel-delete-btn" class="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">Cancelar</button>
@@ -161,67 +117,21 @@
             </div>
         </div>
     </div>
+    <div id="toast" class="fixed bottom-10 right-10 flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow-lg hidden opacity-0 transition-opacity duration-300"><div id="toast-icon"></div><div id="toast-message" class="ml-3 text-sm font-normal"></div><button type="button" id="toast-close" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8"><span class="sr-only">Fechar</span><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg></button></div>
 
-    <div id="toast" class="fixed bottom-10 right-10 flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow-lg hidden opacity-0 transition-opacity duration-300" role="alert">
-        <div id="toast-icon" class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg">
-            </div>
-        <div id="toast-message" class="ml-3 text-sm font-normal"></div>
-        <button type="button" id="toast-close" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8" aria-label="Close">
-            <span class="sr-only">Fechar</span>
-            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
-        </button>
-    </div>
-    
-    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- Lógica do Sidebar Retrátil ---
+            // Sidebar (igual ao anterior)
             const sidebar = document.getElementById('sidebar');
-            const mainContent = document.getElementById('main-content');
             const toggleButton = document.getElementById('sidebar-toggle');
             const toggleIcon = toggleButton.querySelector('svg');
-            const navTextLabels = document.querySelectorAll('.nav-text');
-            const navLinks = document.querySelectorAll('.nav-link');
-            const logoText = document.getElementById('logo-text');
-
             const setSidebarState = (isCollapsed) => {
-                if (isCollapsed) {
-                    sidebar.classList.remove('w-64');
-                    sidebar.classList.add('w-20');
-                    // **** CORREÇÃO APLICADA AQUI: Linhas de margem removidas ****
-                    logoText.classList.add('hidden');
-                    navTextLabels.forEach(label => label.classList.add('hidden'));
-                    navLinks.forEach(link => {
-                        link.classList.add('justify-center');
-                        link.classList.remove('justify-start');
-                    });
-                    toggleIcon.innerHTML = `<svg id="sidebar-toggle-icon" class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>`; // Chevron Right
-                } else {
-                    sidebar.classList.add('w-64');
-                    sidebar.classList.remove('w-20');
-                    // **** CORREÇÃO APLICADA AQUI: Linhas de margem removidas ****
-                    logoText.classList.remove('hidden');
-                    navTextLabels.forEach(label => label.classList.remove('hidden'));
-                    navLinks.forEach(link => {
-                        link.classList.remove('justify-center');
-                        link.classList.add('justify-start');
-                    });
-                    toggleIcon.innerHTML = `<svg id="sidebar-toggle-icon" class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>`; // Chevron Left
-                }
+                if (isCollapsed) { sidebar.classList.remove('w-64'); sidebar.classList.add('w-20'); document.getElementById('logo-text').classList.add('hidden'); document.querySelectorAll('.nav-text').forEach(l=>l.classList.add('hidden')); document.querySelectorAll('.nav-link').forEach(l=>{l.classList.add('justify-center'); l.classList.remove('justify-start');}); toggleIcon.innerHTML=`<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.25 4.5l7.5 7.5-7.5 7.5"></path></svg>`; } else { sidebar.classList.add('w-64'); sidebar.classList.remove('w-20'); document.getElementById('logo-text').classList.remove('hidden'); document.querySelectorAll('.nav-text').forEach(l=>l.classList.remove('hidden')); document.querySelectorAll('.nav-link').forEach(l=>{l.classList.remove('justify-center'); l.classList.add('justify-start');}); toggleIcon.innerHTML=`<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 19.5L8.25 12l7.5-7.5"></path></svg>`; }
             };
+            setSidebarState(localStorage.getItem('sidebarCollapsed') === 'true');
+            toggleButton.addEventListener('click', () => { const s = sidebar.classList.contains('w-20'); localStorage.setItem('sidebarCollapsed', !s); setSidebarState(!s); });
 
-            const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
-            setSidebarState(isCollapsed);
-
-            toggleButton.addEventListener('click', () => {
-                const currentState = sidebar.classList.contains('w-20');
-                localStorage.setItem('sidebarCollapsed', !currentState);
-                setSidebarState(!currentState);
-            });
-            // --- Fim da Lógica do Sidebar ---
-
-
-            // --- Lógica da Página (Usuários) ---
+            // --- Lógica Principal ---
             const API_URL = '/usuarios';
             const form = document.getElementById('user-form');
             const formTitle = document.getElementById('form-title');
@@ -229,273 +139,83 @@
             const loadingIndicator = document.getElementById('loading-indicator');
             const emptyState = document.getElementById('empty-state');
             const cancelButton = document.getElementById('cancel-button');
-            const hiddenId = document.getElementById('idUsuario');
-            
+            const hiddenId = document.getElementById('idPessoa'); // CORREÇÃO: ID do campo hidden atualizado
             const deleteModal = document.getElementById('delete-modal');
-            const cancelDeleteBtn = document.getElementById('cancel-delete-btn');
             const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
             const deleteUserIdInput = document.getElementById('delete-user-id');
             const toast = document.getElementById('toast');
-            const toastIcon = document.getElementById('toast-icon');
-            const toastMessage = document.getElementById('toast-message');
-            const toastClose = document.getElementById('toast-close');
+
+            let users = []; let isEditing = false;
             
-            let users = [];
-            let isEditing = false;
-            
-            const showToast = (message, type = 'success') => {
-                toastMessage.textContent = message;
-                toastIcon.className = "inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg";
-                if (type === 'success') {
-                    toastIcon.classList.add('text-green-500', 'bg-green-100');
-                    toastIcon.innerHTML = `<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>`;
-                } else {
-                    toastIcon.classList.add('text-red-500', 'bg-red-100');
-                    toastIcon.innerHTML = `<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>`;
-                }
-                toast.classList.remove('hidden');
-                setTimeout(() => toast.classList.add('opacity-100'), 10);
-                setTimeout(() => {
-                    toast.classList.add('opacity-0');
-                    setTimeout(() => toast.classList.add('hidden'), 300);
-                }, 4000); 
-            };
-            toastClose.addEventListener('click', () => {
-                toast.classList.add('opacity-0');
-                setTimeout(() => toast.classList.add('hidden'), 300);
-            });
-
-            const setError = (id, message) => {
-                const input = document.getElementById(id);
-                const errorEl = document.getElementById(`${id}-error`);
-                if (input) input.classList.add('input-error');
-                if (errorEl) errorEl.textContent = message;
-            };
-
-            const clearError = (id) => {
-                const input = document.getElementById(id);
-                const errorEl = document.getElementById(`${id}-error`);
-                if (input) input.classList.remove('input-error');
-                if (errorEl) errorEl.textContent = '';
-            };
-
-            const clearAllErrors = () => {
-                ['nome', 'login', 'senha', 'dataNascimento'].forEach(clearError);
-            };
+            const showToast = (msg, type='success') => { document.getElementById('toast-message').textContent = msg; document.getElementById('toast-icon').innerHTML = type==='success' ? `<svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"></path></svg>` : `<svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg>`; toast.classList.remove('hidden'); setTimeout(()=>toast.classList.add('opacity-100'),10); setTimeout(()=>{toast.classList.add('opacity-0');setTimeout(()=>toast.classList.add('hidden'),300)},4000); };
+            document.getElementById('toast-close').onclick = () => { toast.classList.add('opacity-0'); setTimeout(()=>toast.classList.add('hidden'),300); };
+            const clearAllErrors = () => ['nome', 'login', 'senha', 'dataNascimento'].forEach(id=>{document.getElementById(id)?.classList.remove('input-error');document.getElementById(id+'-error').textContent='';});
 
             const validateForm = () => {
-                clearAllErrors();
-                let isValid = true;
-                
-                const formData = new FormData(form);
-                const nome = formData.get('nome').trim();
-                const login = formData.get('login').trim();
-                const senha = formData.get('senha').trim();
-                const dataNascimento = formData.get('dataNascimento');
-
-                if (!nome) {
-                    setError('nome', 'O nome é obrigatório.');
-                    isValid = false;
-                }
-
-                if (!login) {
-                    setError('login', 'O login é obrigatório.');
-                    isValid = false;
-                }
-
-                if (!isEditing && !senha) {
-                    setError('senha', 'A senha é obrigatória ao criar.');
-                    isValid = false;
-                }
-                
-                if (senha && senha.length < 4) { 
-                     setError('senha', 'A senha deve ter no mínimo 4 caracteres.');
-                    isValid = false;
-                }
-
-                if (!dataNascimento) {
-                    setError('dataNascimento', 'A data de nascimento é obrigatória.');
-                    isValid = false;
-                } else if (new Date(dataNascimento) >= new Date()) {
-                     setError('dataNascimento', 'A data deve ser no passado.');
-                     isValid = false;
-                }
-                
-                return isValid;
+                clearAllErrors(); let ok = true;
+                const fd = new FormData(form);
+                if (!fd.get('nome').trim()) { document.getElementById('nome').classList.add('input-error'); document.getElementById('nome-error').textContent='Nome obrigatório.'; ok=false; }
+                if (!fd.get('login').trim()) { document.getElementById('login').classList.add('input-error'); document.getElementById('login-error').textContent='Login obrigatório.'; ok=false; }
+                if (!isEditing && !fd.get('senha')) { document.getElementById('senha').classList.add('input-error'); document.getElementById('senha-error').textContent='Senha obrigatória.'; ok=false; }
+                if (!fd.get('dataNascimento')) { document.getElementById('dataNascimento').classList.add('input-error'); document.getElementById('dataNascimento-error').textContent='Data obrigatória.'; ok=false; }
+                return ok;
             };
-            
+
             const renderTable = () => {
-                tableBody.innerHTML = '';
-                if (users.length === 0) {
-                    emptyState.classList.remove('hidden');
-                } else {
-                    emptyState.classList.add('hidden');
-                    users.forEach(user => {
-                        const tr = document.createElement('tr');
-                        tr.className = 'hover:bg-gray-50';
-                        tr.innerHTML = `
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${user.idUsuario}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${user.nome}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${user.login}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
-                                <button data-id="${user.idUsuario}" class="edit-btn text-gray-500 hover:text-[#00CEF7]" title="Editar">
-                                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M17.414 2.586a2 2 0 0 0-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 0 0 0-2.828Z" /><path fill-rule="evenodd" d="M2 6a2 2 0 0 1 2-2h4a1 1 0 0 1 0 2H4v10h10v-4a1 1 0 1 1 2 0v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6Z" clip-rule="evenodd" /></svg>
-                                </button>
-                                <button data-id="${user.idUsuario}" class="delete-btn text-gray-500 hover:text-red-600" title="Excluir">
-                                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.75 1A2.75 2.75 0 0 0 6 3.75V4.5h8V3.75A2.75 2.75 0 0 0 11.25 1H8.75ZM-1.357 6.357a.75.75 0 0 1 1.06 0l2.061 2.061a.75.75 0 0 1-1.06 1.06L-1.357 7.418a.75.75 0 0 1 0-1.061Zm10.414 0a.75.75 0 0 1 1.06 0l2.06 2.061a.75.75 0 1 1-1.06 1.06l-2.06-2.06a.75.75 0 0 1 0-1.061ZM5 6.5a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0v-7.5A.75.75 0 0 1 5 6.5Zm5 0a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0v-7.5A.75.75 0 0 1 10 6.5ZM15 6.5a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0v-7.5A.75.75 0 0 1 15 6.5Z" clip-rule="evenodd" /></svg>
-                                </button>
-                            </td>
-                        `;
-                        tableBody.appendChild(tr);
-                    });
-                }
+                tableBody.innerHTML = ''; if(users.length===0){emptyState.classList.remove('hidden');}else{emptyState.classList.add('hidden');
+                users.forEach(user => {
+                    // CORREÇÃO: user.idPessoa no lugar de user.idUsuario
+                    tableBody.innerHTML += `<tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4 text-sm font-medium text-gray-900">${user.idPessoa}</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">${user.nome}</td>
+                        <td class="px-6 py-4 text-sm text-gray-500">${user.login}</td>
+                        <td class="px-6 py-4 text-right text-sm font-medium space-x-2">
+                            <button data-id="${user.idPessoa}" class="edit-btn text-gray-500 hover:text-[#00CEF7]"><svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor"><path d="M17.414 2.586a2 2 0 0 0-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 0 0 0-2.828Z"/><path fill-rule="evenodd" d="M2 6a2 2 0 0 1 2-2h4a1 1 0 0 1 0 2H4v10h10v-4a1 1 0 1 1 2 0v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6Z" clip-rule="evenodd"/></svg></button>
+                            <button data-id="${user.idPessoa}" class="delete-btn text-gray-500 hover:text-red-600"><svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.75 1A2.75 2.75 0 0 0 6 3.75V4.5h8V3.75A2.75 2.75 0 0 0 11.25 1H8.75ZM-1.357 6.357a.75.75 0 0 1 1.06 0l2.061 2.061a.75.75 0 0 1-1.06 1.06L-1.357 7.418a.75.75 0 0 1 0-1.061Zm10.414 0a.75.75 0 0 1 1.06 0l2.06 2.061a.75.75 0 1 1-1.06 1.06l-2.06-2.06a.75.75 0 0 1 0-1.061ZM5 6.5a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0v-7.5A.75.75 0 0 1 5 6.5Zm5 0a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0v-7.5A.75.75 0 0 1 10 6.5ZM15 6.5a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0v-7.5A.75.75 0 0 1 15 6.5Z" clip-rule="evenodd"/></svg></button>
+                        </td></tr>`;
+                });}
             };
 
-            const fetchUsers = async () => {
-                loadingIndicator.classList.remove('hidden');
-                emptyState.classList.add('hidden');
-                tableBody.innerHTML = '';
-                try {
-                    const response = await fetch(API_URL);
-                    if (!response.ok) throw new Error('Falha ao buscar usuários.');
-                    users = await response.json();
-                    renderTable();
-                } catch (error) {
-                    console.error('Erro:', error);
-                    showToast(error.message, 'error');
-                } finally {
-                    loadingIndicator.classList.add('hidden');
-                }
-            };
+            const fetchUsers = async () => { loadingIndicator.classList.remove('hidden'); emptyState.classList.add('hidden'); try { const r = await fetch(API_URL); if(!r.ok) throw new Error(); users = await r.json(); renderTable(); } catch(e){showToast('Erro ao carregar', 'error');} finally{loadingIndicator.classList.add('hidden');} };
 
-            const resetForm = () => {
-                form.reset();
-                hiddenId.value = '';
-                isEditing = false;
-                formTitle.textContent = 'Informações do Usuário';
-                cancelButton.classList.add('hidden');
-                document.getElementById('senha').required = true;
-                document.getElementById('senha').placeholder = "Senha (obrigatória ao criar)";
-                clearAllErrors();
-            };
+            const resetForm = () => { form.reset(); hiddenId.value = ''; isEditing = false; formTitle.textContent='Informações do Usuário'; cancelButton.classList.add('hidden'); document.getElementById('senha').required=true; clearAllErrors(); };
 
             const handleEdit = (id) => {
-                const user = users.find(u => u.idUsuario === id);
-                if (!user) return;
-                isEditing = true;
-                formTitle.textContent = 'Editar Usuário';
-                cancelButton.classList.remove('hidden');
-                clearAllErrors();
-                
-                hiddenId.value = user.idUsuario;
+                // CORREÇÃO: Buscar por idPessoa
+                const user = users.find(u => u.idPessoa === id); if(!user) return;
+                isEditing=true; formTitle.textContent='Editar Usuário'; cancelButton.classList.remove('hidden'); clearAllErrors();
+                hiddenId.value = user.idPessoa;
                 document.getElementById('nome').value = user.nome;
                 document.getElementById('login').value = user.login;
                 document.getElementById('dataNascimento').value = user.dataNascimento;
-                document.getElementById('senha').required = false; 
-                document.getElementById('senha').value = ""; // Limpa o campo
-                document.getElementById('senha').placeholder = "Deixe em branco para não alterar";
-                
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                document.getElementById('nome').focus();
-            };
-            
-            const handleDelete = (id) => {
-                deleteUserIdInput.value = id;
-                deleteModal.classList.remove('hidden');
-                setTimeout(() => {
-                    deleteModal.classList.add('opacity-100');
-                    deleteModal.querySelector('div > div').style.transform = 'scale(1)';
-                }, 10);
+                document.getElementById('senha').required = false;
+                window.scrollTo({top:0, behavior:'smooth'});
             };
 
-            const closeDeleteModal = () => {
-                deleteModal.classList.remove('opacity-100');
-                deleteModal.querySelector('div > div').style.transform = 'scale(0.95)';
-                setTimeout(() => deleteModal.classList.add('hidden'), 300);
-            };
-
-            const confirmDelete = async () => {
-                const id = parseInt(deleteUserIdInput.value);
-                try {
-                    const response = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
-                    if (!response.ok) {
-                         const errorBody = await response.json();
-                         throw new Error(errorBody.message || 'Falha ao excluir.');
-                    }
-                    fetchUsers(); // Recarrega da API
-                    showToast('Usuário excluído com sucesso.', 'success');
-                } catch (error) {
-                    console.error('Erro ao excluir:', error);
-                    showToast(error.message, 'error');
-                } finally {
-                    closeDeleteModal();
-                }
-            };
-            
-            
             const handleSubmit = async (e) => {
-                e.preventDefault();
-                
-                if (!validateForm()) {
-                    showToast('Por favor, corrija os erros no formulário.', 'error');
-                    return;
-                }
-                
-                const formData = new FormData(form);
-                const apiData = Object.fromEntries(formData.entries());
+                e.preventDefault(); if(!validateForm()){showToast('Corrija erros','error');return;}
+                const fd = new FormData(form);
                 const id = hiddenId.value ? parseInt(hiddenId.value) : null;
-
-                if (isEditing && !apiData.senha) {
-                    delete apiData.senha;
-                }
-
-                const method = isEditing ? 'PUT' : 'POST';
-                const url = isEditing ? `${API_URL}/${id}` : API_URL;
+                const data = Object.fromEntries(fd.entries());
+                if(isEditing && !data.senha) delete data.senha;
 
                 try {
-                    const response = await fetch(url, {
-                        method: method,
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(apiData)
-                    });
-                    if (!response.ok) {
-                         const errorBody = await response.json();
-                         throw new Error(errorBody.message || 'Falha ao salvar.');
-                    }
-                    
-                    if (isEditing) {
-                        showToast('Usuário atualizado com sucesso.', 'success');
-                    } else {
-                        showToast('Usuário salvo com sucesso.', 'success');
-                    }
-                    
-                    resetForm();
-                    fetchUsers(); // Recarrega da API
-                } catch (error)
-                 {
-                    console.error('Erro:', error);
-                    showToast(error.message, 'error')
-                }
+                    const r = await fetch(isEditing ? `${API_URL}/${id}` : API_URL, { method: isEditing?'PUT':'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data) });
+                    if(!r.ok) throw new Error();
+                    showToast('Salvo com sucesso'); resetForm(); fetchUsers();
+                } catch(e){ showToast('Erro ao salvar', 'error'); }
             };
 
-            // --- Event Listeners ---
+            // Listeners
             fetchUsers();
-            form.addEventListener('submit', handleSubmit);
-            cancelButton.addEventListener('click', resetForm);
-            tableBody.addEventListener('click', (e) => {
-                const button = e.target.closest('button');
-                if (!button) return;
-                const id = parseInt(button.dataset.id);
-                if (button.classList.contains('edit-btn')) handleEdit(id);
-                if (button.classList.contains('delete-btn')) handleDelete(id);
-            });
-            
-            cancelDeleteBtn.addEventListener('click', closeDeleteModal);
-            confirmDeleteBtn.addEventListener('click', confirmDelete);
-            deleteModal.addEventListener('click', (e) => {
-                if (e.target === deleteModal) closeDeleteModal();
-            });
+            form.addEventListener('submit', handleSubmit); cancelButton.onclick=resetForm;
+            tableBody.onclick = (e) => { const btn = e.target.closest('button'); if(!btn)return; const id=parseInt(btn.dataset.id); if(btn.classList.contains('edit-btn'))handleEdit(id); if(btn.classList.contains('delete-btn')){deleteUserIdInput.value=id;deleteModal.classList.remove('hidden');setTimeout(()=>deleteModal.classList.add('opacity-100'),10);} };
+            document.getElementById('cancel-delete-btn').onclick=()=>{deleteModal.classList.remove('opacity-100');setTimeout(()=>deleteModal.classList.add('hidden'),300)};
+            document.getElementById('confirm-delete-btn').onclick=async()=>{
+                try{ await fetch(`${API_URL}/${deleteUserIdInput.value}`, {method:'DELETE'}); fetchUsers(); showToast('Excluído'); } catch(e){showToast('Erro','error');} finally{document.getElementById('cancel-delete-btn').click();}
+            };
         });
     </script>
+</div>
 </body>
 </html>

@@ -7,23 +7,16 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { font-family: 'Inter', sans-serif; }
-        /* Classe de erro para inputs */
-        .input-error {
-            border-color: #ef4444 !important; /* Borda vermelha */
-        }
-        .input-error:focus {
-            --tw-ring-color: #ef4444 !important; /* Anel de foco vermelho */
-            border-color: #ef4444 !important;
-        }
-        /* Oculta scrollbars no Firefox */
+        .input-error { border-color: #ef4444 !important; }
+        .input-error:focus { --tw-ring-color: #ef4444 !important; border-color: #ef4444 !important; }
         .no-scrollbar { scrollbar-width: none; }
-        /* Oculta scrollbars no Chrome, Safari e Opera */
         .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 antialiased">
 
 <div class="flex min-h-screen">
+    <!-- Sidebar -->
     <aside id="sidebar" class="w-64 bg-[#211E48] text-white p-6 flex flex-col justify-between transition-all duration-300 ease-in-out no-scrollbar overflow-y-auto">
         <div>
             <div class="flex items-center justify-center mb-10">
@@ -32,50 +25,22 @@
             </div>
             <nav>
                 <ul>
-                    <li class="mb-2">
-                        <a href="clientes.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
-                            <svg class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m-4.682-2.72a3 3 0 00-4.682 2.72 9.094 9.094 0 003.741.479M0 10.5h24m-24 0a8.999 8.999 0 008.94 8.94 8.999 8.999 0 008.94-8.94M3 10.5a8.999 8.999 0 018.94-8.94A8.999 8.999 0 0121 10.5M12 15.75a3 3 0 01-3-3m3 3a3 3 0 003-3m-3 3v-3.75m-3 3h3.75m-3.75 0h-3.75C6.34 12 4.5 10.16 4.5 8.25V6.75a3 3 0 013-3h1.5a3 3 0 013 3v1.5c0 1.91-1.84 3.75-4.25 3.75M12 15.75v-3.75m0 0a3 3 0 00-3-3m3 3a3 3 0 003-3m-3 3h3.75m-3.75 0h-3.75a3 3 0 01-3-3V6.75a3 3 0 013-3h1.5a3 3 0 013 3v1.5c0 1.91 1.84 3.75 4.25 3.75m-4.25 0V15.75m0 0a3 3 0 013 3m-3-3a3 3 0 00-3 3m3-3h-3.75m3.75 0h3.75c2.41 0 4.25-1.84 4.25-3.75V6.75a3 3 0 00-3-3h-1.5a3 3 0 00-3 3v1.5c0 1.91-1.84 3.75-4.25 3.75m4.25 3.75v-3.75" /></svg>
-                            <span class="nav-text ml-4 transition-opacity duration-200">Cadastro Clientes</span>
-                        </a>
-                    </li>
-                    <li class="mb-2">
-                        <a href="usuarios.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
-                            <svg class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
-                            <span class="nav-text ml-4 transition-opacity duration-200">Cadastro Usuários</span>
-                        </a>
-                    </li>
-                    <li class="mb-2">
-                        <a href="produtos.html" class="nav-link flex items-center px-4 py-2 rounded-md text-[#00CEF7] font-medium bg-[#37336D] justify-start">
-                            <svg class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10.5 11.25h3M12 15h.008" /></svg>
-                            <span class="nav-text ml-4 transition-opacity duration-200">Cadastro Produtos</span>
-                        </a>
-                    </li>
-                    <li class="mb-2">
-                        <a href="orcamentos.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
-                            <svg class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
-                            <span class="nav-text ml-4 transition-opacity duration-200">Lançar Orçamento</span>
-                        </a>
-                    </li>
-                    <li class="mb-2">
-                        <a href="pedidos.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
-                            <svg class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
-                            <span class="nav-text ml-4 transition-opacity duration-200">Lançar Pedido</span>
-                        </a>
-                    </li>
+                    <li class="mb-2"><a href="clientes.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start"><svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg><span class="nav-text ml-4">Cadastro Clientes</span></a></li>
+                    <li class="mb-2"><a href="usuarios.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start"><svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg><span class="nav-text ml-4">Cadastro Usuários</span></a></li>
+                    <li class="mb-2"><a href="produtos.html" class="nav-link flex items-center px-4 py-2 rounded-md text-[#00CEF7] font-medium bg-[#37336D] justify-start"><svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg><span class="nav-text ml-4">Cadastro Produtos</span></a></li>
+                    <li class="mb-2"><a href="orcamentos.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start"><svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg><span class="nav-text ml-4">Lançar Orçamento</span></a></li>
+                    <li class="mb-2"><a href="pedidos.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start"><svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg><span class="nav-text ml-4">Lançar Pedido</span></a></li>
                 </ul>
             </nav>
         </div>
         <div>
             <button id="sidebar-toggle" class="nav-link flex items-center w-full px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-400 hover:text-white justify-start mb-2">
-                <svg id="sidebar-toggle-icon" class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                </svg>
-                <span class="nav-text ml-4 transition-opacity duration-200">Recolher</span>
+                <svg id="sidebar-toggle-icon" class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7" /></svg>
+                <span class="nav-text ml-4">Recolher</span>
             </button>
-
             <a href="index.html" class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-red-700 text-gray-300 hover:text-white justify-start">
-                <svg class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" /></svg>
-                <span class="nav-text ml-4 transition-opacity duration-200">Sair</span>
+                <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+                <span class="nav-text ml-4">Sair</span>
             </a>
         </div>
     </aside>
@@ -177,7 +142,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             // --- Lógica do Sidebar Retrátil ---
             const sidebar = document.getElementById('sidebar');
-            const mainContent = document.getElementById('main-content');
             const toggleButton = document.getElementById('sidebar-toggle');
             const toggleIcon = toggleButton.querySelector('svg');
             const navTextLabels = document.querySelectorAll('.nav-text');
@@ -186,27 +150,17 @@
 
             const setSidebarState = (isCollapsed) => {
                 if (isCollapsed) {
-                    sidebar.classList.remove('w-64');
-                    sidebar.classList.add('w-20');
-                    // **** CORREÇÃO APLICADA AQUI: Linhas de margem removidas ****
+                    sidebar.classList.remove('w-64'); sidebar.classList.add('w-20');
                     logoText.classList.add('hidden');
                     navTextLabels.forEach(label => label.classList.add('hidden'));
-                    navLinks.forEach(link => {
-                        link.classList.add('justify-center');
-                        link.classList.remove('justify-start');
-                    });
-                    toggleIcon.innerHTML = `<svg id="sidebar-toggle-icon" class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>`; // Chevron Right
+                    navLinks.forEach(link => { link.classList.add('justify-center'); link.classList.remove('justify-start'); });
+                    toggleIcon.innerHTML = `<svg id="sidebar-toggle-icon" class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>`;
                 } else {
-                    sidebar.classList.add('w-64');
-                    sidebar.classList.remove('w-20');
-                    // **** CORREÇÃO APLICADA AQUI: Linhas de margem removidas ****
+                    sidebar.classList.add('w-64'); sidebar.classList.remove('w-20');
                     logoText.classList.remove('hidden');
                     navTextLabels.forEach(label => label.classList.remove('hidden'));
-                    navLinks.forEach(link => {
-                        link.classList.remove('justify-center');
-                        link.classList.add('justify-start');
-                    });
-                    toggleIcon.innerHTML = `<svg id="sidebar-toggle-icon" class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>`; // Chevron Left
+                    navLinks.forEach(link => { link.classList.remove('justify-center'); link.classList.add('justify-start'); });
+                    toggleIcon.innerHTML = `<svg id="sidebar-toggle-icon" class="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>`;
                 }
             };
 
@@ -218,7 +172,6 @@
                 localStorage.setItem('sidebarCollapsed', !currentState);
                 setSidebarState(!currentState);
             });
-            // --- Fim da Lógica do Sidebar ---
 
 
             // --- Lógica da Página (Produtos) ---
@@ -408,7 +361,7 @@
                          const errorBody = await response.json();
                          throw new Error(errorBody.message || 'Falha ao excluir.');
                     }
-                    fetchProducts(); // Recarrega da API
+                    fetchProducts();
                     showToast('Produto excluído com sucesso.', 'success');
                 } catch (error) {
                     console.error('Erro ao excluir:', error);
@@ -451,7 +404,7 @@
                     }
 
                     resetForm();
-                    fetchProducts(); // Recarrega da API
+                    fetchProducts();
                 } catch (error) {
                     console.error('Erro:', error);
                     showToast(error.message, 'error')
@@ -477,5 +430,6 @@
             });
         });
     </script>
+</div>
 </body>
 </html>
