@@ -1,21 +1,18 @@
 package com.inter.graphtech_solutions.entities;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -30,41 +27,36 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "pedidos")
+// REMOVIDO @JsonIdentityInfo
 public class PedidoEntity {
 
-    // Atributos
-    @Id // chave primária
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idPedido;
-    @NonNull
+    @Column(name = "id_pedido")
+    private Integer idPedido;
+
+    @Column(nullable = false, length = 1000)
     private String descricao;
+
+    @Column(name = "data_cancel")
     private LocalDate dataCancel;
+
     @NonNull
+    @Column(name = "data_pedido")
     private LocalDate dataPedido;
 
-    // Relacionamento N:1 (Muitos Pedidos para Um Cliente)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idCliente")
+    @ManyToOne
+    @JoinColumn(name = "id_cliente")
     private ClienteEntity cliente;
 
-    // Relacionamento N:1 (Muitos Pedidos para Um Usuário)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idUsuario")
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
     private UsuarioEntity usuario;
 
-    // Relacionamento 1:N (Um Pedido para Muitos Produtos)
-    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    @JoinTable(
-        name = "pedido_produto", // Nome da tabela de junção
-        joinColumns = @JoinColumn(name = "pedido_id"), // Chave desta entidade
-        inverseJoinColumns = @JoinColumn(name = "produto_id") // Chave da outra entidade
-    )
-    private Set<ProdutoEntity> produtos = new HashSet<>();
-
-    // Relação 1:1 com Orçamento
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idOrcamento", unique = true)
-    @JsonIgnore
+    @OneToOne
+    @JoinColumn(name = "id_orcamento", unique = true)
     private OrcamentoEntity orcamento;
 
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PedidoProdutoEntity> itens = new ArrayList<>();
 }

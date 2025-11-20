@@ -1,62 +1,52 @@
 package com.inter.graphtech_solutions.entities;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "usuarios")
-@JsonIdentityInfo(
-  generator = ObjectIdGenerators.PropertyGenerator.class, 
-  property = "idUsuario")
+@PrimaryKeyJoinColumn(name = "id_pessoa")
+public class UsuarioEntity extends PessoaEntity {
 
-public class UsuarioEntity {
-
-    // Atributos
-    @Id // chave primária
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idUsuario;
-    private String nome;
     @NonNull
     private String login;
+    
     @NonNull
     private String senha;
-    @NonNull
-    private LocalDate dataNascimento;
-    // Relacionamento 1:N (Um Usuário para Muitos Clientes)
+
+    // IMPORTANTE: CascadeType.PERSIST e MERGE permitem salvar clientes ao salvar usuario.
+    // NÃO use CascadeType.ALL ou REMOVE aqui, senão deleta os clientes junto!
     @JsonIgnore
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuario", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<ClienteEntity> clientes = new ArrayList<>();
 
-    // Relacionamento 1:N (Um Usuário para Muitos Pedidos)
     @JsonIgnore
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuario", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<PedidoEntity> pedidos = new ArrayList<>();
 
-    // Relacionamento 1:N (Um Usuário para Muitos Orçamentos)
     @JsonIgnore
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuario", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<OrcamentoEntity> orcamentos = new ArrayList<>();
 
 }
