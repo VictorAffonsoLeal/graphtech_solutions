@@ -9,12 +9,13 @@ import org.springframework.stereotype.Repository;
 import com.inter.graphtech_solutions.entities.OrcamentoEntity;
 
 @Repository
-public interface OrcamentoRepository extends JpaRepository <OrcamentoEntity, Integer>{
+public interface OrcamentoRepository extends JpaRepository<OrcamentoEntity, Integer> {
+    
+    // Atualizado para buscar Clientes, Usuarios, Itens e os Produtos dentro dos itens
     @Query("SELECT o FROM OrcamentoEntity o " +
-           "JOIN FETCH o.cliente " +
-           "JOIN FETCH o.usuario " +
-           "LEFT JOIN FETCH o.produtos " +
-           "LEFT JOIN FETCH o.pedido")
+           "LEFT JOIN FETCH o.cliente " +
+           "LEFT JOIN FETCH o.usuario " +
+           "LEFT JOIN FETCH o.itens i " +
+           "LEFT JOIN FETCH i.produto")
     List<OrcamentoEntity> findAllWithDetails();
-
 }

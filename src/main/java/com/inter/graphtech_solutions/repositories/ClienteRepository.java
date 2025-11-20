@@ -9,8 +9,10 @@ import org.springframework.stereotype.Repository;
 import com.inter.graphtech_solutions.entities.ClienteEntity;
 
 @Repository
-public interface ClienteRepository extends JpaRepository <ClienteEntity, Integer>{
-    @Query("SELECT c FROM ClienteEntity c JOIN FETCH c.usuario")
+public interface ClienteRepository extends JpaRepository<ClienteEntity, Integer> {
+    
+    // Atualizado: Traz apenas clientes com status 0 (Ativos)
+    @Query("SELECT c FROM ClienteEntity c JOIN FETCH c.usuario WHERE c.status = 0")
     List<ClienteEntity> findAllWithUsuario();
 
 }
