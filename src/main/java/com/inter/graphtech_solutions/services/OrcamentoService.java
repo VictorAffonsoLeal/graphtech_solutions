@@ -1,15 +1,13 @@
 package com.inter.graphtech_solutions.services;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import com.inter.graphtech_solutions.entities.OrcamentoEntity;
+import com.inter.graphtech_solutions.entities.OrcamentoProdutoEntity;
 import com.inter.graphtech_solutions.entities.ProdutoEntity;
 import com.inter.graphtech_solutions.repositories.OrcamentoRepository;
 import com.inter.graphtech_solutions.repositories.ProdutoRepository;
@@ -20,12 +18,14 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class OrcamentoService {
+    
     private final OrcamentoRepository orcamentoRepository;
     private final ProdutoRepository produtoRepository;
 
     @Transactional
     public OrcamentoEntity salvar(OrcamentoEntity orcamento) {
-        vincularProdutosExistentes(orcamento, new ArrayList<>(orcamento.getProdutos()));
+        // Prepara os itens antes de salvar
+        prepararItens(orcamento);
         return orcamentoRepository.save(orcamento);
     }
 
@@ -34,41 +34,64 @@ public class OrcamentoService {
     }
 
     public List<OrcamentoEntity> listarOrcamento(){
-        return orcamentoRepository.findAllWithDetails();
+        // Certifique-se que seu Repository tenha um método ou @Query para trazer os itens junto se necessário
+        // ou use o findAll padrão (lazy loading trará os itens quando acessados, se dentro de transação)
+        return orcamentoRepository.findAll(); 
     }
 
-    public OrcamentoEntity alterar(int id, OrcamentoEntity orcamento){
-        Optional<OrcamentoEntity> orcamentoExistente = orcamentoRepository.findById(id);
-        if (orcamentoExistente.isPresent()) {
-            OrcamentoEntity orcamentoAtualizado = orcamentoExistente.get();
+    @Transactional
+    public OrcamentoEntity alterar(Integer id, OrcamentoEntity orcamento){
+        Optional<OrcamentoEntity> orcamentoExistenteOpt = orcamentoRepository.findById(id);
+        
+        if (orcamentoExistenteOpt.isPresent()) {
+            OrcamentoEntity orcamentoAtualizado = orcamentoExistenteOpt.get();
+            
+            // Atualiza campos simples
             orcamentoAtualizado.setDescricao(orcamento.getDescricao());
             orcamentoAtualizado.setDataCancel(orcamento.getDataCancel());
             orcamentoAtualizado.setDataOrcamento(orcamento.getDataOrcamento());
-            orcamentoAtualizado.setStatus(orcamento.isStatus());
+            orcamentoAtualizado.setStatus(orcamento.getStatus());
             orcamentoAtualizado.setCliente(orcamento.getCliente());
             orcamentoAtualizado.setUsuario(orcamento.getUsuario());
-            vincularProdutosExistentes(orcamentoAtualizado, new ArrayList<>(orcamento.getProdutos()));
+            
+            // Atualiza a lista de itens (Limpa e readiciona para garantir sincronia)
+            orcamentoAtualizado.getItens().clear();
+            if (orcamento.getItens() != null) {
+                orcamentoAtualizado.getItens().addAll(orcamento.getItens());
+            }
+            
+            // Re-vincula os produtos corretamente
+            prepararItens(orcamentoAtualizado);
 
-            //orcamentoAtualizado.setProdutosList(orcamento.getProdutosList());
             return orcamentoRepository.save(orcamentoAtualizado);
         } else {
             return null;
         }
     }
 
-    private void vincularProdutosExistentes(OrcamentoEntity orcamento, List<ProdutoEntity> produtos) {
-        if (produtos != null && !produtos.isEmpty()) {
-            Set<ProdutoEntity> produtosGerenciados = produtos.stream()
-                .map(produto -> produtoRepository.findById(produto.getIdProduto()))
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .collect(Collectors.toSet());
-            
-            orcamento.setProdutos(produtosGerenciados); // Define o Set de produtos gerenciados
-        } else {
-            orcamento.setProdutos(new HashSet<>()); // Limpa a lista se ela vier vazia
+    // Método auxiliar para vincular Produtos e o Próprio Orçamento aos itens
+    private void prepararItens(OrcamentoEntity orcamento) {
+        if (orcamento.getItens() != null && !orcamento.getItens().isEmpty()) {
+            List<OrcamentoProdutoEntity> itensParaRemover = new ArrayList<>();
+
+            for (OrcamentoProdutoEntity item : orcamento.getItens()) {
+                // 1. Busca o produto real no banco pelo ID vindo da tela
+                if (item.getProduto() != null && item.getProduto().getIdProduto() != null) {
+                    ProdutoEntity produtoReal = produtoRepository.findById(item.getProduto().getIdProduto())
+                        .orElse(null);
+                    
+                    if (produtoReal != null) {
+                        item.setProduto(produtoReal);
+                        item.setOrcamento(orcamento); // Vincula o pai (Orçamento) ao filho (Item)
+                    } else {
+                        // Se o produto não existe, marcamos para remover da lista para não dar erro
+                        itensParaRemover.add(item);
+                    }
+                } else {
+                    itensParaRemover.add(item);
+                }
+            }
+            orcamento.getItens().removeAll(itensParaRemover);
         }
     }
-
-
 }

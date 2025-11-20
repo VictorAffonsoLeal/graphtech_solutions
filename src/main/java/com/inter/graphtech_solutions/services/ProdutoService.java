@@ -20,7 +20,7 @@ public class ProdutoService {
     }
 
     public List<ProdutoEntity> listarProdutos() {
-        return produtoRepository.findAllWithDetails();
+        return produtoRepository.findAll();
     }
 
     public void excluirProduto(int id) {
