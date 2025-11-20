@@ -26,7 +26,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "orcamentos")
-// REMOVIDO @JsonIdentityInfo para evitar envio apenas do ID
 public class OrcamentoEntity {
 
     @Id
