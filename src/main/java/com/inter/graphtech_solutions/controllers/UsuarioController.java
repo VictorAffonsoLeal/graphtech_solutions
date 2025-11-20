@@ -21,6 +21,7 @@ import com.inter.graphtech_solutions.services.UsuarioService;
 @RequiredArgsConstructor
 @RequestMapping(value = "/usuarios")
 public class UsuarioController {
+    
     private final UsuarioService usuarioService;
 
     @GetMapping
@@ -40,19 +41,18 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UsuarioEntity> alterar(@PathVariable int id, @RequestBody UsuarioEntity usuario) {
+    public ResponseEntity<UsuarioEntity> alterar(@PathVariable Integer id, @RequestBody UsuarioEntity usuario) {
         UsuarioEntity atualizado = usuarioService.alterarUsuario(id, usuario);
         if (atualizado != null) {
             return new ResponseEntity<>(atualizado, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluir(@PathVariable int id) {
-        usuarioService.deletarUsuario(id);;
+    public ResponseEntity<Void> excluir(@PathVariable Integer id) {
+        usuarioService.deletarUsuario(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
