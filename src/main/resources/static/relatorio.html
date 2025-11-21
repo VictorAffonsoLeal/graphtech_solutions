@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Relatórios DB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .no-scrollbar {
+            scrollbar-width: none;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-900 antialiased">
+
+    <div class="flex min-h-screen">
+
+        <!-- Placeholder do Menu -->
+        <aside id="sidebar"
+            class="w-64 bg-[#211E48] text-white p-6 flex flex-col justify-between transition-all duration-300 ease-in-out no-scrollbar overflow-y-auto">
+            <div>
+                <div class="flex items-center justify-center mb-10">
+                    <img src="images/logo.png" alt="Logo GraphTech" class="w-12 h-12 rounded-lg mr-4 flex-shrink-0">
+                    <span id="logo-text" class="text-xl font-semibold transition-opacity duration-200">GraphTech</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li class="mb-2"><a href="clientes.html"
+                                class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start"><svg
+                                    class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg><span class="nav-text ml-4">Cadastro Clientes</span></a></li>
+                        <li class="mb-2">
+                            <a href="usuarios.html"
+                                class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
+                                <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                                </svg>
+                                <span class="nav-text ml-4 transition-opacity duration-200">Cadastro Usuários</span>
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="produtos.html"
+                                class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
+                                <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10.5 11.25h3M12 15h.008" />
+                                </svg>
+                                <span class="nav-text ml-4 transition-opacity duration-200">Cadastro Produtos</span>
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="orcamentos.html"
+                                class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
+                                <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                </svg>
+                                <span class="nav-text ml-4 transition-opacity duration-200">Lançar Orçamento</span>
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="pedidos.html"
+                                class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
+                                <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                                </svg>
+                                <span class="nav-text ml-4 transition-opacity duration-200">Lançar Pedido</span>
+                            </a>
+                        </li>
+                        <li class="mb-2"><a href="relatorio.html"
+                                class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
+                                <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                                </svg>
+                                <span class="nav-text ml-4">Relatório</span></a></li>
+
+                    </ul>
+                </nav>
+            </div>
+            <div>
+                <button id="sidebar-toggle"
+                    class="nav-link flex items-center w-full px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-400 hover:text-white justify-start mb-2">
+                    <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7" />
+                    </svg>
+                    <span class="nav-text ml-4">Recolher</span>
+                </button>
+                <a href="index.html"
+                    class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-red-700 text-gray-300 hover:text-white justify-start">
+                    <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                    <span class="nav-text ml-4">Sair</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <div id="main-content" class="flex-1 p-10 overflow-y-auto h-screen transition-all duration-300 ease-in-out">
+            <h1 class="text-3xl font-bold text-gray-800 mb-8">Relatórios e Rotinas de Banco de Dados</h1>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+                <!-- 1. FUNCTION: Vendas por Mês -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                        <span
+                            class="bg-purple-100 text-purple-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">FUNCTION</span>
+                        Vendas por Mês
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 mb-1">Selecione o Usuário</label>
+                            <select id="idUsuario"
+                                class="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm">
+                                <option value="">Carregando...</option>
+                            </select>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-1">Mês</label>
+                                <input type="number" id="mes" min="1" max="12" value="3"
+                                    class="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-1">Ano</label>
+                                <input type="number" id="ano" min="2000" max="2100" value="2025"
+                                    class="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm">
+                            </div>
+                        </div>
+                        <button onclick="executarFunction()"
+                            class="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition">Consultar</button>
+
+                        <div id="function-result-container"
+                            class="hidden mt-4 p-4 bg-gray-50 rounded-md border border-gray-200">
+                            <p class="text-sm text-gray-600">Resultado:</p>
+                            <div class="flex justify-between items-end mt-2">
+                                <div>
+                                    <p class="text-xs text-gray-500 font-bold">Usuário</p>
+                                    <p id="res-nome" class="font-medium">-</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-xs text-gray-500 font-bold">Total</p>
+                                    <p id="res-total" class="text-2xl font-bold text-purple-600">R$ 0,00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. VIEW: Taxa de Conversão (NOVO) -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 lg:col-span-2">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-700 flex items-center">
+                            <span
+                                class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">VIEW</span>
+                            Taxa de Conversão
+                        </h3>
+                        <button onclick="carregarView()"
+                            class="text-blue-500 hover:text-blue-700 text-sm font-medium">Atualizar Dados</button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200 text-sm">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-4 py-2 text-left font-medium text-gray-500">Vendedor</th>
+                                    <th class="px-4 py-2 text-center font-medium text-gray-500">Orç. Total</th>
+                                    <th class="px-4 py-2 text-center font-medium text-gray-500">Convertidos</th>
+                                    <th class="px-4 py-2 text-center font-medium text-gray-500">Vendas Totais</th>
+                                    <th class="px-4 py-2 text-center font-medium text-gray-500">Taxa (%)</th>
+                                    <th class="px-4 py-2 text-left font-medium text-gray-500">Classificação</th>
+                                </tr>
+                            </thead>
+                            <tbody id="view-table-body" class="divide-y divide-gray-200">
+                                <tr>
+                                    <td colspan="6" class="px-4 py-2 text-center text-gray-400">Clique em Atualizar para
+                                        carregar...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 3. PROCEDURE -->
+
+
+                <!-- 4. TRIGGER -->
+
+
+            </div>
+        </div>
+    </div>
+
+    <script src="js/menu-loader.js"></script>
+    <script>
+        const USERS_API_URL = '/usuarios';
+        const RELATORIO_FUNCTION_API = '/relatorios/vendas-usuario';
+        const RELATORIO_VIEW_API = '/relatorios/taxa-conversao'; // Novo Endpoint
+
+        // Carregar Usuários
+        async function carregarUsuarios() {
+            try {
+                const r = await fetch(USERS_API_URL); const d = await r.json();
+                const s = document.getElementById('idUsuario'); s.innerHTML = '<option value="">Selecione</option>';
+                d.forEach(u => s.appendChild(new Option(`${u.idPessoa} - ${u.nome}`, u.idPessoa)));
+            } catch (e) { }
+        }
+
+        // FUNCTION
+        async function executarFunction() {
+            const id = document.getElementById('idUsuario').value;
+            const mes = document.getElementById('mes').value;
+            const ano = document.getElementById('ano').value;
+            const container = document.getElementById('function-result-container');
+
+            if (!id || !mes || !ano) return alert("Preencha tudo");
+
+            try {
+                const r = await fetch(`${RELATORIO_FUNCTION_API}?idUsuario=${id}&mes=${mes}&ano=${ano}`);
+                const d = await r.json();
+                container.classList.remove('hidden');
+                if (d.length > 0) {
+                    document.getElementById('res-nome').textContent = d[0].nome;
+                    document.getElementById('res-total').textContent = d[0].valorTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                } else {
+                    document.getElementById('res-nome').textContent = "Sem dados";
+                    document.getElementById('res-total').textContent = "R$ 0,00";
+                }
+            } catch (e) { alert("Erro ao buscar"); }
+        }
+
+        // VIEW (Nova Lógica)
+        async function carregarView() {
+            const tbody = document.getElementById('view-table-body');
+            tbody.innerHTML = '<tr><td colspan="6" class="px-4 py-2 text-center">Carregando...</td></tr>';
+
+            try {
+                const r = await fetch(RELATORIO_VIEW_API);
+                if (!r.ok) throw new Error("Erro API");
+                const dados = await r.json();
+
+                tbody.innerHTML = '';
+                if (dados.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" class="px-4 py-2 text-center">Nenhum dado encontrado.</td></tr>';
+                    return;
+                }
+
+                dados.forEach(item => {
+                    // Classificação com cores
+                    let badgeClass = 'bg-gray-100 text-gray-800';
+                    if (item.classificacao.includes('Conversão normal')) badgeClass = 'bg-green-100 text-green-800';
+                    if (item.classificacao.includes('Sem conversão')) badgeClass = 'bg-red-100 text-red-800';
+                    if (item.classificacao.includes('Venda direta')) badgeClass = 'bg-blue-100 text-blue-800';
+
+                    tbody.innerHTML += `
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-2 font-medium text-gray-900">${item.nome}</td>
+                        <td class="px-4 py-2 text-center text-gray-600">${item.totalOrcamentos}</td>
+                        <td class="px-4 py-2 text-center text-green-600 font-semibold">${item.orcamentosConvertidos}</td>
+                        <td class="px-4 py-2 text-center text-blue-600 font-semibold">${item.vendas}</td>
+                        <td class="px-4 py-2 text-center text-gray-900 font-bold">${item.taxaConversao}%</td>
+                        <td class="px-4 py-2">
+                            <span class="px-2 py-1 rounded-full text-xs font-medium ${badgeClass}">
+                                ${item.classificacao}
+                            </span>
+                        </td>
+                    </tr>
+                `;
+                });
+
+            } catch (e) {
+                console.error(e);
+                tbody.innerHTML = '<tr><td colspan="6" class="px-4 py-2 text-center text-red-500">Erro ao carregar dados da view.</td></tr>';
+            }
+        }
+
+        // Mock Procedure
+        function executarProcedure() {
+            const s = document.getElementById('procedure-status');
+            s.classList.remove('hidden'); setTimeout(() => s.classList.add('hidden'), 3000);
+        }
+
+        // Iniciar
+        carregarUsuarios();
+        carregarView(); // Carrega a view automaticamente ao abrir
+    </script>
+</body>
+
+</html>

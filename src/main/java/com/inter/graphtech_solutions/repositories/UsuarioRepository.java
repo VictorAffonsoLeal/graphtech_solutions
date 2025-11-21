@@ -4,16 +4,21 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.inter.graphtech_solutions.entities.UsuarioEntity;
+import com.inter.graphtech_solutions.projection.TaxaConversaoProjection;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Integer> {
     
     Optional<UsuarioEntity> findByLogin(String login);
     
-    // Busca apenas usuários onde o status é 0 (Ativo)
     List<UsuarioEntity> findByStatus(Integer status);
+
+    // NOVO: Chamada para a View
+    @Query(value = "SELECT * FROM vw_taxa_conversao_vendedores", nativeQuery = true)
+    List<TaxaConversaoProjection> buscarTaxaConversao();
 
 }
