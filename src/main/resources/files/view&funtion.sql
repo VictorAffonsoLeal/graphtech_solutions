@@ -81,7 +81,10 @@ select * from dbo.vw_taxa_conversao_vendedores
 -----------------------------------------------------------------------------------
 -- FUNCTION
 -----------------------------------------------------------------------------------
-CREATE function fc_qtdPedidoMesUsuario
+use interdb
+go 
+
+create function fc_qtdPedidoMesUsuario
 (
 	@id int, @mes		int,	@ano	int
 )
@@ -98,4 +101,7 @@ as
 go
 
 select * from dbo.fc_qtdPedidoMesUsuario(4, 3, 2025)
+go
+
+select * from pedidos
 go
