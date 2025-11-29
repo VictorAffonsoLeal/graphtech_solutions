@@ -1,0 +1,74 @@
+CREATE PROCEDURE SP_CADCLIENTE
+(
+    @NOMECLI    VARCHAR(50),
+    @EMAILCLI   VARCHAR(50),
+    @ENDCLI     VARCHAR(50),
+    @TELCLI     VARCHAR(20),
+    @DATNAS     DATE,
+    @USUARIOID  INT   
+)
+AS
+BEGIN
+    BEGIN TRY
+        BEGIN TRAN
+
+        -- Inserir dados na tabela Pessoas
+        INSERT INTO Pessoas (NOME, data_nascimento, status)
+        VALUES (@NOMECLI, @DATNAS, 0)
+
+        -- Capturar o ID gerado para a pessoa
+        DECLARE @ID_PESSOA INT = SCOPE_IDENTITY()
+
+        -- Inserir dados na tabela Clientes, incluindo usuario_id e data_cadastro
+        INSERT INTO Clientes (id_pessoa, email, endereco, telefone, data_cadastro, usuario_id)
+        VALUES (@ID_PESSOA, @EMAILCLI, @ENDCLI, @TELCLI, GETDATE(), @USUARIOID)
+
+        COMMIT
+        PRINT 'DADOS CADASTRADOS COM SUCESSO'
+    END TRY
+    BEGIN CATCH
+        ROLLBACK
+        PRINT 'DADOS NÃO CADASTRADOS'
+        PRINT ERROR_MESSAGE()
+    END CATCH
+END
+GO
+
+EXEC SP_CADCLIENTE 'CLIENTE TESTE', 'clienteteste@gmail.com', 'teste, 123', '(11)98888-7777', '1990-05-20', 4
+
+
+CREATE PROCEDURE SP_CADUSUARIO
+(	-- PARAMETROS RECEBIDOS PELA PROCEDURE
+	@NOMECLI VARCHAR(50), 
+    @DATNAS  DATE,
+    @LOGIN   VARCHAR(50),
+    @SENHA   VARCHAR(20)    
+)    
+    
+AS 
+BEGIN
+	-- INICIAR UM TRATAMENTO DE ERRO
+	BEGIN TRY
+		-- INICIAR UMA TRANSAÇÃO
+		BEGIN TRAN
+			-- INSERIR OS DADOS DA PESSOA NA TABELA PESSOAS
+			INSERT INTO Pessoas (NOME, data_nascimento, status)       -- COLUNAS DA TABELA
+			-- VALUES ('BRUNO GABRIEL', '123.666.555-14', 1) -- VALORES INSERIDOS
+			VALUES (@NOMECLI, @DATNAS, 0) -- VALORES RECEBIDOS POR PARAMETRO
+			
+			
+			INSERT INTO usuarios(id_pessoa, login, senha)
+			VALUES (SCOPE_IDENTITY(), @LOGIN, @SENHA)
+			-- SE DEU TUDO CERTO, CONFIRMAR OS DADOS NAS DUAS TABELAS
+			COMMIT
+			PRINT 'DADOS CADASTRADOS COM SUCESSO'
+	END TRY
+	BEGIN CATCH
+		-- SE DEU ERRO, DESFAZER TUDO (OS DOIS INSERTS)
+		ROLLBACK
+		PRINT 'DADOS NÃO CADASTRADOS'
+	END CATCH
+END
+GO
+
+EXEC SP_CADUSUARIO 'USUARIO TESTE', '1990-05-20', 'TESTEMASTER', 'senha123'
