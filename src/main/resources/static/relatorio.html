@@ -125,22 +125,27 @@
                 <!-- NOVO: MANUTENÇÃO (Backup & Restore) -->
                 <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 lg:col-span-2">
                     <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
-                        <span class="bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">MANUTENÇÃO</span>
+                        <span
+                            class="bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">MANUTENÇÃO</span>
                         Backup e Restauração
                     </h3>
                     <p class="text-sm text-gray-500 mb-4">
                         Gerencie a segurança dos seus dados. O arquivo de backup será salvo localmente no servidor.
                     </p>
                     <div class="flex space-x-4">
-                        <button onclick="fazerBackup()" id="btn-backup" class="flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition focus:outline-none disabled:opacity-50">
+                        <button onclick="fazerBackup()" id="btn-backup"
+                            class="flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition focus:outline-none disabled:opacity-50">
                             <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
                             </svg>
                             Fazer Backup Agora
                         </button>
-                        <button onclick="fazerRestore()" id="btn-restore" class="flex items-center px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition focus:outline-none disabled:opacity-50">
+                        <button onclick="fazerRestore()" id="btn-restore"
+                            class="flex items-center px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition focus:outline-none disabled:opacity-50">
                             <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                             </svg>
                             Restaurar Último Backup
                         </button>
@@ -230,12 +235,81 @@
 
                 <!-- 3. PROCEDURE -->
 
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 lg:col-span-2">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                        <span
+                            class="bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">PROCEDURES</span>
+                        Teste de Cadastro via Procedure
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Form Cliente -->
+                        <div class="bg-gray-50 p-4 rounded-md">
+                            <h4 class="font-medium mb-3">SP_CADCLIENTE</h4>
+                            <input type="text" id="proc-cli-nome" placeholder="Nome Cliente"
+                                class="w-full mb-2 p-2 border rounded text-sm">
+                            <input type="email" id="proc-cli-email" placeholder="Email"
+                                class="w-full mb-2 p-2 border rounded text-sm">
+                            <input type="text" id="proc-cli-end" placeholder="Endereço"
+                                class="w-full mb-2 p-2 border rounded text-sm">
+                            <input type="text" id="proc-cli-tel" placeholder="Telefone"
+                                class="w-full mb-2 p-2 border rounded text-sm">
+                            <input type="date" id="proc-cli-nasc" class="w-full mb-2 p-2 border rounded text-sm">
+                            <input type="number" id="proc-cli-user" placeholder="ID Usuario Resp."
+                                class="w-full mb-2 p-2 border rounded text-sm">
+                            <button onclick="testarProcedureCliente()"
+                                class="w-full bg-yellow-500 text-white py-2 rounded hover:bg-yellow-600 text-sm">Executar
+                                Procedure</button>
+                        </div>
+
+                        <!-- Form Usuário -->
+                        <div class="bg-gray-50 p-4 rounded-md">
+                            <h4 class="font-medium mb-3">SP_CADUSUARIO</h4>
+                            <input type="text" id="proc-usu-nome" placeholder="Nome Usuário"
+                                class="w-full mb-2 p-2 border rounded text-sm">
+                            <input type="text" id="proc-usu-login" placeholder="Login"
+                                class="w-full mb-2 p-2 border rounded text-sm">
+                            <input type="password" id="proc-usu-senha" placeholder="Senha"
+                                class="w-full mb-2 p-2 border rounded text-sm">
+                            <input type="date" id="proc-usu-nasc" class="w-full mb-2 p-2 border rounded text-sm">
+                            <button onclick="testarProcedureUsuario()"
+                                class="w-full bg-yellow-500 text-white py-2 rounded hover:bg-yellow-600 text-sm">Executar
+                                Procedure</button>
+                        </div>
+                    </div>
+                </div>
+
 
                 <!-- 4. TRIGGER -->
+
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 lg:col-span-2">
+                     <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-700 flex items-center">
+                            <span class="bg-orange-100 text-orange-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">TRIGGERS</span>
+                            Log de Auditoria e Controle de Estoque
+                        </h3>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-4">
+                        As triggers estão ativas no banco de dados e funcionam automaticamente:<br>
+                        1. <b>TG_LOGALTERACAOPRECO:</b> Registra alterações de preço na tabela <i>LOG_HISTORICOPRECO</i>.<br>
+                        2. <b>trg_reduzir_estoque_pedido:</b> Baixa o estoque ao criar pedidos.<br>
+                        3. <b>trg_validar_estoque:</b> Impede vendas sem estoque.
+                    </p>
+                </div>
 
 
             </div>
         </div>
+    </div>
+
+        <!-- Toast de Notificação -->
+    <div id="toast" class="fixed bottom-10 right-10 flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow-lg hidden opacity-0 transition-opacity duration-300" role="alert">
+        <div id="toast-icon" class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg"></div>
+        <div id="toast-message" class="ml-3 text-sm font-normal"></div>
+        <button type="button" id="toast-close" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8" aria-label="Close">
+            <span class="sr-only">Fechar</span>
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
     </div>
 
     <script src="js/menu-loader.js"></script>
@@ -244,12 +318,37 @@
         const RELATORIO_FUNCTION_API = '/relatorios/vendas-usuario';
         const RELATORIO_VIEW_API = '/relatorios/taxa-conversao'; // Novo Endpoint
 
+                
+        // --- NOTIFICAÇÃO TOAST ---
+        const toast = document.getElementById('toast');
+        const showToast = (msg, type = 'success') => {
+            document.getElementById('toast-message').textContent = msg;
+            const iconDiv = document.getElementById('toast-icon');
+            if(type === 'success') {
+                iconDiv.className = "inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg";
+                iconDiv.innerHTML = `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>`;
+            } else {
+                iconDiv.className = "inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg";
+                iconDiv.innerHTML = `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>`;
+            }
+            toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.add('opacity-100'), 10);
+            setTimeout(() => {
+                toast.classList.remove('opacity-100');
+                setTimeout(() => toast.classList.add('hidden'), 300);
+            }, 4000);
+        };
+        document.getElementById('toast-close').onclick = () => {
+            toast.classList.remove('opacity-100');
+            setTimeout(() => toast.classList.add('hidden'), 300);
+        };
+
         // --- LÓGICA DE BACKUP E RESTORE ---
         async function fazerBackup() {
             const btn = document.getElementById('btn-backup');
             const status = document.getElementById('backup-status');
-            
-            if(!confirm("Deseja realmente gerar um backup do banco de dados agora?")) return;
+
+            if (!confirm("Deseja realmente gerar um backup do banco de dados agora?")) return;
 
             btn.disabled = true;
             btn.innerHTML = 'Processando...';
@@ -280,7 +379,7 @@
             const btn = document.getElementById('btn-restore');
             const status = document.getElementById('backup-status');
 
-            if(!confirm("ATENÇÃO: Isso irá substituir todos os dados atuais pelos do último backup. Tem certeza absoluta?")) return;
+            if (!confirm("ATENÇÃO: Isso irá substituir todos os dados atuais pelos do último backup. Tem certeza absoluta?")) return;
 
             btn.disabled = true;
             btn.innerHTML = 'Restaurando...';
@@ -389,6 +488,40 @@
         function executarProcedure() {
             const s = document.getElementById('procedure-status');
             s.classList.remove('hidden'); setTimeout(() => s.classList.add('hidden'), 3000);
+        }
+
+        async function testarProcedureCliente() {
+            const data = {
+                nome: document.getElementById('proc-cli-nome').value,
+                email: document.getElementById('proc-cli-email').value,
+                endereco: document.getElementById('proc-cli-end').value,
+                telefone: document.getElementById('proc-cli-tel').value,
+                dataNascimento: document.getElementById('proc-cli-nasc').value,
+                usuarioId: document.getElementById('proc-cli-user').value
+            };
+            try {
+                const r = await fetch('/relatorios/procedure/cliente', {
+                    method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)
+                });
+                const msg = await r.text();
+                if(r.ok) showToast(msg, "success"); else showToast("Erro: " + msg, "error");
+            } catch (e) { showToast("Erro na requisição", "error"); }
+        }
+
+        async function testarProcedureUsuario() {
+            const data = {
+                nome: document.getElementById('proc-usu-nome').value,
+                login: document.getElementById('proc-usu-login').value,
+                senha: document.getElementById('proc-usu-senha').value,
+                dataNascimento: document.getElementById('proc-usu-nasc').value
+            };
+            try {
+                const r = await fetch('/relatorios/procedure/usuario', {
+                    method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)
+                });
+                const msg = await r.text();
+                if(r.ok) showToast(msg, "success"); else showToast("Erro: " + msg, "error");
+            } catch (e) { showToast("Erro na requisição", "error"); }
         }
 
         // Iniciar
