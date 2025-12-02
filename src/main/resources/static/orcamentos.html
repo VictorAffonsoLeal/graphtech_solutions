@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -115,6 +116,31 @@
                                         d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
                                 </svg>
                                 <span class="nav-text ml-4">Relatório</span></a></li>
+                        <!-- Link Ativo -->
+                        <li>
+                            <a href="auditoria.html"
+                                class="nav-link flex items-center px-4 py-2 rounded-md text-[#00CEF7] font-medium bg-[#37336D] justify-start transition-colors">
+                                <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
+                                </svg>
+                                <span class="nav-text ml-4">Auditoria</span>
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="analise_dados.html"
+                                class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
+                                <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
+                                </svg>
+                                <span class="nav-text ml-4">Análise de Dados</span>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -191,22 +217,28 @@
                         </div>
                     </div>
 
-                    <!-- ÁREA DE PRODUTOS -->
+                    <!-- ÁREA DE PRODUTOS COM QUANTIDADE -->
                     <div class="bg-gray-50 p-4 rounded-md border border-gray-200">
                         <label class="block text-sm font-medium text-gray-600 mb-2">Adicionar Produtos</label>
-                        <div class="flex space-x-3 mb-3">
-                            <div class="flex-1">
+                        <div class="flex space-x-3 mb-3 items-end">
+                            <div class="flex-grow">
+                                <label class="text-xs text-gray-500 mb-1 block">Produto</label>
                                 <select id="produto-select" class="block w-full">
                                     <option value="">Selecione um produto...</option>
                                 </select>
                             </div>
+                            <div class="w-24">
+                                <label for="qtd-add" class="text-xs text-gray-500 mb-1 block">Qtd.</label>
+                                <input type="number" id="qtd-add" value="1" min="1"
+                                    class="block w-full h-[42px] px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00CEF7] sm:text-sm">
+                            </div>
                             <button type="button" id="btn-add-produto"
-                                class="px-4 py-2 bg-[#00CEF7] text-white rounded-md hover:bg-[#00b2d3] focus:outline-none text-sm font-medium">
+                                class="h-[42px] px-4 bg-[#00CEF7] text-white rounded-md hover:bg-[#00b2d3] focus:outline-none text-sm font-medium">
                                 Adicionar
                             </button>
                         </div>
 
-                        <!-- Tabela de itens selecionados NO FORMULÁRIO -->
+                        <!-- Tabela de Itens -->
                         <div class="overflow-x-auto bg-white rounded-md border border-gray-200">
                             <table class="min-w-full divide-y divide-gray-200">
                                 <thead class="bg-gray-50">
@@ -248,7 +280,7 @@
                 </form>
             </div>
 
-            <!-- Tabela Principal de Orçamentos -->
+            <!-- Tabela Principal -->
             <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
                 <div class="p-6">
                     <h3 class="text-xl font-semibold text-gray-700">Orçamentos Lançados</h3>
@@ -299,30 +331,27 @@
             class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
             <div
                 class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md mx-4 transform scale-95 transition-transform duration-300">
-                <div class="text-center">
-                    <svg class="w-16 h-16 text-red-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div class="text-center"><svg class="w-16 h-16 text-red-500 mx-auto" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                             d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
                     </svg>
                     <h3 class="text-xl font-bold text-gray-900 mt-4">Excluir Orçamento</h3>
-                    <div class="flex justify-center space-x-4 mt-6">
-                        <button id="cancel-delete-btn"
-                            class="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">Cancelar</button>
-                        <button id="confirm-delete-btn"
+                    <div class="flex justify-center space-x-4 mt-6"><button id="cancel-delete-btn"
+                            class="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">Cancelar</button><button
+                            id="confirm-delete-btn"
                             class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700">Excluir</button>
                     </div>
                 </div>
-            </div>
-            <input type="hidden" id="delete-budget-id">
+            </div><input type="hidden" id="delete-budget-id">
         </div>
-
         <div id="product-modal"
             class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
             <div
                 class="bg-white p-6 rounded-lg shadow-xl w-full max-w-lg mx-4 transform scale-95 transition-transform duration-300">
                 <div class="flex justify-between items-center pb-3 border-b border-gray-200">
-                    <h3 class="text-xl font-bold text-gray-900">Produtos do Orçamento</h3>
-                    <button id="close-product-modal-btn" class="text-gray-400 hover:text-gray-600"><svg class="w-6 h-6"
+                    <h3 class="text-xl font-bold text-gray-900">Produtos do Orçamento</h3><button
+                        id="close-product-modal-btn" class="text-gray-400 hover:text-gray-600"><svg class="w-6 h-6"
                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                 d="M6 18L18 6M6 6l12 12" />
@@ -346,13 +375,10 @@
 
         <script>
             document.addEventListener('DOMContentLoaded', () => {
-                // Sidebar (Mesma)
-                const sidebar = document.getElementById('sidebar');
-                const toggleButton = document.getElementById('sidebar-toggle');
-                const toggleIcon = toggleButton.querySelector('svg');
+                // Sidebar Logic
+                const sidebar = document.getElementById('sidebar'); const toggleButton = document.getElementById('sidebar-toggle'); const toggleIcon = toggleButton.querySelector('svg');
                 const setSidebarState = (isCollapsed) => { if (isCollapsed) { sidebar.classList.remove('w-64'); sidebar.classList.add('w-20'); document.getElementById('logo-text').classList.add('hidden'); document.querySelectorAll('.nav-text').forEach(l => l.classList.add('hidden')); document.querySelectorAll('.nav-link').forEach(l => { l.classList.add('justify-center'); l.classList.remove('justify-start'); }); toggleIcon.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.25 4.5l7.5 7.5-7.5 7.5"></path></svg>`; } else { sidebar.classList.add('w-64'); sidebar.classList.remove('w-20'); document.getElementById('logo-text').classList.remove('hidden'); document.querySelectorAll('.nav-text').forEach(l => l.classList.remove('hidden')); document.querySelectorAll('.nav-link').forEach(l => { l.classList.remove('justify-center'); l.classList.add('justify-start'); }); toggleIcon.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 19.5L8.25 12l7.5-7.5"></path></svg>`; } };
-                setSidebarState(localStorage.getItem('sidebarCollapsed') === 'true');
-                toggleButton.addEventListener('click', () => { const s = sidebar.classList.contains('w-20'); localStorage.setItem('sidebarCollapsed', !s); setSidebarState(!s); });
+                setSidebarState(localStorage.getItem('sidebarCollapsed') === 'true'); toggleButton.addEventListener('click', () => { const s = sidebar.classList.contains('w-20'); localStorage.setItem('sidebarCollapsed', !s); setSidebarState(!s); });
 
                 // --- Lógica Principal ---
                 const API_URL = '/orcamentos'; const PRODUCTS_API_URL = '/produtos'; const PEDIDOS_API_URL = '/pedidos'; const CLIENTS_API_URL = '/clientes'; const USERS_API_URL = '/usuarios';
@@ -367,6 +393,7 @@
                 const clientSelect = document.getElementById('idCliente');
                 const userSelect = document.getElementById('idUsuario');
                 const productSelect = $('#produto-select');
+                const qtyInput = document.getElementById('qtd-add');
                 const btnAddProduto = document.getElementById('btn-add-produto');
                 const listaProdutosBody = document.getElementById('lista-produtos-body');
                 const emptyProductsRow = document.getElementById('empty-products-row');
@@ -398,34 +425,67 @@
                     return ok;
                 };
 
-                // --- PRODUTOS NO FORMULÁRIO ---
+                // --- PRODUTOS NA LISTA (Criação/Edição) ---
                 const renderSelectedProducts = () => {
                     listaProdutosBody.innerHTML = ''; let grandTotal = 0;
                     if (selectedItems.length === 0) { listaProdutosBody.appendChild(emptyProductsRow); totalContainer.classList.add('hidden'); return; }
                     totalContainer.classList.remove('hidden');
                     selectedItems.forEach((item, index) => {
-                        // CORREÇÃO: Proteção contra valores nulos ou indefinidos
-                        const qtd = (item.quantidade || 1);
-                        const val = (item.valor || item.valorUnitario || 0);
+                        // CORREÇÃO: Usando 'qtd' para renderizar
+                        const qtd = item.qtd || item.quantidade || 1;
+                        const val = item.valor || item.valorUnitario || 0;
                         const subtotal = val * qtd;
                         grandTotal += subtotal;
+
                         const tr = document.createElement('tr');
                         tr.innerHTML = `<td class="px-4 py-2 text-sm text-gray-700">${item.descricao}</td><td class="px-4 py-2"><input type="number" min="1" value="${qtd}" data-index="${index}" class="qtd-input w-16 border-gray-300 rounded-md text-sm focus:ring-[#00CEF7] focus:border-[#00CEF7] px-2 py-1 border"></td><td class="px-4 py-2 text-sm text-gray-700">R$ ${subtotal.toFixed(2)}</td><td class="px-4 py-2 text-right"><button type="button" data-index="${index}" class="remove-item-btn text-red-500 hover:text-red-700"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button></td>`;
                         listaProdutosBody.appendChild(tr);
                     });
                     valorTotalDisplay.textContent = `R$ ${grandTotal.toFixed(2)}`;
-                    document.querySelectorAll('.qtd-input').forEach(input => { input.addEventListener('change', (e) => { const idx = parseInt(e.target.dataset.index); let newQtd = parseInt(e.target.value); if (newQtd < 1) newQtd = 1; selectedItems[idx].quantidade = newQtd; renderSelectedProducts(); }); });
+
+                    // Listeners para inputs de quantidade e remoção
+                    document.querySelectorAll('.qtd-input').forEach(input => {
+                        input.addEventListener('change', (e) => {
+                            const idx = parseInt(e.target.dataset.index);
+                            let newQtd = parseInt(e.target.value);
+                            if (newQtd < 1) newQtd = 1;
+                            // Atualiza com 'qtd'
+                            selectedItems[idx].qtd = newQtd;
+                            selectedItems[idx].quantidade = newQtd;
+                            renderSelectedProducts();
+                        });
+                    });
                     document.querySelectorAll('.remove-item-btn').forEach(btn => { btn.addEventListener('click', (e) => { const idx = parseInt(e.target.closest('button').dataset.index); selectedItems.splice(idx, 1); renderSelectedProducts(); }); });
                 };
 
                 btnAddProduto.addEventListener('click', () => {
-                    const prodId = parseInt(productSelect.val()); if (!prodId) return;
+                    const prodId = parseInt(productSelect.val());
+                    if (!prodId) return;
+
+                    let qtdToAdd = parseInt(qtyInput.value);
+                    if (isNaN(qtdToAdd) || qtdToAdd < 1) qtdToAdd = 1;
+
                     const existingItem = selectedItems.find(i => i.idProduto === prodId);
-                    if (existingItem) { existingItem.quantidade++; } else { const prod = allProducts.find(p => p.idProduto === prodId); if (prod) { selectedItems.push({ idProduto: prod.idProduto, descricao: prod.descricao, valor: prod.valor, quantidade: 1 }); } }
-                    renderSelectedProducts(); productSelect.val(null).trigger('change');
+                    if (existingItem) {
+                        existingItem.qtd = (existingItem.qtd || existingItem.quantidade || 0) + qtdToAdd;
+                        existingItem.quantidade = existingItem.qtd;
+                    } else {
+                        const prod = allProducts.find(p => p.idProduto === prodId);
+                        if (prod) {
+                            selectedItems.push({
+                                idProduto: prod.idProduto,
+                                descricao: prod.descricao,
+                                valor: prod.valor,
+                                qtd: qtdToAdd,
+                                quantidade: qtdToAdd
+                            });
+                        }
+                    }
+                    renderSelectedProducts();
+                    productSelect.val(null).trigger('change');
+                    qtyInput.value = 1;
                 });
 
-                // --- Fetchs ---
                 const fetchProducts = async () => { try { const r = await fetch(PRODUCTS_API_URL); allProducts = await r.json(); productSelect.empty(); productSelect.append(new Option("Selecione...", "", true, true)); allProducts.forEach(p => productSelect.append(new Option(`${p.idProduto} - ${p.descricao} (R$ ${p.valor})`, p.idProduto, false, false))); } catch (e) { showToast('Erro produtos', 'error'); } };
                 const fetchClientsList = async () => { try { const r = await fetch(CLIENTS_API_URL); const d = await r.json(); clientSelect.innerHTML = '<option value="">Selecione</option>'; d.forEach(c => clientSelect.appendChild(new Option(`${c.idPessoa} - ${c.nome}`, c.idPessoa))); } catch (e) { } };
                 const fetchUsersList = async () => { try { const r = await fetch(USERS_API_URL); const d = await r.json(); userSelect.innerHTML = '<option value="">Selecione</option>'; d.forEach(u => userSelect.appendChild(new Option(`${u.idPessoa} - ${u.nome}`, u.idPessoa))); } catch (e) { } };
@@ -435,16 +495,14 @@
                     tableBody.innerHTML = ''; if (budgets.length === 0) { emptyState.classList.remove('hidden'); } else {
                         emptyState.classList.add('hidden');
                         budgets.forEach(b => {
-                            // CORREÇÃO CRÍTICA: Cálculo seguro contra null/undefined
                             let total = 0;
                             b.itens?.forEach(i => {
-                                const qtd = (i.quantidade || 1);
-                                const val = (i.valorUnitario || (i.produto ? i.produto.valor : 0));
+                                // CORREÇÃO: Usando 'qtd'
+                                const qtd = i.qtd || i.quantidade || 1;
+                                const val = i.valorUnitario || (i.produto ? i.produto.valor : 0);
                                 total += val * qtd;
                             });
-
                             const count = b.itens ? b.itens.length : 0;
-                            // Restaurado Botão Visualizar
                             const produtosDisplay = count > 0 ? `<div class="flex items-center space-x-2"><span class="text-sm">${count} item(ns)</span><button data-id="${b.idOrcamento}" class="view-products-btn text-[#00CEF7] hover:text-[#00b2d3] text-xs font-medium">Visualizar</button></div>` : '<span class="text-gray-400">Nenhum</span>';
                             const clientName = b.cliente ? b.cliente.nome : 'N/A';
                             const pedidoDisplay = b.pedido ? `<span class="text-sm font-medium">Pedido #${b.pedido.idPedido}</span>` : (b.status ? `<button data-id="${b.idOrcamento}" class="gerar-pedido-btn px-2 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded">Gerar Pedido</button>` : 'N/A');
@@ -480,24 +538,32 @@
                     document.getElementById('dataOrcamento').value = budget.dataOrcamento;
                     document.getElementById('status').checked = budget.status;
                     selectedItems = [];
-                    if (budget.itens) { budget.itens.forEach(i => { selectedItems.push({ idProduto: i.produto.idProduto, descricao: i.produto.descricao, valor: i.valorUnitario || i.produto.valor, quantidade: i.quantidade }); }); }
+                    if (budget.itens) {
+                        budget.itens.forEach(i => {
+                            // CORREÇÃO: Carregando 'qtd' da API para o selectedItems
+                            selectedItems.push({
+                                idProduto: i.produto.idProduto,
+                                descricao: i.produto.descricao,
+                                valor: i.valorUnitario || i.produto.valor,
+                                qtd: i.qtd || i.quantidade || 1,
+                                quantidade: i.qtd || i.quantidade || 1
+                            });
+                        });
+                    }
                     renderSelectedProducts(); window.scrollTo({ top: 0, behavior: 'smooth' });
                 };
 
-                // --- MODAL DE ITENS (CORRIGIDO) ---
                 const showProductModal = (itens) => {
                     productModalContent.innerHTML = ''; let total = 0;
                     if (itens && itens.length > 0) {
                         const ul = document.createElement('ul'); ul.className = 'list-disc list-inside space-y-2 text-gray-700';
                         itens.forEach(item => {
-                            // CORREÇÃO: Proteção contra null/undefined aqui também
-                            const qtd = (item.quantidade || 1);
-                            const val = (item.valorUnitario || (item.produto ? item.produto.valor : 0));
-                            const sub = val * qtd;
-                            total += sub;
+                            // CORREÇÃO: Usando 'qtd'
+                            const qtd = item.qtd || item.quantidade || 1;
+                            const val = item.valorUnitario || (item.produto ? item.produto.valor : 0);
+                            const sub = val * qtd; total += sub;
                             const desc = item.produto ? item.produto.descricao : 'Produto removido';
-                            const li = document.createElement('li');
-                            li.textContent = `${desc} - Qtd: ${qtd} - R$ ${val.toFixed(2)} (Sub: R$ ${sub.toFixed(2)})`;
+                            const li = document.createElement('li'); li.textContent = `${desc} - Qtd: ${qtd} - R$ ${val.toFixed(2)} (Sub: R$ ${sub.toFixed(2)})`;
                             ul.appendChild(li);
                         });
                         productModalContent.appendChild(ul);
@@ -512,9 +578,27 @@
                     e.preventDefault(); if (!validateForm()) { showToast('Corrija erros', 'error'); return; }
                     const fd = new FormData(form);
                     const id = hiddenId.value ? parseInt(hiddenId.value) : null;
-                    const itensParaEnviar = selectedItems.map(item => ({ produto: { idProduto: item.idProduto }, quantidade: item.quantidade }));
-                    const apiData = { descricao: fd.get('descricao'), dataOrcamento: fd.get('dataOrcamento'), status: fd.get('status') === 'on', cliente: { idPessoa: parseInt(fd.get('idCliente')) }, usuario: { idPessoa: parseInt(fd.get('idUsuario')) }, itens: itensParaEnviar };
-                    try { const r = await fetch(isEditing ? `${API_URL}/${id}` : API_URL, { method: isEditing ? 'PUT' : 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(apiData) }); if (!r.ok) throw new Error(); showToast('Salvo com sucesso'); resetForm(); fetchBudgets(); } catch (e) { showToast('Erro ao salvar', 'error'); }
+
+                    // CORREÇÃO: Enviando 'qtd' para o Java
+                    const itensParaEnviar = selectedItems.map(item => ({
+                        produto: { idProduto: item.idProduto },
+                        qtd: item.qtd || item.quantidade // Chave 'qtd' obrigatória para o Java
+                    }));
+
+                    const apiData = {
+                        descricao: fd.get('descricao'),
+                        dataOrcamento: fd.get('dataOrcamento'),
+                        status: fd.get('status') === 'on',
+                        cliente: { idPessoa: parseInt(fd.get('idCliente')) },
+                        usuario: { idPessoa: parseInt(fd.get('idUsuario')) },
+                        itens: itensParaEnviar
+                    };
+
+                    try {
+                        const r = await fetch(isEditing ? `${API_URL}/${id}` : API_URL, { method: isEditing ? 'PUT' : 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(apiData) });
+                        if (!r.ok) throw new Error();
+                        showToast('Salvo com sucesso'); resetForm(); fetchBudgets();
+                    } catch (e) { showToast('Erro ao salvar', 'error'); }
                 };
 
                 fetchBudgets(); fetchProducts(); fetchClientsList(); fetchUsersList();
@@ -531,7 +615,6 @@
                 document.getElementById('close-product-modal-btn').onclick = () => { productModal.classList.remove('opacity-100'); setTimeout(() => productModal.classList.add('hidden'), 300) };
             });
         </script>
-    </div>
 </body>
 
 </html>

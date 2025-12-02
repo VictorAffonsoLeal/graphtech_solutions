@@ -80,3 +80,64 @@ EXEC SP_CADUSUARIO 'USUARIO TESTE', '1990-05-20', 'TESTEMASTER', 'senha123'
 
 select * from LOG_HISTORICOPRECO
 go
+
+alter PROCEDURE SP_CADUSUARIO
+(
+	@NOMECLI VARCHAR(255), 
+    @DATNAS  DATE,
+    @LOGIN   VARCHAR(100),
+    @SENHA   VARCHAR(100)    
+)    
+AS 
+BEGIN
+    SET NOCOUNT ON;
+	BEGIN TRY
+		BEGIN TRAN
+			INSERT INTO pessoas (nome, data_nascimento, status) VALUES (@NOMECLI, @DATNAS, 0);
+			DECLARE @NOVO_ID INT = SCOPE_IDENTITY();
+
+			INSERT INTO usuarios(id_pessoa, login, senha) VALUES (@NOVO_ID, @LOGIN, @SENHA);
+		COMMIT
+        SELECT @NOVO_ID as id_gerado;
+	END TRY
+	BEGIN CATCH
+		ROLLBACK;
+        THROW;
+	END CATCH
+END
+GO
+
+alter PROCEDURE SP_CADCLIENTE
+(
+    @NOMECLI    VARCHAR(255),
+    @EMAILCLI   VARCHAR(100),
+    @ENDCLI     VARCHAR(255),
+    @TELCLI     VARCHAR(50),
+    @DATNAS     DATE,
+    @USUARIOID  INT   
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        BEGIN TRAN
+            -- 1. Inserir na tabela Pessoas
+            INSERT INTO pessoas (nome, data_nascimento, status) VALUES (@NOMECLI, @DATNAS, 0);
+            
+            -- 2. Pegar o ID gerado
+            DECLARE @NOVO_ID INT = SCOPE_IDENTITY();
+
+            -- 3. Inserir na tabela Clientes
+            INSERT INTO clientes (id_pessoa, email, endereco, telefone, data_cadastro, usuario_id)
+            VALUES (@NOVO_ID, @EMAILCLI, @ENDCLI, @TELCLI, GETDATE(), @USUARIOID);
+        COMMIT
+        
+        -- 4. Retornar o ID para o Java
+        SELECT @NOVO_ID as id_gerado;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK;
+        THROW; -- Lança o erro original para o Java capturar
+    END CATCH
+END
+GO

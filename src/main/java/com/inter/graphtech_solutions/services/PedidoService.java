@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -29,12 +30,14 @@ public class PedidoService {
 
     @Transactional
     public PedidoEntity salvarPedido(PedidoEntity pedido) {
-        prepararItens(pedido);
+        // Para novos pedidos, a lista vem do JSON e o Hibernate ainda não gerencia.
+        // Mas precisamos garantir os vínculos antes de salvar.
+        prepararItens(pedido); 
         return pedidoRepository.save(pedido);
     }
 
     public List<PedidoEntity> listarPedidos() {
-        return pedidoRepository.findAll();
+        return pedidoRepository.findAllWithDetails();
     }
 
     public void deletarPedido(Integer id) {
@@ -42,64 +45,100 @@ public class PedidoService {
     }
 
     @Transactional
-    public PedidoEntity alterarPedido(Integer id, PedidoEntity pedido) {
+    public PedidoEntity alterarPedido(Integer id, PedidoEntity pedidoInfoVindoDoFront) {
         Optional<PedidoEntity> pedidoExistenteOpt = pedidoRepository.findById(id);
         
         if (pedidoExistenteOpt.isPresent()) {
-            PedidoEntity pedidoAtualizado = pedidoExistenteOpt.get();
+            PedidoEntity pedidoGerenciado = pedidoExistenteOpt.get();
             
-            pedidoAtualizado.setDescricao(pedido.getDescricao());
-            pedidoAtualizado.setDataCancel(pedido.getDataCancel());
-            pedidoAtualizado.setDataPedido(pedido.getDataPedido());
-            pedidoAtualizado.setCliente(pedido.getCliente());
-            pedidoAtualizado.setUsuario(pedido.getUsuario());
+            // 1. Atualiza campos simples
+            pedidoGerenciado.setDescricao(pedidoInfoVindoDoFront.getDescricao());
+            pedidoGerenciado.setDataCancel(pedidoInfoVindoDoFront.getDataCancel());
+            pedidoGerenciado.setDataPedido(pedidoInfoVindoDoFront.getDataPedido());
+            pedidoGerenciado.setCliente(pedidoInfoVindoDoFront.getCliente());
+            pedidoGerenciado.setUsuario(pedidoInfoVindoDoFront.getUsuario());
             
-            // Atualiza lista de itens
-            pedidoAtualizado.getItens().clear();
-            if (pedido.getItens() != null) {
-                pedidoAtualizado.getItens().addAll(pedido.getItens());
+            // 2. LÓGICA CRÍTICA PARA COLEÇÃO COM ORPHAN REMOVAL
+            // Não podemos fazer pedidoGerenciado.setItens(novaLista)! Isso causa o erro.
+            // Temos que manipular a lista existente.
+            
+            // A. Limpa a lista atual (remove os itens antigos do banco graças ao orphanRemoval=true)
+            pedidoGerenciado.getItens().clear();
+            
+            // B. Se vieram novos itens, adiciona na lista existente
+            if (pedidoInfoVindoDoFront.getItens() != null) {
+                // Precisamos preparar esses novos itens (vincular IDs, produtos, etc) ANTES de adicionar
+                // Para não bagunçar a referência 'pedidoInfoVindoDoFront', criamos uma lista auxiliar
+                List<PedidoProdutoEntity> novosItensPreparados = new ArrayList<>();
+                
+                for (PedidoProdutoEntity item : pedidoInfoVindoDoFront.getItens()) {
+                    if (item.getProduto() != null && item.getProduto().getIdProduto() != null) {
+                        ProdutoEntity produtoReal = produtoRepository.findById(item.getProduto().getIdProduto()).orElse(null);
+                        if (produtoReal != null) {
+                            // Cria uma nova instância para garantir que é um novo objeto gerenciado
+                            PedidoProdutoEntity novoItem = new PedidoProdutoEntity();
+                            novoItem.setProduto(produtoReal);
+                            novoItem.setPedido(pedidoGerenciado); // Vincula ao pedido gerenciado (Pai)
+                            
+                            novoItem.setValorUnitario(item.getValorUnitario() != null ? item.getValorUnitario() : produtoReal.getValor());
+                            // CORREÇÃO: Usar a quantidade que vem do front (item.getQuantidade())
+                            // Se vier nulo ou zero, usa 1 como padrão.
+                            novoItem.setQtd((item.getQtd() != null && item.getQtd() > 0) ? item.getQtd() : 1);
+                            
+                            novoItem.setId(new PedidoProdutoEntity.PedidoProdutoId());
+                            // Configura ID composto (mesmo que o save resolva, é bom garantir)
+                            novoItem.getId().setPedidoId(pedidoGerenciado.getIdPedido());
+                            novoItem.getId().setProdutoId(produtoReal.getIdProduto());
+                            
+                            novosItensPreparados.add(novoItem);
+                        }
+                    }
+                }
+                
+                // C. Adiciona tudo na coleção gerenciada
+                pedidoGerenciado.getItens().addAll(novosItensPreparados);
             }
             
-            prepararItens(pedidoAtualizado);
-            
-            return pedidoRepository.save(pedidoAtualizado);
+            // O save() não é estritamente necessário dentro de @Transactional se a entidade está gerenciada,
+            // mas o chamamos para garantir o retorno atualizado e triggers do ciclo de vida.
+            return pedidoRepository.save(pedidoGerenciado);
         } else {
             return null;
         }
     }
 
-    // Método auxiliar para vincular Produtos e o Próprio Pedido aos itens
+    // Método auxiliar para preparar itens de um pedido NOVO (não gerenciado ainda)
     private void prepararItens(PedidoEntity pedido) {
         if (pedido.getItens() != null && !pedido.getItens().isEmpty()) {
-            List<PedidoProdutoEntity> itensParaRemover = new ArrayList<>();
+            List<PedidoProdutoEntity> itensValidos = new ArrayList<>();
 
             for (PedidoProdutoEntity item : pedido.getItens()) {
                 if (item.getProduto() != null && item.getProduto().getIdProduto() != null) {
-                    // Busca o produto para garantir que temos o objeto completo (valor atual, etc)
                     ProdutoEntity produtoReal = produtoRepository.findById(item.getProduto().getIdProduto())
                         .orElse(null);
                     
                     if (produtoReal != null) {
                         item.setProduto(produtoReal);
-                        item.setPedido(pedido); // Vincula o pai (Pedido) ao filho (Item)
+                        item.setPedido(pedido); 
                         
-                        // Lógica de negócio: Se o valor unitário não veio do front, usa o do cadastro
-                        if (item.getValorUnitario() == null) {
-                            item.setValorUnitario(produtoReal.getValor());
-                        }
-                        // Se quantidade não veio, assume 1
-                        if (item.getQtd() == null) {
-                            item.setQtd(1);
-                        }
+                        if (item.getValorUnitario() == null) item.setValorUnitario(produtoReal.getValor());
+                        // CORREÇÃO: Garantir que a quantidade venha do objeto item, senão default 1
+                        item.setQtd((item.getQtd() != null && item.getQtd() > 0) ? item.getQtd() : 1);
                         
-                    } else {
-                        itensParaRemover.add(item);
+                        if (item.getId() == null) {
+                            item.setId(new PedidoProdutoEntity.PedidoProdutoId());
+                        }
+                        if (pedido.getIdPedido() != null) {
+                            item.getId().setPedidoId(pedido.getIdPedido());
+                        }
+                        item.getId().setProdutoId(produtoReal.getIdProduto());
+
+                        itensValidos.add(item);
                     }
-                } else {
-                    itensParaRemover.add(item);
                 }
             }
-            pedido.getItens().removeAll(itensParaRemover);
+            // Aqui podemos usar setItens porque o objeto 'pedido' ainda não é gerenciado pelo Hibernate no contexto de 'salvar'
+            pedido.setItens(itensValidos);
         }
     }
 
@@ -108,7 +147,6 @@ public class PedidoService {
         OrcamentoEntity orcamento = orcamentoRepository.findById(orcamentoId)
             .orElseThrow(() -> new RuntimeException("Orçamento com ID " + orcamentoId + " não encontrado."));
 
-        // Validações...
         if (Boolean.FALSE.equals(orcamento.getStatus())) {
              throw new RuntimeException("Este orçamento não está aprovado.");
         }
@@ -120,17 +158,18 @@ public class PedidoService {
         novoPedido.setUsuario(orcamento.getUsuario());
         novoPedido.setOrcamento(orcamento);
         
-        // Converte Itens de Orçamento -> Itens de Pedido
         if (orcamento.getItens() != null) {
             for (OrcamentoProdutoEntity itemOrcamento : orcamento.getItens()) {
                 PedidoProdutoEntity itemPedido = new PedidoProdutoEntity();
-                
                 itemPedido.setProduto(itemOrcamento.getProduto());
                 itemPedido.setPedido(novoPedido);
-                
-                // COPIA AQUI OS DADOS DO ITEM
+                // CORREÇÃO: Copiar a quantidade do orçamento para o pedido
                 itemPedido.setQtd(itemOrcamento.getQtd());
                 itemPedido.setValorUnitario(itemOrcamento.getValorUnitario());
+                
+                // ID composto
+                itemPedido.setId(new PedidoProdutoEntity.PedidoProdutoId());
+                itemPedido.getId().setProdutoId(itemOrcamento.getProduto().getIdProduto());
                 
                 novoPedido.getItens().add(itemPedido);
             }

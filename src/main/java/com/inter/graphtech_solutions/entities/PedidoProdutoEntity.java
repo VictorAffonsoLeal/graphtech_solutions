@@ -39,11 +39,9 @@ public class PedidoProdutoEntity {
     @JoinColumn(name = "produto_id")
     private ProdutoEntity produto;
 
-    // --- NOVOS CAMPOS ---
     private Integer qtd;
-    private Double valorUnitario; // Grava o preço real de venda (pode ter desconto)
+    private Double valorUnitario; 
 
-    // --- CLASSE DE ID INTERNA ---
     @Getter
     @Setter
     @AllArgsConstructor

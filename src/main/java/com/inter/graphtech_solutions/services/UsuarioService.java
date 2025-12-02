@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.inter.graphtech_solutions.entities.UsuarioEntity;
 import com.inter.graphtech_solutions.repositories.UsuarioRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -16,12 +17,18 @@ public class UsuarioService {
     
     private final UsuarioRepository usuarioRepository;
 
+    @Transactional
     public UsuarioEntity salvarUsuario(UsuarioEntity usuario) {
-        // Garante que nasce ativo
-        if (usuario.getStatus() == null) {
-            usuario.setStatus(0);
-        }
-        return usuarioRepository.save(usuario);
+        // Chama a procedure
+        Integer novoId = usuarioRepository.cadastrarUsuarioViaProcedure(
+            usuario.getNome(),
+            usuario.getDataNascimento(),
+            usuario.getLogin(),
+            usuario.getSenha()
+        );
+
+        // Busca o registro criado
+        return usuarioRepository.findById(novoId).orElse(null);
     }
 
     public List<UsuarioEntity> listarUsuarios() {

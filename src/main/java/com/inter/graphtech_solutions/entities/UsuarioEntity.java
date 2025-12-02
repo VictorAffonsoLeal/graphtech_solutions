@@ -34,9 +34,7 @@ public class UsuarioEntity extends PessoaEntity {
     
     @NonNull
     private String senha;
-
-    // IMPORTANTE: CascadeType.PERSIST e MERGE permitem salvar clientes ao salvar usuario.
-    // NÃO use CascadeType.ALL ou REMOVE aqui, senão deleta os clientes junto!
+    
     @JsonIgnore
     @OneToMany(mappedBy = "usuario", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<ClienteEntity> clientes = new ArrayList<>();

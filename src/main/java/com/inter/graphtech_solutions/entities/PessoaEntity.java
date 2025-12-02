@@ -41,9 +41,6 @@ public class PessoaEntity {
     @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
 
-    // CORREÇÃO AQUI:
-    // Adicionamos 'columnDefinition' para o banco aceitar criar a coluna em uma tabela já populada.
-    // Ele vai preencher '0' automaticamente nos registros existentes.
     @Column(nullable = false, columnDefinition = "int default 0")
     private Integer status = 0; 
 }

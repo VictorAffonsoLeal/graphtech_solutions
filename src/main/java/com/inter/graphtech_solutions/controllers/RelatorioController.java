@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.inter.graphtech_solutions.projection.RelatorioPedidoUsuarioProjection;
 import com.inter.graphtech_solutions.projection.TaxaConversaoProjection;
+import com.inter.graphtech_solutions.repositories.LogPrecoProjection;
 import com.inter.graphtech_solutions.repositories.PedidoRepository;
+import com.inter.graphtech_solutions.repositories.ProdutoRepository;
 import com.inter.graphtech_solutions.repositories.UsuarioRepository;
 
 import jakarta.persistence.EntityManager;
@@ -36,9 +38,15 @@ public class RelatorioController {
 
     private final PedidoRepository pedidoRepository;
     private final UsuarioRepository usuarioRepository;
+    private final ProdutoRepository produtoRepository;
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    @GetMapping("/log-precos")
+    public ResponseEntity<List<LogPrecoProjection>> getLogPrecos() {
+        return ResponseEntity.ok(produtoRepository.buscarLogPrecos());
+    }
 
     // Injetando credenciais do application.properties para usar na conexão JDBC manual
     @Value("${spring.datasource.username}")

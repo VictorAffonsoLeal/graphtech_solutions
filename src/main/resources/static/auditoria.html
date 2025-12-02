@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Auditoria de Triggers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .no-scrollbar {
+            scrollbar-width: none;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-900 antialiased">
+
+    <div class="flex min-h-screen">
+        <!-- Sidebar (Cópia do padrão, adicionado link Auditoria) -->
+        <aside id="sidebar"
+            class="w-64 bg-[#211E48] text-white p-6 flex flex-col justify-between transition-all duration-300 ease-in-out no-scrollbar overflow-y-auto">
+            <div>
+                <div class="flex items-center justify-center mb-10">
+                    <img src="images/logo.png" alt="Logo" class="w-12 h-12 rounded-lg mr-4 flex-shrink-0"
+                        onerror="this.style.display='none'">
+                    <span id="logo-text" class="text-xl font-semibold transition-opacity duration-200">GraphTech</span>
+                </div>
+                <nav>
+                    <ul class="flex flex-col space-y-2">
+                        <!-- Links padrões -->
+                        <li class="mb-2"><a href="clientes.html"
+                                class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start"><svg
+                                    class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg><span class="nav-text ml-4">Cadastro Clientes</span></a></li>
+                        <li class="mb-2">
+                            <a href="usuarios.html"
+                                class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
+                                <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                                </svg>
+                                <span class="nav-text ml-4 transition-opacity duration-200">Cadastro Usuários</span>
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="produtos.html"
+                                class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
+                                <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10.5 11.25h3M12 15h.008" />
+                                </svg>
+                                <span class="nav-text ml-4 transition-opacity duration-200">Cadastro Produtos</span>
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="orcamentos.html"
+                                class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
+                                <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                </svg>
+                                <span class="nav-text ml-4 transition-opacity duration-200">Lançar Orçamento</span>
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="pedidos.html"
+                                class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
+                                <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                                </svg>
+                                <span class="nav-text ml-4 transition-opacity duration-200">Lançar Pedido</span>
+                            </a>
+                        </li>
+                        <li class="mb-2"><a href="relatorio.html"
+                                class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
+                                <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                                </svg>
+                                <span class="nav-text ml-4">Relatório</span></a></li>
+                        <!-- Link Ativo -->
+                        <li>
+                            <a href="auditoria.html"
+                                class="nav-link flex items-center px-4 py-2 rounded-md text-[#00CEF7] font-medium bg-[#37336D] justify-start transition-colors">
+                                <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
+                                </svg>
+                                <span class="nav-text ml-4">Auditoria</span>
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="analise_dados.html"
+                                class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
+                                <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
+                                </svg>
+                                <span class="nav-text ml-4">Análise de Dados</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div>
+                <button id="sidebar-toggle"
+                    class="nav-link flex items-center w-full px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-400 hover:text-white justify-start mb-2 cursor-pointer"><svg
+                        id="sidebar-toggle-icon" class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                    </svg><span class="nav-text ml-4">Recolher</span></button>
+                <a href="index.html"
+                    class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-red-700 text-gray-300 hover:text-white justify-start transition-colors"><svg
+                        class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                    </svg><span class="nav-text ml-4">Sair</span></a>
+            </div>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <div id="main-content" class="flex-1 p-10 overflow-y-auto h-screen transition-all duration-300 ease-in-out">
+            <h1 class="text-3xl font-bold text-gray-800 mb-8">Auditoria de Triggers e Banco de Dados</h1>
+
+            <div class="grid grid-cols-1 gap-8">
+
+                <!-- TRIGGER 1: Log de Preços -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-700 flex items-center">
+                                <span
+                                    class="bg-orange-100 text-orange-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">TRIGGER
+                                    1</span>
+                                Log de Alteração de Preços
+                            </h3>
+                            <p class="text-sm text-gray-500 mt-1">Monitora a tabela PRODUTOS. Quando o valor muda, a
+                                trigger <b>TG_LOGALTERACAOPRECO</b> grava aqui.</p>
+                        </div>
+                        <button onclick="carregarLogPrecos()"
+                            class="text-blue-500 hover:text-blue-700 text-sm font-medium">Atualizar</button>
+                    </div>
+                    <div class="overflow-x-auto max-h-64 overflow-y-auto">
+                        <table class="min-w-full divide-y divide-gray-200 text-sm">
+                            <thead class="bg-gray-50 sticky top-0">
+                                <tr>
+                                    <th class="px-4 py-2 text-left font-medium text-gray-500">Data/Hora</th>
+                                    <th class="px-4 py-2 text-left font-medium text-gray-500">Produto</th>
+                                    <th class="px-4 py-2 text-right font-medium text-gray-500">Preço Antigo</th>
+                                    <th class="px-4 py-2 text-right font-medium text-gray-500">Novo Preço</th>
+                                    <th class="px-4 py-2 text-left font-medium text-gray-500 pl-6">Usuário DB</th>
+                                </tr>
+                            </thead>
+                            <tbody id="log-table-body" class="divide-y divide-gray-200">
+                                <tr>
+                                    <td colspan="5" class="px-4 py-2 text-center text-gray-400">Carregando logs...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast"
+        class="fixed bottom-10 right-10 flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow-lg hidden opacity-0 transition-opacity duration-300">
+        <div id="toast-icon"></div>
+        <div id="toast-message" class="ml-3 text-sm font-normal"></div><button type="button" id="toast-close"
+            class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8"><span
+                class="sr-only">Fechar</span><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    clip-rule="evenodd"></path>
+            </svg></button>
+    </div>
+
+    <script>
+        // --- Sidebar Logic (Mesma dos outros arquivos) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const sidebar = document.getElementById('sidebar');
+            const toggleButton = document.getElementById('sidebar-toggle');
+            const toggleIcon = document.getElementById('sidebar-toggle-icon');
+            const logoText = document.getElementById('logo-text');
+            const navTextLabels = document.querySelectorAll('.nav-text');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const setSidebarState = (isCollapsed) => {
+                if (isCollapsed) {
+                    sidebar.classList.remove('w-64'); sidebar.classList.add('w-20');
+                    logoText.classList.add('hidden'); navTextLabels.forEach(l => l.classList.add('hidden'));
+                    navLinks.forEach(l => { l.classList.remove('justify-start'); l.classList.add('justify-center'); });
+                    toggleIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />`;
+                } else {
+                    sidebar.classList.add('w-64'); sidebar.classList.remove('w-20');
+                    logoText.classList.remove('hidden'); navTextLabels.forEach(l => l.classList.remove('hidden'));
+                    navLinks.forEach(l => { l.classList.remove('justify-center'); l.classList.add('justify-start'); });
+                    toggleIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />`;
+                }
+            };
+
+            const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+            setSidebarState(isCollapsed);
+
+            if (toggleButton) {
+                toggleButton.addEventListener('click', () => {
+                    const currentState = sidebar.classList.contains('w-20');
+                    localStorage.setItem('sidebarCollapsed', !currentState);
+                    setSidebarState(!currentState);
+                });
+            }
+        });
+
+        const showToast = (msg, type = 'success') => {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = msg;
+            const iconDiv = document.getElementById('toast-icon');
+            if (type === 'success') {
+                iconDiv.className = "inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg";
+                iconDiv.innerHTML = `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>`;
+            } else {
+                iconDiv.className = "inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg";
+                iconDiv.innerHTML = `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>`;
+            }
+            toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.add('opacity-100'), 10);
+            setTimeout(() => { toast.classList.remove('opacity-100'); setTimeout(() => toast.classList.add('hidden'), 300); }, 4000);
+        };
+
+        // --- FUNÇÕES DE AUDITORIA ---
+
+        async function carregarLogPrecos() {
+            const tbody = document.getElementById('log-table-body');
+            try {
+                const r = await fetch('/relatorios/log-precos');
+                const data = await r.json();
+                tbody.innerHTML = '';
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" class="px-4 py-2 text-center text-gray-400">Nenhuma alteração de preço registrada.</td></tr>';
+                    return;
+                }
+                data.forEach(log => {
+                    const dataFormatada = new Date(log.dataAlteracao).toLocaleString('pt-BR');
+                    const precoAntigo = log.precoAntigo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                    const precoNovo = log.precoNovo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+                    tbody.innerHTML += `
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-2 text-gray-600">${dataFormatada}</td>
+                        <td class="px-4 py-2 font-medium text-gray-900">${log.produto}</td>
+                        <td class="px-4 py-2 text-right text-red-500 line-through text-xs">${precoAntigo}</td>
+                        <td class="px-4 py-2 text-right text-green-600 font-bold">${precoNovo}</td>
+                        <td class="px-4 py-2 text-gray-500 pl-6">${log.usuario}</td>
+                    </tr>
+                `;
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        async function carregarEstoque() {
+            const grid = document.getElementById('estoque-grid');
+            try {
+                const r = await fetch('/produtos');
+                const data = await r.json();
+                grid.innerHTML = '';
+                data.forEach(p => {
+                    let corEstoque = 'text-gray-900';
+                    let bgClass = 'bg-white';
+                    if (p.qtd <= 5) { corEstoque = 'text-red-600'; bgClass = 'bg-red-50 border-red-200'; }
+
+                    grid.innerHTML += `
+                    <div class="${bgClass} p-4 rounded-md border border-gray-200 flex justify-between items-center shadow-sm">
+                        <div>
+                            <p class="text-xs text-gray-500 uppercase font-bold">Produto #${p.idProduto}</p>
+                            <p class="font-medium text-gray-800 truncate w-32" title="${p.descricao}">${p.descricao}</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-xs text-gray-500">Estoque</p>
+                            <p class="text-2xl font-bold ${corEstoque}">${p.qtd}</p>
+                        </div>
+                    </div>
+                `;
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        async function testarErroEstoque() {
+            if (!confirm("Isso vai tentar criar um pedido com 9999 unidades. O banco DEVE rejeitar. Continuar?")) return;
+
+            // Dados fake para forçar erro (Cliente 1, Usuario 1, Produto 1)
+            // IMPORTANTE: Ajuste os IDs se seu banco não tiver ID 1
+            const data = {
+                descricao: "TESTE DE ERRO TRIGGER ESTOQUE",
+                dataPedido: new Date().toISOString().split('T')[0],
+                cliente: { idPessoa: 15 }, // Ajuste para um ID de cliente válido no seu banco
+                usuario: { idPessoa: 1 }, // Ajuste para um ID de usuário válido
+                itens: [{ produto: { idProduto: 1 }, quantidade: 9999 }] // Quantidade absurda
+            };
+
+            try {
+                const r = await fetch('/pedidos', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const msg = await r.text();
+                if (!r.ok) {
+                    // Sucesso! O erro aconteceu como esperado
+                    // A mensagem deve conter o texto da trigger "Estoque insuficiente"
+                    if (msg.includes("Estoque insuficiente")) {
+                        showToast("SUCESSO: A trigger bloqueou a venda! \n" + msg, "success");
+                    } else {
+                        showToast("Erro no servidor: " + msg, "error");
+                    }
+                } else {
+                    showToast("FALHA: A venda foi permitida! A trigger não funcionou.", "error");
+                }
+            } catch (e) {
+                showToast("Erro de conexão", "error");
+            }
+        }
+
+        // Iniciar
+        carregarLogPrecos();
+        carregarEstoque();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Análise de Dados</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js para gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .no-scrollbar {
+            scrollbar-width: none;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-900 antialiased">
+
+    <div class="flex min-h-screen">
+        <!-- Sidebar (Mantido) -->
+        <aside id="sidebar"
+            class="w-64 bg-[#211E48] text-white p-6 flex flex-col justify-between transition-all duration-300 ease-in-out no-scrollbar overflow-y-auto">
+            <div>
+                <div class="flex items-center justify-center mb-10">
+                    <img src="images/logo.png" alt="Logo GraphTech" class="w-12 h-12 rounded-lg mr-4 flex-shrink-0">
+                    <span id="logo-text" class="text-xl font-semibold transition-opacity duration-200">GraphTech</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li class="mb-2"><a href="clientes.html"
+                                class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start"><svg
+                                    class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg><span class="nav-text ml-4">Cadastro Clientes</span></a></li>
+                        <li class="mb-2">
+                            <a href="usuarios.html"
+                                class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
+                                <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                                </svg>
+                                <span class="nav-text ml-4 transition-opacity duration-200">Cadastro Usuários</span>
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="produtos.html"
+                                class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
+                                <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10.5 11.25h3M12 15h.008" />
+                                </svg>
+                                <span class="nav-text ml-4 transition-opacity duration-200">Cadastro Produtos</span>
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="orcamentos.html"
+                                class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
+                                <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                </svg>
+                                <span class="nav-text ml-4 transition-opacity duration-200">Lançar Orçamento</span>
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="pedidos.html"
+                                class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
+                                <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                                </svg>
+                                <span class="nav-text ml-4 transition-opacity duration-200">Lançar Pedido</span>
+                            </a>
+                        </li>
+                        <li class="mb-2"><a href="relatorio.html"
+                                class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-300 hover:text-white justify-start">
+                                <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                                </svg>
+                                <span class="nav-text ml-4">Relatório</span></a></li>
+                        <!-- Link Ativo -->
+                        <a href="auditoria.html"
+                            class="nav-link flex items-center px-4 py-2 rounded-md text-[#00CEF7] font-medium bg-[#37336D] justify-start transition-colors">
+                            <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
+                            </svg>
+                            <span class="nav-text ml-4">Auditoria</span>
+                        </a>
+                        </li>
+
+                        <!-- NOVO ITEM DE MENU (Ativo) -->
+                        <li class="mb-2">
+                            <a href="analise_dados.html"
+                                class="nav-link flex items-center px-4 py-2 rounded-md text-[#00CEF7] font-medium bg-[#37336D] justify-start transition-colors">
+                                <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
+                                </svg>
+                                <span class="nav-text ml-4">Análise de Dados</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div>
+                <button id="sidebar-toggle"
+                    class="nav-link flex items-center w-full px-4 py-2 rounded-md hover:bg-[#37336D] text-gray-400 hover:text-white justify-start mb-2 cursor-pointer"><svg
+                        id="sidebar-toggle-icon" class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                    </svg><span class="nav-text ml-4">Recolher</span></button>
+                <a href="index.html"
+                    class="nav-link flex items-center px-4 py-2 rounded-md hover:bg-red-700 text-gray-300 hover:text-white justify-start"><span
+                        class="nav-text ml-4">Sair</span></a>
+            </div>
+        </aside>
+
+        <div id="main-content" class="flex-1 p-10 overflow-y-auto h-screen transition-all duration-300 ease-in-out">
+            <h1 class="text-3xl font-bold text-gray-800 mb-8">Dashboard de Análise de Dados (CSV)</h1>
+
+            <!-- ÁREA DE UPLOAD ÚNICA -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-blue-200 bg-blue-50 mb-8">
+                <h3 class="text-lg font-semibold text-blue-800 mb-2 flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                    </svg>
+                    Carregar "Dados.csv"
+                </h3>
+                <p class="text-sm text-blue-600 mb-4">Selecione o arquivo <b>Dados.csv</b> que contém todas as abas
+                    unificadas.</p>
+                <input type="file" id="file-global" accept=".csv"
+                    class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer">
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- 1. Pizza (Status) -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4">Status de Orçamentos</h3>
+                    <div class="h-64 w-full flex justify-center">
+                        <canvas id="chartPizza"></canvas>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-2 text-center">Coluna: Status (AK)</p>
+                </div>
+
+                <!-- 2. Barras (Estoque) -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4">Estoque de Produtos</h3>
+                    <div class="h-64 w-full">
+                        <canvas id="chartBarras"></canvas>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-2 text-center">Coluna: Produto (X), Qtd (Z)</p>
+                </div>
+
+                <!-- 3. Histograma (Idade) -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4">Distribuição de Idades</h3>
+                    <div class="h-64 w-full">
+                        <canvas id="chartHistograma"></canvas>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-2 text-center">Coluna: Idade (I)</p>
+                </div>
+
+                <!-- 4. Linha (Evolução) -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4">Cadastros por Semana</h3>
+                    <div class="h-64 w-full">
+                        <canvas id="chartLinha"></canvas>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-2 text-center">Coluna: Semana (U)</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sidebar Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const sidebar = document.getElementById('sidebar'); const toggleButton = document.getElementById('sidebar-toggle'); const toggleIcon = toggleButton.querySelector('svg'); const logoText = document.getElementById('logo-text'); const navTextLabels = document.querySelectorAll('.nav-text'); const navLinks = document.querySelectorAll('.nav-link');
+            const setSidebarState = (isCollapsed) => { if (isCollapsed) { sidebar.classList.remove('w-64'); sidebar.classList.add('w-20'); logoText.classList.add('hidden'); navTextLabels.forEach(l => l.classList.add('hidden')); navLinks.forEach(l => { l.classList.remove('justify-start'); l.classList.add('justify-center'); }); toggleIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />`; } else { sidebar.classList.add('w-64'); sidebar.classList.remove('w-20'); logoText.classList.remove('hidden'); navTextLabels.forEach(l => l.classList.remove('hidden')); navLinks.forEach(l => { l.classList.remove('justify-center'); l.classList.add('justify-start'); }); toggleIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />`; } };
+            const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true'; setSidebarState(isCollapsed);
+            toggleButton.addEventListener('click', () => { const s = sidebar.classList.contains('w-20'); localStorage.setItem('sidebarCollapsed', !s); setSidebarState(!s); });
+        });
+
+        // --- LÓGICA DE LEITURA ---
+        let chartPizzaInst = null;
+        let chartBarrasInst = null;
+        let chartHistInst = null;
+        let chartLinhaInst = null;
+
+        document.getElementById('file-global').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const text = e.target.result;
+                const rows = text.split('\n').map(row => row.split(','));
+
+                // Os dados começam na linha 5 (índice 4)
+                const dataRows = rows.slice(4);
+
+                // console.log para debug
+                console.log("Processando " + dataRows.length + " linhas.");
+                if (dataRows.length > 0) console.log("Exemplo linha 1:", dataRows[0]);
+
+                processarPizza(dataRows);
+                processarBarras(dataRows);
+                processarHistograma(dataRows);
+                processarLinha(dataRows);
+            };
+            reader.readAsText(file);
+        });
+
+        function processarPizza(rows) {
+            const statusCount = {};
+
+            rows.forEach(row => {
+                // Coluna 36 (AK) - Status Texto ou 33 (AH) - Status Num
+                let status = null;
+                if (row.length > 36 && row[36]) {
+                    status = row[36].trim().toUpperCase();
+                }
+                // Fallback para coluna 33 (0=Pendente/Ativo, 1=Aprovado/Cancelado dependendo da regra)
+                else if (row.length > 33 && row[33]) {
+                    status = row[33].trim() === '1' ? 'CONCLUÍDO' : 'PENDENTE';
+                }
+
+                if (status && status.length > 2) { // Ignora lixo
+                    statusCount[status] = (statusCount[status] || 0) + 1;
+                }
+            });
+
+            const ctx = document.getElementById('chartPizza');
+            if (chartPizzaInst) chartPizzaInst.destroy();
+
+            chartPizzaInst = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: Object.keys(statusCount),
+                    datasets: [{
+                        data: Object.values(statusCount),
+                        backgroundColor: ['#4ADE80', '#F87171', '#FACC15', '#60A5FA'],
+                    }]
+                }
+            });
+        }
+
+        function processarBarras(rows) {
+            const produtosMap = {};
+
+            rows.forEach(row => {
+                // Coluna 23 (X) - Nome, Coluna 25 (Z) - Qtd
+                if (row.length > 25) {
+                    const prod = row[23] ? row[23].trim() : null;
+                    const qtd = parseInt(row[25]);
+
+                    if (prod && prod !== 'descricao' && !isNaN(qtd)) {
+                        produtosMap[prod] = (produtosMap[prod] || 0) + qtd;
+                    }
+                }
+            });
+
+            // Ordenar (maior qtd primeiro) e pegar top 10
+            const sorted = Object.entries(produtosMap).sort((a, b) => b[1] - a[1]).slice(0, 10);
+
+            const ctx = document.getElementById('chartBarras');
+            if (chartBarrasInst) chartBarrasInst.destroy();
+
+            chartBarrasInst = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: sorted.map(item => item[0]),
+                    datasets: [{
+                        label: 'Quantidade',
+                        data: sorted.map(item => item[1]),
+                        backgroundColor: '#60A5FA'
+                    }]
+                },
+                options: { scales: { y: { beginAtZero: true } } }
+            });
+        }
+
+        function processarHistograma(rows) {
+            const idades = [];
+            rows.forEach(row => {
+                // Coluna 8 (I) - Idade
+                if (row.length > 8) {
+                    const idade = parseInt(row[8]);
+                    if (!isNaN(idade) && idade > 0 && idade < 120) {
+                        idades.push(idade);
+                    }
+                }
+            });
+
+            const bins = { '18-25': 0, '26-35': 0, '36-45': 0, '46-60': 0, '60+': 0 };
+            idades.forEach(id => {
+                if (id <= 25) bins['18-25']++;
+                else if (id <= 35) bins['26-35']++;
+                else if (id <= 45) bins['36-45']++;
+                else if (id <= 60) bins['46-60']++;
+                else bins['60+']++;
+            });
+
+            const ctx = document.getElementById('chartHistograma');
+            if (chartHistInst) chartHistInst.destroy();
+
+            chartHistInst = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(bins),
+                    datasets: [{
+                        label: 'Pessoas',
+                        data: Object.values(bins),
+                        backgroundColor: '#A78BFA',
+                        barPercentage: 1.0,
+                        categoryPercentage: 1.0
+                    }]
+                },
+                options: { scales: { y: { beginAtZero: true } } }
+            });
+        }
+
+        function processarLinha(rows) {
+            const semanaCount = {};
+
+            rows.forEach(row => {
+                // Coluna 20 (U) - Semana
+                if (row.length > 20) {
+                    const semana = row[20] ? row[20].trim() : null;
+                    // Valida formato simples (contém números e /)
+                    if (semana && semana.includes('/') && semana.length > 5 && !semana.includes('semana')) {
+                        semanaCount[semana] = (semanaCount[semana] || 0) + 1;
+                    }
+                }
+            });
+
+            const ctx = document.getElementById('chartLinha');
+            if (chartLinhaInst) chartLinhaInst.destroy();
+
+            chartLinhaInst = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: Object.keys(semanaCount),
+                    datasets: [{
+                        label: 'Cadastros/Pedidos',
+                        data: Object.values(semanaCount),
+                        borderColor: '#F472B6',
+                        tension: 0.1
+                    }]
+                },
+                options: { scales: { y: { beginAtZero: true } } }
+            });
+        }
+    </script>
+</body>
+
+</html>
