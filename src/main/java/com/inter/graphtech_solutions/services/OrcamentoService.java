@@ -3,6 +3,8 @@ package com.inter.graphtech_solutions.services;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -24,7 +26,6 @@ public class OrcamentoService {
 
     @Transactional
     public OrcamentoEntity salvar(OrcamentoEntity orcamento) {
-        // Prepara os itens antes de salvar
         prepararItens(orcamento);
         return orcamentoRepository.save(orcamento);
     }
@@ -34,64 +35,96 @@ public class OrcamentoService {
     }
 
     public List<OrcamentoEntity> listarOrcamento(){
-        // Certifique-se que seu Repository tenha um método ou @Query para trazer os itens junto se necessário
-        // ou use o findAll padrão (lazy loading trará os itens quando acessados, se dentro de transação)
-        return orcamentoRepository.findAll(); 
+        return orcamentoRepository.findAllWithDetails();
     }
 
     @Transactional
-    public OrcamentoEntity alterar(Integer id, OrcamentoEntity orcamento){
+    public OrcamentoEntity alterar(Integer id, OrcamentoEntity orcamentoInfo) {
         Optional<OrcamentoEntity> orcamentoExistenteOpt = orcamentoRepository.findById(id);
         
         if (orcamentoExistenteOpt.isPresent()) {
-            OrcamentoEntity orcamentoAtualizado = orcamentoExistenteOpt.get();
+            OrcamentoEntity orcamentoGerenciado = orcamentoExistenteOpt.get();
             
-            // Atualiza campos simples
-            orcamentoAtualizado.setDescricao(orcamento.getDescricao());
-            orcamentoAtualizado.setDataCancel(orcamento.getDataCancel());
-            orcamentoAtualizado.setDataOrcamento(orcamento.getDataOrcamento());
-            orcamentoAtualizado.setStatus(orcamento.getStatus());
-            orcamentoAtualizado.setCliente(orcamento.getCliente());
-            orcamentoAtualizado.setUsuario(orcamento.getUsuario());
+            // 1. Atualiza campos simples
+            orcamentoGerenciado.setDescricao(orcamentoInfo.getDescricao());
+            orcamentoGerenciado.setDataCancel(orcamentoInfo.getDataCancel());
+            orcamentoGerenciado.setDataOrcamento(orcamentoInfo.getDataOrcamento());
+            orcamentoGerenciado.setStatus(orcamentoInfo.getStatus());
+            orcamentoGerenciado.setCliente(orcamentoInfo.getCliente());
+            orcamentoGerenciado.setUsuario(orcamentoInfo.getUsuario());
             
-            // Atualiza a lista de itens (Limpa e readiciona para garantir sincronia)
-            orcamentoAtualizado.getItens().clear();
-            if (orcamento.getItens() != null) {
-                orcamentoAtualizado.getItens().addAll(orcamento.getItens());
+            // 2. LÓGICA CRÍTICA PARA COLEÇÃO (Evita NonUniqueObjectException)
+            // A. Limpa a lista atual gerenciada
+            orcamentoGerenciado.getItens().clear();
+            
+            // B. Se vieram novos itens, prepara e adiciona na lista existente
+            if (orcamentoInfo.getItens() != null) {
+                List<OrcamentoProdutoEntity> novosItensPreparados = new ArrayList<>();
+                
+                for (OrcamentoProdutoEntity item : orcamentoInfo.getItens()) {
+                    if (item.getProduto() != null && item.getProduto().getIdProduto() != null) {
+                        ProdutoEntity produtoReal = produtoRepository.findById(item.getProduto().getIdProduto()).orElse(null);
+                        
+                        if (produtoReal != null) {
+                            // Cria nova instância para garantir unicidade na sessão
+                            OrcamentoProdutoEntity novoItem = new OrcamentoProdutoEntity();
+                            novoItem.setProduto(produtoReal);
+                            novoItem.setOrcamento(orcamentoGerenciado); // Vincula ao Pai
+                            
+                            novoItem.setValorUnitario(item.getValorUnitario() != null ? item.getValorUnitario() : produtoReal.getValor());
+                            // Garante que a QTD venha do front (ou 1 se nulo)
+                            novoItem.setQtd((item.getQtd() != null && item.getQtd() > 0) ? item.getQtd() : 1);
+                            
+                            novoItem.setId(new OrcamentoProdutoEntity.OrcamentoProdutoId());
+                            // Configura ID composto
+                            novoItem.getId().setOrcamentoId(orcamentoGerenciado.getIdOrcamento());
+                            novoItem.getId().setProdutoId(produtoReal.getIdProduto());
+                            
+                            novosItensPreparados.add(novoItem);
+                        }
+                    }
+                }
+                // C. Adiciona tudo na coleção gerenciada
+                orcamentoGerenciado.getItens().addAll(novosItensPreparados);
             }
             
-            // Re-vincula os produtos corretamente
-            prepararItens(orcamentoAtualizado);
-
-            return orcamentoRepository.save(orcamentoAtualizado);
+            return orcamentoRepository.save(orcamentoGerenciado);
         } else {
             return null;
         }
     }
 
-    // Método auxiliar para vincular Produtos e o Próprio Orçamento aos itens
+    // Método auxiliar para preparar itens de um orcamento NOVO
     private void prepararItens(OrcamentoEntity orcamento) {
         if (orcamento.getItens() != null && !orcamento.getItens().isEmpty()) {
-            List<OrcamentoProdutoEntity> itensParaRemover = new ArrayList<>();
+            List<OrcamentoProdutoEntity> itensValidos = new ArrayList<>();
 
             for (OrcamentoProdutoEntity item : orcamento.getItens()) {
-                // 1. Busca o produto real no banco pelo ID vindo da tela
                 if (item.getProduto() != null && item.getProduto().getIdProduto() != null) {
                     ProdutoEntity produtoReal = produtoRepository.findById(item.getProduto().getIdProduto())
                         .orElse(null);
                     
                     if (produtoReal != null) {
                         item.setProduto(produtoReal);
-                        item.setOrcamento(orcamento); // Vincula o pai (Orçamento) ao filho (Item)
-                    } else {
-                        // Se o produto não existe, marcamos para remover da lista para não dar erro
-                        itensParaRemover.add(item);
+                        item.setOrcamento(orcamento);
+                        
+                        if (item.getValorUnitario() == null) item.setValorUnitario(produtoReal.getValor());
+                        // Garante a QTD
+                        item.setQtd((item.getQtd() != null && item.getQtd() > 0) ? item.getQtd() : 1);
+                        
+                        if (item.getId() == null) {
+                            item.setId(new OrcamentoProdutoEntity.OrcamentoProdutoId());
+                        }
+                        if (orcamento.getIdOrcamento() != null) {
+                            item.getId().setOrcamentoId(orcamento.getIdOrcamento());
+                        }
+                        item.getId().setProdutoId(produtoReal.getIdProduto());
+
+                        itensValidos.add(item);
                     }
-                } else {
-                    itensParaRemover.add(item);
                 }
             }
-            orcamento.getItens().removeAll(itensParaRemover);
+            orcamento.setItens(itensValidos);
         }
     }
 }

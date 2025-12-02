@@ -32,5 +32,8 @@ public class ProdutoEntity {
     private Double valor;
 
     @NonNull
-    private Integer qtd; // Quantidade em estoque
+    private Integer qtd;
+
+    @Column(nullable = false, columnDefinition = "int default 0")
+    private Integer status = 0;
 }

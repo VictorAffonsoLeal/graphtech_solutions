@@ -12,6 +12,8 @@ import com.inter.graphtech_solutions.entities.ProdutoEntity;
 @Repository
 public interface ProdutoRepository extends JpaRepository <ProdutoEntity, Integer>{
 
+    List<ProdutoEntity> findByStatus(Integer status);
+
     @Query(value = 
         "SELECT p.descricao as produto, l.data as dataAlteracao, " +
         "l.precoantigo as precoAntigo, l.preconovo as precoNovo, l.usuario " +
