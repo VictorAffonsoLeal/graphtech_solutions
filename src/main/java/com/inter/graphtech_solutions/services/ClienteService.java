@@ -18,12 +18,10 @@ public class ClienteService {
 
     @Transactional
     public ClienteEntity salvarCliente(ClienteEntity cliente) {
-        // Valida se tem usuário vinculado
         if (cliente.getUsuario() == null || cliente.getUsuario().getIdPessoa() == null) {
             throw new RuntimeException("Usuário responsável é obrigatório.");
         }
 
-        // Chama a procedure no banco e recebe o ID novo
         Integer novoId = clienteRepository.cadastrarClienteViaProcedure(
             cliente.getNome(),
             cliente.getEmail(),
@@ -33,7 +31,6 @@ public class ClienteService {
             cliente.getUsuario().getIdPessoa()
         );
 
-        // Busca o objeto completo criado para retornar ao controller
         return clienteRepository.findById(novoId).orElse(null);
     }
 
@@ -58,7 +55,6 @@ public class ClienteService {
     }
 
     public void deletarCliente(Integer id) {
-        // SOFT DELETE TAMBÉM PARA CLIENTES
         Optional<ClienteEntity> cliente = clienteRepository.findById(id);
         if (cliente.isPresent()) {
             ClienteEntity c = cliente.get();
@@ -68,7 +64,6 @@ public class ClienteService {
     }
 
     public List<ClienteEntity> listarClientes() {
-        // O Repositório já filtra WHERE status = 0
         return clienteRepository.findAllWithUsuario();
     }
 }

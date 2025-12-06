@@ -39,11 +39,9 @@ public class OrcamentoProdutoEntity {
     @JoinColumn(name = "produto_id")
     private ProdutoEntity produto;
 
-    // --- NOVOS CAMPOS ---
     private Integer qtd;
-    private Double valorUnitario; // Grava o preço no momento do orçamento
+    private Double valorUnitario;
 
-    // --- CLASSE DE ID INTERNA ---
     @Getter
     @Setter
     @AllArgsConstructor

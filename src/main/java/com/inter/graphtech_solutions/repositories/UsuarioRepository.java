@@ -19,11 +19,9 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Integer>
     
     List<UsuarioEntity> findByStatus(Integer status);
 
-    // NOVO: Chamada para a View
     @Query(value = "SELECT * FROM vw_taxa_conversao_vendedores", nativeQuery = true)
     List<TaxaConversaoProjection> buscarTaxaConversao();
 
-    // Procedure
     @Query(value = "EXEC SP_CADUSUARIO :nome, :dataNascimento, :login, :senha", nativeQuery = true)
     Integer cadastrarUsuarioViaProcedure(
         @Param("nome") String nome,

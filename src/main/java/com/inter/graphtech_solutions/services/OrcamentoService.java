@@ -45,7 +45,6 @@ public class OrcamentoService {
         if (orcamentoExistenteOpt.isPresent()) {
             OrcamentoEntity orcamentoGerenciado = orcamentoExistenteOpt.get();
             
-            // 1. Atualiza campos simples
             orcamentoGerenciado.setDescricao(orcamentoInfo.getDescricao());
             orcamentoGerenciado.setDataCancel(orcamentoInfo.getDataCancel());
             orcamentoGerenciado.setDataOrcamento(orcamentoInfo.getDataOrcamento());
@@ -53,11 +52,8 @@ public class OrcamentoService {
             orcamentoGerenciado.setCliente(orcamentoInfo.getCliente());
             orcamentoGerenciado.setUsuario(orcamentoInfo.getUsuario());
             
-            // 2. LÓGICA CRÍTICA PARA COLEÇÃO (Evita NonUniqueObjectException)
-            // A. Limpa a lista atual gerenciada
             orcamentoGerenciado.getItens().clear();
             
-            // B. Se vieram novos itens, prepara e adiciona na lista existente
             if (orcamentoInfo.getItens() != null) {
                 List<OrcamentoProdutoEntity> novosItensPreparados = new ArrayList<>();
                 
@@ -66,17 +62,15 @@ public class OrcamentoService {
                         ProdutoEntity produtoReal = produtoRepository.findById(item.getProduto().getIdProduto()).orElse(null);
                         
                         if (produtoReal != null) {
-                            // Cria nova instância para garantir unicidade na sessão
+
                             OrcamentoProdutoEntity novoItem = new OrcamentoProdutoEntity();
                             novoItem.setProduto(produtoReal);
-                            novoItem.setOrcamento(orcamentoGerenciado); // Vincula ao Pai
+                            novoItem.setOrcamento(orcamentoGerenciado);
                             
                             novoItem.setValorUnitario(item.getValorUnitario() != null ? item.getValorUnitario() : produtoReal.getValor());
-                            // Garante que a QTD venha do front (ou 1 se nulo)
                             novoItem.setQtd((item.getQtd() != null && item.getQtd() > 0) ? item.getQtd() : 1);
                             
                             novoItem.setId(new OrcamentoProdutoEntity.OrcamentoProdutoId());
-                            // Configura ID composto
                             novoItem.getId().setOrcamentoId(orcamentoGerenciado.getIdOrcamento());
                             novoItem.getId().setProdutoId(produtoReal.getIdProduto());
                             
@@ -84,7 +78,6 @@ public class OrcamentoService {
                         }
                     }
                 }
-                // C. Adiciona tudo na coleção gerenciada
                 orcamentoGerenciado.getItens().addAll(novosItensPreparados);
             }
             

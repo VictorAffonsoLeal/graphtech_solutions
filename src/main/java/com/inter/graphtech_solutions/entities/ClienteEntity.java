@@ -32,7 +32,6 @@ import lombok.ToString;
 @Entity
 @Table(name = "clientes")
 @PrimaryKeyJoinColumn(name = "id_pessoa")
-// REMOVIDO @JsonIdentityInfo daqui pois ele já é herdado de PessoaEntity corretamente
 public class ClienteEntity extends PessoaEntity {
 
     @NonNull

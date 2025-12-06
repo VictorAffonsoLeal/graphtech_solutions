@@ -13,13 +13,9 @@ import com.inter.graphtech_solutions.entities.ClienteEntity;
 @Repository
 public interface ClienteRepository extends JpaRepository<ClienteEntity, Integer> {
     
-    // Atualizado: Traz apenas clientes com status 0 (Ativos)
     @Query("SELECT c FROM ClienteEntity c JOIN FETCH c.usuario WHERE c.status = 0")
     List<ClienteEntity> findAllWithUsuario();
 
-    // Chamada Nativa da Procedure
-    // nativeQuery = true permite usar SQL puro (EXEC ...)
-    // Retorna o ID gerado pela procedure
     @Query(value = "EXEC SP_CADCLIENTE :nome, :email, :endereco, :telefone, :dataNascimento, :usuarioId", nativeQuery = true)
     Integer cadastrarClienteViaProcedure(
         @Param("nome") String nome,

@@ -45,8 +45,7 @@ public class PedidoController {
             PedidoEntity novoPedido = pedidoService.criarPedidoDeOrcamento(orcamentoId);
             return new ResponseEntity<>(novoPedido, HttpStatus.CREATED);
         } catch (RuntimeException e) {
-            // Captura exceções personalizadas (Ex: Orçamento não encontrado ou já processado)
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT); // 409 Conflict
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
         }
     }
 

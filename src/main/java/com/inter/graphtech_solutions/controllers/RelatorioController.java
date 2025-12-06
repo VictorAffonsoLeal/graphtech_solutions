@@ -28,7 +28,6 @@ import jakarta.persistence.ParameterMode;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.StoredProcedureQuery;
 import jakarta.transaction.Transactional;
-// Não precisamos mais do EntityManager para backup/restore via JDBC direto
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -48,14 +47,11 @@ public class RelatorioController {
         return ResponseEntity.ok(produtoRepository.buscarLogPrecos());
     }
 
-    // Injetando credenciais do application.properties para usar na conexão JDBC manual
     @Value("${spring.datasource.username}")
     private String dbUser;
 
     @Value("${spring.datasource.password}")
     private String dbPass;
-
-    // --- RELATÓRIOS (Function e View) ---
 
     @GetMapping("/vendas-usuario")
     public ResponseEntity<List<RelatorioPedidoUsuarioProjection>> getVendasUsuario(
@@ -74,34 +70,27 @@ public class RelatorioController {
     }
 
     private String getCaminhoBackup() {
-        // Pega o diretório onde o projeto está rodando (Raiz do projeto)
         String projetoDir = System.getProperty("user.dir");
         
-        // Monta o caminho relativo até a pasta de resources
-        // Nota: File.separator garante que funcione em Windows (\) ou Linux (/)
         String caminhoRelativo = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "backup";
         
-        // Cria o objeto File para garantir que o diretório exista
         File pastaBackup = new File(projetoDir, caminhoRelativo);
         if (!pastaBackup.exists()) {
-            pastaBackup.mkdirs(); // Cria a pasta se não existir
+            pastaBackup.mkdirs();
         }
 
-        // Retorna o caminho completo do arquivo .bak
         return new File(pastaBackup, "interdb.bak").getAbsolutePath();
     }
 
     @PostMapping("/backup")
     public ResponseEntity<String> realizarBackup() {
         String caminhoBackup = getCaminhoBackup();
-        
-        // Conecta no master para evitar bloqueios, embora backup possa ser feito no próprio banco
+
         String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=master;encrypt=true;trustServerCertificate=true";
 
         try (Connection con = DriverManager.getConnection(connectionUrl, dbUser, dbPass);
              Statement stmt = con.createStatement()) {
 
-            // SQL Server precisa do caminho absoluto
             String sql = "BACKUP DATABASE interdb TO DISK = '" + caminhoBackup + "' WITH INIT";
             
             stmt.execute(sql);
@@ -137,7 +126,6 @@ public class RelatorioController {
         }
     }
 
-        // --- PROCEDURES ---
 
     @PostMapping("/procedure/cliente")
     @Transactional
@@ -145,7 +133,6 @@ public class RelatorioController {
         try {
             StoredProcedureQuery query = entityManager.createStoredProcedureQuery("SP_CADCLIENTE");
             
-            // Registra parâmetros
             query.registerStoredProcedureParameter("NOMECLI", String.class, ParameterMode.IN);
             query.registerStoredProcedureParameter("EMAILCLI", String.class, ParameterMode.IN);
             query.registerStoredProcedureParameter("ENDCLI", String.class, ParameterMode.IN);
@@ -153,12 +140,10 @@ public class RelatorioController {
             query.registerStoredProcedureParameter("DATNAS", java.sql.Date.class, ParameterMode.IN);
             query.registerStoredProcedureParameter("USUARIOID", Integer.class, ParameterMode.IN);
 
-            // Define valores
             query.setParameter("NOMECLI", dados.get("nome"));
             query.setParameter("EMAILCLI", dados.get("email"));
             query.setParameter("ENDCLI", dados.get("endereco"));
             query.setParameter("TELCLI", dados.get("telefone"));
-            // Converte string de data para java.sql.Date
             query.setParameter("DATNAS", java.sql.Date.valueOf((String) dados.get("dataNascimento")));
             query.setParameter("USUARIOID", Integer.parseInt(dados.get("usuarioId").toString()));
 

@@ -11,7 +11,6 @@ import com.inter.graphtech_solutions.entities.OrcamentoEntity;
 @Repository
 public interface OrcamentoRepository extends JpaRepository<OrcamentoEntity, Integer> {
     
-    // Atualizado para buscar Clientes, Usuarios, Itens e os Produtos dentro dos itens
     @Query("SELECT o FROM OrcamentoEntity o " +
            "LEFT JOIN FETCH o.cliente " +
            "LEFT JOIN FETCH o.usuario " +

@@ -27,7 +27,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "pedidos")
-// REMOVIDO @JsonIdentityInfo
 public class PedidoEntity {
 
     @Id
